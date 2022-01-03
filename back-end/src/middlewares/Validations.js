@@ -10,8 +10,7 @@ const registerValidations = async (req, res, _next) => {
   const isEmailValid = await helpers.validateEmail(email);
   if (!isEmailValid) return res.status(400).json({ message: 'EMAIL RUIM'})
   
-  res.status(200).json({ message: 'TA DANDO BOA' });
-  // next();
+  next();
 }
 
 module.exports = {
