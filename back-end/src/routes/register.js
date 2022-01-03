@@ -1,5 +1,7 @@
 const router = require('express').Router();
 
-router.post('/');
+router.post('/', (req, res) => {
+  res.status(200).json({ message: 'VRAU' });
+});
 
 module.exports = router;
