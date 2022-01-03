@@ -1,10 +1,17 @@
 const helpers = require('../helpers');
 
-const registerValidations = async (req, res, next) => {
-  const { password } = req.body;
+const registerValidations = async (req, res, _next) => {
+  const { password, name, email } = req.body;
+
   const isPwdValid = await helpers.validatePwd(password);
-  if (!isPwdValid) return res.status(400).json({ message: 'DEU RUIM' });
-  next();
+  if (!isPwdValid) return res.status(400).json({ message: 'PWD RUIM' });
+  const isNameValid = await helpers.validateName(name);
+  if (!isNameValid) return res.status(400).json({ message: 'NAME RUIM'})
+  const isEmailValid = await helpers.validateEmail(email);
+  if (!isEmailValid) return res.status(400).json({ message: 'EMAIL RUIM'})
+  
+  res.status(200).json({ message: 'TA DANDO BOA' });
+  // next();
 }
 
 module.exports = {
