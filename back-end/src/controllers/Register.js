@@ -3,11 +3,10 @@ const Service = require('../services/Register');
 const registerUser = async (req, res) => {
   try {
     const user = req.body;
-    const isCreated = await Service.registerUser(user)
-    res.status(201).json({ message: 'Created' });
+    await Service.registerUser(user);
+    res.status(201).json('Created');
   } catch (e) {
-    console.error(e.message);
-    res.status(e.code).json({ message: e.message });
+    res.status(500).json({ message: e.message });
   }
 };
 

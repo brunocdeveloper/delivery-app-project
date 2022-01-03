@@ -1,9 +1,11 @@
-// const Models = require('../models/Register.js');
+const { Users } = require('../database/models');
 const md5 = require('md5');
 
 const registerUser = async (payload) => {
   const { name, email, password } = payload;
-  const result = await Models.registerUser(name, email, md5(password));
+  const encryptedPwd = md5(password);
+  const result = await Users.create({ name, email, password: encryptedPwd, role: 'client' })
+  if (!result) throw new Error('Service unavailable. Try again later.')
 }
 
 module.exports = {
