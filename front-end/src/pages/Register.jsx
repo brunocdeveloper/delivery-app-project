@@ -1,48 +1,28 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../context/AppContext';
 
 export default function Register() {
-  const [rgName, setRgName] = useState('');
-  const [rgEmail, setRgEmail] = useState('');
-  const [rgPwd, setRgPwd] = useState('');
-  const [err, setErr] = useState('');
-  const [validName, setValidName] = useState(false);
-  const [isValidEmail, setIsValidEmail] = useState(false);
-  const [validPwd, setValidPwd] = useState(false);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     return 'ola';
   };
 
-  const vldtPwd = (password) => {
-    const number = 6;
-    const error = 'password must be valid';
-    setErr(error);
-    if (!password || password.length < number) return;
-    setErr(null);
-    setValidPwd(true);
-  };
+  const {
+    rgName,
+    setRgName,
+    rgEmail,
+    setRgEmail,
+    rgPwd,
+    setRgPwd,
+    err,
+    validName,
+    isValidEmail,
+    validPwd,
+    vldtPwd,
+    vldtName,
+    vldtEmail,
+  } = useContext(AppContext);
 
-  const vldtName = (name) => {
-    const number = 12;
-    const error = 'name must be valid';
-    setErr(error);
-    if (!name || name.length < number) return;
-    setErr(null);
-    setValidName(true);
-  };
-
-  const vldtEmail = (email) => {
-    const error = 'email must be valid';
-    setErr(error);
-    const validRegex = new RegExp(
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/,
-    );
-    const validEmail = validRegex.test(email);
-    if (!email || !validEmail) return;
-    setErr(null);
-    setIsValidEmail(true);
-  };
   return (
     <section className="registerContainer">
       <h1 className="appalmirinha">Cadastro</h1>
