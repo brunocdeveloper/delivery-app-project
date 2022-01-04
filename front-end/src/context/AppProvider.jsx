@@ -6,38 +6,29 @@ function AppProvider({ children }) {
   const [rgName, setRgName] = useState('');
   const [rgEmail, setRgEmail] = useState('');
   const [rgPwd, setRgPwd] = useState('');
-  const [err, setErr] = useState('');
+  const [err, setErr] = useState(true);
   const [validName, setValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [validPwd, setValidPwd] = useState(false);
 
   const vldtPwd = (password) => {
     const number = 6;
-    const error = 'password must be valid';
-    setErr(error);
-    if (!password || password.length < number) return;
-    setErr(null);
+    if (!password || password.length < number) return setValidPwd(false);
     setValidPwd(true);
   };
 
   const vldtName = (name) => {
     const number = 12;
-    const error = 'name must be valid';
-    setErr(error);
-    if (!name || name.length < number) return;
-    setErr(null);
+    if (!name || name.length < number) return setValidName(false);
     setValidName(true);
   };
 
   const vldtEmail = (email) => {
-    const error = 'email must be valid';
-    setErr(error);
     const validRegex = new RegExp(
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/,
+      /^([\w.-]+)@([\w-]+)((\.(\w){2,3})+)$/,
     );
     const validEmail = validRegex.test(email);
-    if (!email || !validEmail) return;
-    setErr(null);
+    if (!email || !validEmail) return setIsValidEmail(false);
     setIsValidEmail(true);
   };
 

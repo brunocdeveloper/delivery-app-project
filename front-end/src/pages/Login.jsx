@@ -17,7 +17,7 @@ export default function Login() {
   const validateLogin = () => {
     const { email, password } = user;
     const validRegex = new RegExp(
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/,
+      /^([\w.-]+)@([\w-]+)((\.(\w){2,3})+)$/,
     );
     const validEmail = validRegex.test(email);
     const magicNumber = 6;

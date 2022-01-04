@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AppContext from '../context/AppContext';
 import registerUser from '../api/register';
 
@@ -17,6 +17,7 @@ export default function Register() {
     vldtPwd,
     vldtName,
     vldtEmail,
+    setErr,
   } = useContext(AppContext);
 
   const handleSubmit = async (event) => {
@@ -24,6 +25,13 @@ export default function Register() {
     const payload = { rgName, rgEmail, rgPwd };
     await registerUser(payload);
   };
+
+  useEffect(() => {
+    if (validName && isValidEmail && validPwd) {
+      return setErr(false);
+    }
+    setErr(true);
+  }, [rgEmail, rgName, rgPwd]);
 
   return (
     <section className="registerContainer">
@@ -74,12 +82,12 @@ export default function Register() {
         <button
           type="submit"
           data-testid="common_register__button-register"
-          disabled={ !validName || !isValidEmail || !validPwd }
+          disabled={ err }
         >
           Cadastrar
         </button>
       </form>
-      <span data-testid="common_register__button-register">{ err }</span>
+      <span data-testid="common_register__element-invalid_register">{ err }</span>
     </section>
   );
 }
