@@ -17,6 +17,4 @@ const registerUser = async (payload) => {
   }
 };
 
-module.exports = {
-  registerUser,
-};
+module.exports = registerUser;

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
-import { registerUser } from '../api/register';
+import registerUser from '../api/register';
 
 export default function Register() {
   const {
@@ -42,7 +42,7 @@ export default function Register() {
             onChange={
               ({ target }) => { setRgName(target.value); vldtName(target.value); }
             }
-            data-testid="6"
+            data-testid="common_register__input-name"
           />
         </label>
         <label htmlFor="email" className="email">
@@ -55,7 +55,7 @@ export default function Register() {
             onChange={
               ({ target }) => { setRgEmail(target.value); vldtEmail(target.value); }
             }
-            data-testid="7"
+            data-testid="common_register__input-email"
           />
         </label>
         <label htmlFor="password" className="teste">
@@ -68,7 +68,7 @@ export default function Register() {
             onChange={
               ({ target }) => { setRgPwd(target.value); vldtPwd(target.value); }
             }
-            data-testid="8"
+            data-testid="common_register__input-password"
           />
         </label>
         <button
@@ -79,7 +79,7 @@ export default function Register() {
           Cadastrar
         </button>
       </form>
-      <span data-testid="9">{ err }</span>
+      <span data-testid="common_register__button-register">{ err }</span>
     </section>
   );
 }
