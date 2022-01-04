@@ -73,7 +73,7 @@ export default function Register() {
         </label>
         <button
           type="submit"
-          data-testid="register-submit-btn"
+          data-testid="common_register__button-register"
           disabled={ !validName || !isValidEmail || !validPwd }
         >
           Cadastrar
