@@ -1,22 +1,18 @@
 const md5 = require('md5');
 const Service = require('../services/Login');
 
-const verifyExistenceUser = async (req, res, next) => {
-  const { email } = req.body;
-  const user = await Service.verifyExistenceUser(email);
-  if (!user) return res.status(404).json('Not found');
-  next();
-};
-
 const authLogin = async (req, res) => {
-  const { email, password } = req.body;
-  const encryptedPwd = md5(password);
-  const user = await Service.authLogin(email, password);
-  if (user.password === encryptedPwd) return res.status(200).json('Ok');
-  return res.status(404).json('Not found');
+  try {
+    const { email, password } = req.body;
+    const encryptedPwd = md5(password);
+    const userInfoWithToken = await Service.authLogin(email, encryptedPwd);
+    return res.status(201).json(userInfoWithToken);
+  } catch (e) {
+    console.error(e.message);
+    return res.status(404).json(e);
+  }
 };
 
 module.exports = {
-  verifyExistenceUser,
   authLogin,
 };

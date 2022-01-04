@@ -18,8 +18,13 @@
 //   return true;
 // };
 
-// module.exports = {
-//   validatePwd,
-//   validateName,
-//   validateEmail,
-// };
+const jwtKey = require('fs')
+  .readFileSync(`${__dirname}/../../jwt.evaluation.key`, { encoding: 'utf-8' })
+  .trim();
+
+module.exports = {
+  jwtKey,
+  // validatePwd,
+  // validateName,
+  // validateEmail,
+};

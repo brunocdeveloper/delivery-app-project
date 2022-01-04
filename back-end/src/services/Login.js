@@ -1,35 +1,32 @@
-const { users } = require('../database/models');
 const { Op } = require('sequelize');
 const jwt = require('jsonwebtoken');
-
-// const secret =
+const { users } = require('../database/models');
+const { jwtKey } = require('../helpers/index');
 
 const jwtConfig = {
   expiresIn: '10d',
-  algorithm: 'RS256',
+  algorithm: 'HS256',
 };
 
-const verifyExistenceUser = async (email, password) => {
+const authLogin = async (email, password) => {
   const user = await users.findOne({ where: { [Op.and]: [{ email }, { password }] } });
-  if (!user) throw new Error('Incorrect email or password');
+  if (!user) throw new Error('Not Found');
+
   const userWithoutPwd = {
+    id: user.id,
     name: user.name,
     email: user.email,
     role: user.role,
-  }
-  const token = jwt.sign({ data: userWithoutPwd }, secret, jwtConfig);
+  };
+
+  const token = jwt.sign({ data: userWithoutPwd }, jwtKey, jwtConfig);
+
   return {
     ...userWithoutPwd,
     token,
   };
 };
 
-const authLogin = async (email) => {
-  const user = await users.findOne({ where: { email } });
-  return user;
-};
-
 module.exports = {
-  verifyExistenceUser,
   authLogin,
 };
