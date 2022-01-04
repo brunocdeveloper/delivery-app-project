@@ -1,6 +1,6 @@
 const helpers = require('../helpers');
 
-const registerValidations = async (req, res, _next) => {
+const registerValidations = async (req, res, next) => {
   const { password, name, email } = req.body;
 
   const isPwdValid = await helpers.validatePwd(password);
