@@ -24,6 +24,12 @@ const verifyExistenceUser = async (email, password) => {
   };
 };
 
+const authLogin = async (email) => {
+  const user = await users.findOne({ where: { email } });
+  return user;
+};
+
 module.exports = {
   verifyExistenceUser,
+  authLogin,
 };
