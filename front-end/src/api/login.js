@@ -2,19 +2,19 @@ const axios = require('axios').default;
 
 const handleLogin = async (payload) => {
   const body = {
-    name: payload.rgName,
-    password: payload.rgPwd,
-    email: payload.rgEmail,
+    email: payload.email,
+    password: payload.password,
   };
   try {
-    await axios({
+    const data = await axios({
       method: 'post',
-      url: 'http://localhost:3001/register',
+      url: 'http://localhost:3001/login',
       data: body,
     });
+    return data;
   } catch (e) {
     console.log(e.message);
   }
 };
 
-module.exports = registerUser;
+module.exports = handleLogin;

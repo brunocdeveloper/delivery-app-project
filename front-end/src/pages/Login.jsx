@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import handleLogin from '../api/login';
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -26,6 +27,17 @@ export default function Login() {
 
   const handleChangeInputs = ({ target: { value, name } }) => {
     setUser({ ...user, [name]: value });
+  };
+
+  const handleLoginSubmit = async () => {
+    try {
+      const token = await handleLogin(user);// NESSA PARTE DEVE VERIFICAR A EXISTENCIA DO TOKEN
+      if (token) {
+        history.push('/products');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -56,6 +68,7 @@ export default function Login() {
           type="button"
           data-testid="common_login__button-login"
           disabled={ !validateLogin() }
+          onClick={ () => handleLoginSubmit() }
         >
           Login
         </button>
