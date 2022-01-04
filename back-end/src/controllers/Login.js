@@ -1,5 +1,5 @@
-const Service = require('../services/Login');
 const md5 = require('md5');
+const Service = require('../services/Login');
 
 const verifyExistenceUser = async (req, res, next) => {
   const { email } = req.body;
