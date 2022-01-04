@@ -1,6 +1,5 @@
 const { Op } = require('sequelize');
 const { Users } = require('../database/models');
-// const helpers = require('../helpers');
 
 const registerValidations = async (req, res, next) => {
   const { name, email } = req.body;
