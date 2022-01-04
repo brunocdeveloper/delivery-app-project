@@ -1,7 +1,7 @@
-const { Users } = require('../database/models');
+const { users } = require('../database/models');
 
 const verifyExistenceUser = async (email) => {
-  const user = await Users.findOne({ where: { email } });
+  const user = await users.findOne({ where: { email } });
   return user;
 };
 

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
-import { registerUser } from '../api/register';
+import registerUser from '../api/register';
 
 export default function Register() {
   const {
