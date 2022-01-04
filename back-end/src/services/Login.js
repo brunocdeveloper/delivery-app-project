@@ -5,6 +5,12 @@ const verifyExistenceUser = async (email) => {
   return user;
 };
 
+const authLogin = async (email) => {
+  const user = await users.findOne({ where: { email } });
+  return user;
+};
+
 module.exports = {
   verifyExistenceUser,
+  authLogin,
 };
