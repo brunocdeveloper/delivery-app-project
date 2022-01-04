@@ -1,10 +1,17 @@
 import { React, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
+
+  const history = useHistory();
+
+  const handleRedirect = () => {
+    history.push('/register');
+  };
 
   const validateLogin = () => {
     const { email, password } = user;
@@ -55,13 +62,14 @@ export default function Login() {
         <button
           type="button"
           data-testid="common_login__button-register"
+          onClick={ () => handleRedirect() }
         >
           Ainda não tenho conta
         </button>
         <span
           data-testid="common_login__element-invalid-email"
         >
-            Elemento oculto (Mensagem de erro)
+          Elemento oculto (Mensagem de erro)
         </span>
       </form>
     </div>
