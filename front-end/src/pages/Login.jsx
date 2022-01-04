@@ -13,7 +13,7 @@ export default function Login() {
     );
     const validEmail = validRegex.test(email);
     const magicNumber = 6;
-    if (validEmail && password.length > magicNumber) return true;
+    if (validEmail && password.length >= magicNumber) return true;
     return false;
   };
 
