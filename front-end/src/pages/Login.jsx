@@ -61,7 +61,7 @@ export default function Login() {
         <span
           data-testid="common_login__element-invalid-email"
         >
-            Elemento oculto (Mensagem de erro)
+          Elemento oculto (Mensagem de erro)
         </span>
       </form>
     </div>
