@@ -1,12 +1,8 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
+import { registerUser } from '../api/register';
 
 export default function Register() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    return 'ola';
-  };
-
   const {
     rgName,
     setRgName,
@@ -22,6 +18,12 @@ export default function Register() {
     vldtName,
     vldtEmail,
   } = useContext(AppContext);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const payload = { rgName, rgEmail, rgPwd };
+    await registerUser(payload);
+  };
 
   return (
     <section className="registerContainer">
