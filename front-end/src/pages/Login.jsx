@@ -59,7 +59,8 @@ export default function Login() {
           Ainda não tenho conta
         </button>
         <span
-          data-testid="common_login__element-invalid-email">
+          data-testid="common_login__element-invalid-email"
+        >
             Elemento oculto (Mensagem de erro)
         </span>
       </form>
