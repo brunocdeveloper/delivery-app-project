@@ -31,7 +31,7 @@ export default function Login() {
             id="email-login"
             type="email"
             name="email"
-            data-testid="1"
+            data-testid="common_login__input-email"
             onChange={ (e) => handleChangeInputs(e) }
           />
         </label>
@@ -41,19 +41,27 @@ export default function Login() {
             id="password-login"
             type="password"
             name="password"
-            data-testid="2"
+            data-testid="common_login__input-password"
             onChange={ (e) => handleChangeInputs(e) }
           />
         </label>
         <button
           type="button"
-          data-testid="3"
+          data-testid="common_login__button-login"
           disabled={ !validateLogin() }
         >
           Login
         </button>
-        <button type="button" data-testid="4">Ainda não tenho conta</button>
-        <span data-testid="5">Elemento oculto (Mensagem de erro)</span>
+        <button
+          type="button"
+          data-testid="common_login__button-register"
+        >
+          Ainda não tenho conta
+        </button>
+        <span
+          data-testid="common_login__element-invalid-email">
+            Elemento oculto (Mensagem de erro)
+        </span>
       </form>
     </div>
   );
