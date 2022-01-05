@@ -4,8 +4,6 @@ import NavBar from '../components/NavBar';
 export default function Products() {
   const funcaoTeste = () => {
     console.log('TESTOU');
-    const obj = { name: 'Pedro', id: 'Pedrinho' };
-    localStorage.setItem('userInfo', JSON.stringify(obj));
   };
 
   const section1 = {
