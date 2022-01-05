@@ -1,24 +1,26 @@
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 export default function ProductsTable(props) {
-  const { data } = props
-  const [products, setProducts] = useState(data) 
-  const [total, setTotal] = useState(0)
- 
+  const { data } = props;
+  const [products, setProducts] = useState(data);
+  const [total, setTotal] = useState(0);
+
   const removeItem = (item) => {
-    const newCart = products.filter(product => product.item !== item)
-    setProducts(newCart)
-  }
+    const newCart = products.filter((product) => product.item !== item);
+    setProducts(newCart);
+  };
 
   const calculateTotal = () => {
-    const total = products.reduce((acc, { price, quantity }) => {
-      return acc + (price * quantity)
-    }, 0)
-    setTotal(total)
-  }
+    const totalPrice = products
+      .reduce((acc, { price, quantity }) => acc + (price * quantity), 0);
+    setTotal(totalPrice);
+  };
 
   useEffect(() => {
-    calculateTotal()
-  }, [products])
-  
+    calculateTotal();
+  }, [products]);
+
   return (
     <div className="products-table">
       <table>
@@ -31,28 +33,63 @@ export default function ProductsTable(props) {
             <th>Sub-total</th>
             <th>Remover Item</th>
           </tr>
-      </thead>
-      <tbody>
-        {data.map((product, index) => (
-          <tr key={product.item}>
-              <td data-testid={`customer_checkout__element-order-table-item-number-${index}`}>{index + 1}</td>
-              <td data-testid={`customer_checkout__element-order-table-name-${index}`}>{product.description}</td>
-              <td data-testid={`customer_checkout__element-order-table-quantity-${index}`}>{product.quantity}</td>
-              <td data-testid={`customer_checkout__element-order-table-unit-price-${index}`}>{product.price}</td>
-              <td data-testid={`customer_checkout__element-order-table-sub-total-${index}`}>{product.price * quantity}</td>
-              <button 
-                data-testid={`customer_checkout__element-order-table-remove-${index}`}
-                onClick={() => removeItem(product.item)}
+        </thead>
+        <tbody>
+          {data.map((product, i) => (
+            <tr key={ product.item }>
+              <td
+                data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
+              >
+                {i + 1}
+              </td>
+              <td
+                data-testid={ `customer_checkout__element-order-table-name-${i}` }
+              >
+                {product.description}
+              </td>
+              <td
+                data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
+              >
+                {product.quantity}
+              </td>
+              <td
+                data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
+              >
+                {product.price}
+              </td>
+              <td
+                data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
+              >
+                {product.price * product.quantity}
+              </td>
+              <button
+                type="button"
+                data-testid={ `customer_checkout__element-order-table-remove-${i}` }
+                onClick={ () => removeItem(product.item) }
               >
                 Remover
               </button>
             </tr>
           ))}
-        </tbody>    
-    </table>
-    <div className="total">
-      <span data-testid="customer_checkout__element-order-total-price">Total: R$ {total}</span>
+        </tbody>
+      </table>
+      <div className="total">
+        <span
+          data-testid="customer_checkout__element-order-total-price"
+        >
+          Total: R$
+          {total}
+        </span>
+      </div>
     </div>
-  </div>
-  )
+  );
 }
+
+// proptypes
+ProductsTable.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    description: PropTypes.string,
+    quantity: PropTypes.number,
+    price: PropTypes.number,
+  })).isRequired,
+};
