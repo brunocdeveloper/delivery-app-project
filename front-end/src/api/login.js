@@ -1,12 +1,12 @@
 const axios = require('axios').default;
 
-const handleLogin = async (payload) => {
+export default async function handleLogin(payload) {
   const body = {
     email: payload.email,
     password: payload.password,
   };
   try {
-    const data = await axios({
+    const { data } = await axios({
       method: 'post',
       url: 'http://localhost:3001/login',
       data: body,
@@ -15,6 +15,4 @@ const handleLogin = async (payload) => {
   } catch (e) {
     console.log(e.message);
   }
-};
-
-module.exports = handleLogin;
+}
