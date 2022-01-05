@@ -4,6 +4,8 @@ import NavBar from '../components/NavBar';
 export default function Products() {
   const funcaoTeste = () => {
     console.log('TESTOU');
+    const obj = { name: 'Pedro', id: 'Pedrinho' };
+    localStorage.setItem('userInfo', JSON.stringify(obj));
   };
 
   const section1 = {
@@ -18,7 +20,7 @@ export default function Products() {
 
   return (
     <>
-      <NavBar section1={ section1 } section2={ section2 } currentUser="Junior" />
+      <NavBar section1={ section1 } section2={ section2 } />
       <span> PÁGINA DE PRODUTOS </span>
     </>
 
