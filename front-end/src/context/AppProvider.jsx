@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 
@@ -10,6 +11,12 @@ function AppProvider({ children }) {
   const [validName, setValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [validPwd, setValidPwd] = useState(false);
+
+  const history = useHistory();
+
+  const handleRedirect = (path) => {
+    history.push(`${path}`);
+  };
 
   const vldtPwd = (password) => {
     const number = 6;
@@ -50,6 +57,7 @@ function AppProvider({ children }) {
     vldtPwd,
     vldtName,
     vldtEmail,
+    handleRedirect,
   };
 
   AppProvider.propTypes = {

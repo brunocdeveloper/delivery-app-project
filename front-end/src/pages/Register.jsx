@@ -18,12 +18,15 @@ export default function Register() {
     vldtName,
     vldtEmail,
     setErr,
+    handleRedirect,
   } = useContext(AppContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const payload = { rgName, rgEmail, rgPwd };
-    await registerUser(payload);
+    const registered = await registerUser(payload);
+    if (!registered) return;
+    handleRedirect('/customer/products');
   };
 
   useEffect(() => {
@@ -83,6 +86,7 @@ export default function Register() {
           type="submit"
           data-testid="common_register__button-register"
           disabled={ err }
+          onClick={ (e) => handleSubmit(e) }
         >
           Cadastrar
         </button>

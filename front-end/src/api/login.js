@@ -6,7 +6,7 @@ export default async function handleLogin(payload) {
     password: payload.password,
   };
   try {
-    const data = await axios({
+    const { data } = await axios({
       method: 'post',
       url: 'http://localhost:3001/login',
       data: body,
