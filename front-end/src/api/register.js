@@ -1,6 +1,6 @@
 const axios = require('axios').default;
 
-const registerUser = async (payload) => {
+export default async function registerUser(payload) {
   const body = {
     name: payload.rgName,
     password: payload.rgPwd,
@@ -15,6 +15,4 @@ const registerUser = async (payload) => {
   } catch (e) {
     console.log(e.message);
   }
-};
-
-module.exports = registerUser;
+}
