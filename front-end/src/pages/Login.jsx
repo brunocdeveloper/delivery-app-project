@@ -31,10 +31,10 @@ export default function Login() {
   const handleLoginSubmit = async () => {
     try {
       const userWithToken = await handleLogin(user);
-      console.log(userWithToken);
       if (userWithToken && userWithToken.token && userWithToken.role === 'customer') {
         handleRedirect('/customer/products');
       }
+      return;
     } catch (error) {
       console.log(error);
     }
