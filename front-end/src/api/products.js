@@ -1,4 +1,4 @@
-const getAllProducts = () => [
+/* const getAllProducts = () => [
   {
     id: 1,
     name: 'Skol Lata 250ml',
@@ -23,6 +23,19 @@ const getAllProducts = () => [
     price: '7.50',
     url_image: 'http://localhost:3001/images/brahma_600ml.jpg',
   },
-];
+]; */
 
-export default getAllProducts;
+const axios = require('axios').default;
+
+export default async function getAllProducts() {
+  const url = 'http://localhost:3001';
+  try {
+    const { data } = await axios({
+      method: 'get',
+      url: `${url}/customer/products`,
+    });
+    return data;
+  } catch (e) {
+    console.log(e.message);
+  }
+}

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import AppContext from '../context/AppContext';
 import getAllProducts from '../api/products';
 import NavBar from '../components/NavBar';
 import ListProducts from '../components/ListProducts';
 
 export default function Products() {
-  const [products, setProducts] = useState([]);
+  const { products, setProducts } = useContext(AppContext);
 
   const funcaoTeste = () => {
     console.log('TESTOU');
@@ -20,8 +21,8 @@ export default function Products() {
     nameSection2: 'Meus Pedidos',
   };
 
-  const fecthProducts = () => {
-    const result = getAllProducts();
+  const fecthProducts = async () => {
+    const result = await getAllProducts();
     setProducts(result);
   };
 

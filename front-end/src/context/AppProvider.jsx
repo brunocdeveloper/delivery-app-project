@@ -11,6 +11,7 @@ function AppProvider({ children }) {
   const [validName, setValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [validPwd, setValidPwd] = useState(false);
+  const [products, setProducts] = useState([]);
 
   const history = useHistory();
 
@@ -58,6 +59,8 @@ function AppProvider({ children }) {
     vldtName,
     vldtEmail,
     handleRedirect,
+    products,
+    setProducts,
   };
 
   AppProvider.propTypes = {

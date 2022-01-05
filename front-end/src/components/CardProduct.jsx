@@ -4,17 +4,19 @@ import PropTypes from 'prop-types';
 export default function CardProduct(props) {
   const { product: { id, name, price, url_image: urlImage } } = props;
 
+  const changePriceToComa = (value) => value.toString().replace(/\./, ',');
+
   return (
     <main id={ id }>
       <section>
         <span
           data-testid={ `customer_products__element-card-price-${id}` }
         >
-          { price }
+          { changePriceToComa(price) }
         </span>
         <img
           src={ urlImage }
-          alt={ name }
+          alt={ `${name}` }
           data-testid={ `customer_products__img-card-bg-image-${id}` }
         />
       </section>
@@ -32,7 +34,9 @@ export default function CardProduct(props) {
         </button>
         <span
           data-testid={ `customer_products__input-card-quantity-${id}` }
-        >0</span>
+        >
+          0
+        </span>
         <button
           type="button"
           data-testid={ `customer_products__button-card-add-item-${id}` }
