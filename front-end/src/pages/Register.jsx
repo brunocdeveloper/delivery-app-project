@@ -33,7 +33,6 @@ export default function Register() {
     event.preventDefault();
     const payload = { rgName, rgEmail, rgPwd };
     const registered = await registerUser(payload);
-    console.log(registered);
     if (!registered) return;
     await handleLoginSubmit();
   };
