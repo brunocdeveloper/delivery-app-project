@@ -7,11 +7,12 @@ export default async function registerUser(payload) {
     email: payload.rgEmail,
   };
   try {
-    await axios({
+    const { data } = await axios({
       method: 'post',
       url: 'http://localhost:3001/register',
       data: body,
     });
+    return data;
   } catch (e) {
     console.log(e.message);
   }
