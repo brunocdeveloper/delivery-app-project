@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
+import handleLogin from '../api/login';
 
 function AppProvider({ children }) {
   const [rgName, setRgName] = useState('');
@@ -11,6 +12,10 @@ function AppProvider({ children }) {
   const [validName, setValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [validPwd, setValidPwd] = useState(false);
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
 
   const history = useHistory();
 
@@ -39,6 +44,20 @@ function AppProvider({ children }) {
     setIsValidEmail(true);
   };
 
+  const handleLoginSubmit = async () => {
+    try {
+      const userWithToken = await handleLogin(user);
+      if (userWithToken && userWithToken.token && userWithToken.role === 'customer') {
+        const { name, email, role, token } = userWithToken;
+        localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+        handleRedirect('/customer/products');
+      }
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const contextValue = {
     rgName,
     setRgName,
@@ -58,6 +77,9 @@ function AppProvider({ children }) {
     vldtName,
     vldtEmail,
     handleRedirect,
+    user,
+    setUser,
+    handleLoginSubmit,
   };
 
   AppProvider.propTypes = {

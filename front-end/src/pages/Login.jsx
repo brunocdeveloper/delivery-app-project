@@ -1,17 +1,20 @@
-import { React, useState, useContext } from 'react';
+import { React, useContext } from 'react';
 import AppContext from '../context/AppContext';
 // import { useHistory } from 'react-router-dom';
-import handleLogin from '../api/login';
+// import handleLogin from '../api/login';
 
 export default function Login() {
   const {
     handleRedirect,
+    user,
+    setUser,
+    handleLoginSubmit,
   } = useContext(AppContext);
 
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-  });
+  // const [user, setUser] = useState({
+  //   email: '',
+  //   password: '',
+  // });
 
   const validateLogin = () => {
     const { email, password } = user;
@@ -28,19 +31,19 @@ export default function Login() {
     setUser({ ...user, [name]: value });
   };
 
-  const handleLoginSubmit = async () => {
-    try {
-      const userWithToken = await handleLogin(user);
-      if (userWithToken && userWithToken.token && userWithToken.role === 'customer') {
-        const { name, email, role, token } = userWithToken;
-        localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
-        handleRedirect('/customer/products');
-      }
-      return;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleLoginSubmit = async () => {
+  //   try {
+  //     const userWithToken = await handleLogin(user);
+  //     if (userWithToken && userWithToken.token && userWithToken.role === 'customer') {
+  //       const { name, email, role, token } = userWithToken;
+  //       localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+  //       handleRedirect('/customer/products');
+  //     }
+  //     return;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div>

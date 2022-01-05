@@ -26,6 +26,7 @@ export default function Register() {
     const payload = { rgName, rgEmail, rgPwd };
     const registered = await registerUser(payload);
     if (!registered) return;
+    // importar a funçao de login do context
     handleRedirect('/customer/products');
   };
 
