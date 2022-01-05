@@ -10,12 +10,12 @@ export default function NavBar(props) {
   } = useContext(AppContext);
 
   const logout = () => {
-    localStorage.removeItem('userInfo');
+    localStorage.removeItem('user');
     handleRedirect('/');
   };
 
   const currentUser = () => {
-    const data = JSON.parse(localStorage.getItem('userInfo'));
+    const data = JSON.parse(localStorage.getItem('user'));
     if (!data) return handleRedirect('/');
 
     const { name } = data;
