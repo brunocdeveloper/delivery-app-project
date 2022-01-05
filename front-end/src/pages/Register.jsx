@@ -18,17 +18,9 @@ export default function Register() {
     vldtName,
     vldtEmail,
     setErr,
-    handleRedirect,
+    handleLoginSubmit,
+    handleChangeInputs,
   } = useContext(AppContext);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const payload = { rgName, rgEmail, rgPwd };
-    const registered = await registerUser(payload);
-    if (!registered) return;
-    // importar a funçao de login do context
-    handleRedirect('/customer/products');
-  };
 
   useEffect(() => {
     if (validName && isValidEmail && validPwd) {
@@ -37,12 +29,41 @@ export default function Register() {
     setErr(true);
   }, [rgEmail, rgName, rgPwd]);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const payload = { rgName, rgEmail, rgPwd };
+    const registered = await registerUser(payload);
+    console.log(registered);
+    if (!registered) return;
+    await handleLoginSubmit();
+  };
+
+  const handleOnChangeInput = (e) => {
+    switch (e.target.name) {
+    case 'name':
+      setRgName(e.target.value);
+      vldtName(e.target.value);
+      break;
+    case 'email':
+      setRgEmail(e.target.value);
+      vldtEmail(e.target.value);
+      handleChangeInputs(e);
+      break;
+    case 'password':
+      setRgPwd(e.target.value);
+      vldtPwd(e.target.value);
+      handleChangeInputs(e);
+      break;
+    default:
+      break;
+    }
+  };
+
   return (
     <section className="registerContainer">
       <h1 className="appalmirinha">Cadastro</h1>
       <form
         className="register-form"
-        onSubmit={ (event) => handleSubmit(event) }
       >
         <label htmlFor="name" className="name">
           <p className="placeE">Name:</p>
@@ -52,7 +73,7 @@ export default function Register() {
             id="name"
             value={ rgName }
             onChange={
-              ({ target }) => { setRgName(target.value); vldtName(target.value); }
+              (e) => { handleOnChangeInput(e); }
             }
             data-testid="common_register__input-name"
           />
@@ -65,7 +86,7 @@ export default function Register() {
             id="email"
             value={ rgEmail }
             onChange={
-              ({ target }) => { setRgEmail(target.value); vldtEmail(target.value); }
+              (e) => { handleOnChangeInput(e); }
             }
             data-testid="common_register__input-email"
           />
@@ -78,7 +99,7 @@ export default function Register() {
             id="password"
             value={ rgPwd }
             onChange={
-              ({ target }) => { setRgPwd(target.value); vldtPwd(target.value); }
+              (e) => { handleOnChangeInput(e); }
             }
             data-testid="common_register__input-password"
           />

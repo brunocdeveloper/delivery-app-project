@@ -49,13 +49,17 @@ function AppProvider({ children }) {
       const userWithToken = await handleLogin(user);
       if (userWithToken && userWithToken.token && userWithToken.role === 'customer') {
         const { name, email, role, token } = userWithToken;
-        localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+        await localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
         handleRedirect('/customer/products');
       }
       return;
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleChangeInputs = ({ target: { value, name } }) => {
+    setUser({ ...user, [name]: value });
   };
 
   const contextValue = {
@@ -80,6 +84,7 @@ function AppProvider({ children }) {
     user,
     setUser,
     handleLoginSubmit,
+    handleChangeInputs,
   };
 
   AppProvider.propTypes = {
