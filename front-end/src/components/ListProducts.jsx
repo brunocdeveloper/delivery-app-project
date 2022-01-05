@@ -5,7 +5,6 @@ import CardProduct from './CardProduct';
 export default function ListProducts({ products }) {
   return (
     <>
-      { console.log(products) }
       { products && products.map((product, index) => (
         <div key={ index }>
           <CardProduct product={ product } />
