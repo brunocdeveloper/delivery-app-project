@@ -18,4 +18,6 @@ app.use('/login', routes.login);
 
 app.use('/register', routes.register);
 
+app.use('/customer', routes.products);
+
 module.exports = app;
