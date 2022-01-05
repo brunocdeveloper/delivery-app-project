@@ -32,6 +32,8 @@ export default function Login() {
     try {
       const userWithToken = await handleLogin(user);
       if (userWithToken && userWithToken.token && userWithToken.role === 'customer') {
+        const { name, email, role, token } = userWithToken;
+        localStorage.setItem('userInfo', JSON.stringify({ name, email, role, token }));
         handleRedirect('/customer/products');
       }
       return;
