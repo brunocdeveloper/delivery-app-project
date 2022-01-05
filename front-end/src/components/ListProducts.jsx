@@ -4,13 +4,13 @@ import CardProduct from './CardProduct';
 
 export default function ListProducts({ products }) {
   return (
-    <>
+    <section>
       { products && products.map((product, index) => (
         <div key={ index }>
           <CardProduct product={ product } />
         </div>
       )) }
-    </>
+    </section>
   );
 }
 
