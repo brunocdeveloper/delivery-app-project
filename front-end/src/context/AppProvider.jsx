@@ -12,6 +12,7 @@ function AppProvider({ children }) {
   const [validName, setValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [validPwd, setValidPwd] = useState(false);
+  const [products, setProducts] = useState([]);
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -81,6 +82,8 @@ function AppProvider({ children }) {
     vldtName,
     vldtEmail,
     handleRedirect,
+    products,
+    setProducts,
     user,
     setUser,
     handleLoginSubmit,
