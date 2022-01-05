@@ -1,6 +1,6 @@
 const axios = require('axios').default;
 
-const handleLogin = async (payload) => {
+export default async function handleLogin(payload) {
   const body = {
     email: payload.email,
     password: payload.password,
@@ -15,6 +15,4 @@ const handleLogin = async (payload) => {
   } catch (e) {
     console.log(e.message);
   }
-};
-
-module.exports = handleLogin;
+}
