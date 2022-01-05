@@ -11,7 +11,7 @@ const jwtConfig = {
 const authLogin = async (email, password) => {
   const user = await users.findOne({ where: { [Op.and]: [{ email }, { password }] } });
   if (!user) throw new Error('Not Found');
-
+  console.log(user, 'USER');
   const userWithoutPwd = {
     id: user.id,
     name: user.name,

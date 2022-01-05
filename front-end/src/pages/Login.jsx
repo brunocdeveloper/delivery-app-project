@@ -1,18 +1,17 @@
-import { React, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { React, useState, useContext } from 'react';
+import AppContext from '../context/AppContext';
+// import { useHistory } from 'react-router-dom';
 import handleLogin from '../api/login';
 
 export default function Login() {
+  const {
+    handleRedirect,
+  } = useContext(AppContext);
+
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-
-  const history = useHistory();
-
-  const handleRedirect = () => {
-    history.push('/register');
-  };
 
   const validateLogin = () => {
     const { email, password } = user;
@@ -31,9 +30,10 @@ export default function Login() {
 
   const handleLoginSubmit = async () => {
     try {
-      const token = await handleLogin(user);// NESSA PARTE DEVE VERIFICAR A EXISTENCIA DO TOKEN
-      if (token) {
-        history.push('/products');
+      const userWithToken = await handleLogin(user);
+      console.log(userWithToken);
+      if (userWithToken && userWithToken.token && userWithToken.role === 'customer') {
+        handleRedirect('/customer/products');
       }
     } catch (error) {
       console.log(error);
@@ -75,7 +75,7 @@ export default function Login() {
         <button
           type="button"
           data-testid="common_login__button-register"
-          onClick={ () => handleRedirect() }
+          onClick={ () => handleRedirect('/register') }
         >
           Ainda não tenho conta
         </button>
