@@ -27,6 +27,7 @@ module.exports = {
       status: {      
         allowNull: false,  
         type: Sequelize.STRING(50),
+        defaultValue: 'Pendente',
       },
       user_id: {
         type: Sequelize.INTEGER,
