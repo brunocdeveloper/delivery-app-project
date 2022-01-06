@@ -9,9 +9,20 @@ export default function Checkout() {
     price: 10,
   }];
 
+  const section1 = {
+    name: 'PRODUTOS',
+  };
+
+  const section2 = {
+    name: 'MEUS PEDIDOS',
+  };
+
   return (
     <section className="checkout">
-      <NavBar />
+      <NavBar
+        section1={ section1 }
+        section2={ section2 }
+      />
       <ProductsTable data={ data } />
     </section>
   );

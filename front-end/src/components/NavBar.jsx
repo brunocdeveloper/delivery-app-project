@@ -30,7 +30,7 @@ export default function NavBar(props) {
           type="button"
           data-testid="customer_products__element-navbar-link-products"
         >
-          {section1.nameSection1}
+          {section1.name}
         </button>)}
       { section2 && (
         <button
@@ -38,7 +38,7 @@ export default function NavBar(props) {
           type="button"
           data-testid="customer_products__element-navbar-link-orders"
         >
-          {section2.nameSection2}
+          {section2.name}
         </button>)}
       <span data-testid="customer_products__element-navbar-user-full-name">
         {currentUser()}

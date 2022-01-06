@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import DeliveryInfos from './DeliveryInfos';
 
 export default function ProductsTable(props) {
   const { data } = props;
   const [products, setProducts] = useState(data);
   const [total, setTotal] = useState(0);
 
-  const removeItem = (item) => {
-    const newCart = products.filter((product) => product.item !== item);
-    setProducts(newCart);
+  const removeItem = (description) => {
+    const removedItem = products.filter((product) => product.description !== description);
+    setProducts(removedItem);
   };
 
   const calculateTotal = () => {
@@ -19,7 +20,16 @@ export default function ProductsTable(props) {
 
   useEffect(() => {
     calculateTotal();
-  }, [products]);
+  }, [products, calculateTotal]);
+
+  const sellers = [{
+    id: 1,
+    name: 'Vendedora 1',
+  },
+  {
+    id: 2,
+    name: 'Vendedora 2',
+  }];
 
   return (
     <div className="products-table">
@@ -35,7 +45,7 @@ export default function ProductsTable(props) {
           </tr>
         </thead>
         <tbody>
-          {data.map((product, i) => (
+          {products.map((product, i) => (
             <tr key={ product.item }>
               <td
                 data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
@@ -65,7 +75,7 @@ export default function ProductsTable(props) {
               <button
                 type="button"
                 data-testid={ `customer_checkout__element-order-table-remove-${i}` }
-                onClick={ () => removeItem(product.item) }
+                onClick={ () => removeItem(product.description) }
               >
                 Remover
               </button>
@@ -81,6 +91,11 @@ export default function ProductsTable(props) {
           {total}
         </span>
       </div>
+      <DeliveryInfos
+        sellers={ sellers }
+        products={ products }
+        totalPrice={ total }
+      />
     </div>
   );
 }
