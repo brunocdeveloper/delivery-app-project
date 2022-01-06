@@ -10,7 +10,7 @@ const createSale = async (req, res) => {
     console.error(e);
     return res.status(500).json({ message: e.message });
   }
-}
+};
 
 module.exports = {
   createSale,

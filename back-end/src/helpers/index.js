@@ -7,7 +7,19 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
+const organizeProdArray = (saleObj, saleId) => {
+  const { prodArray } = saleObj;
+  return prodArray.map(({ product_id, quantity }) => {
+    return {
+      sale_id: saleId,
+      product_id,
+      quantity,
+    }
+  });
+};
+
 module.exports = {
   jwtKey,
   jwtConfig,
+  organizeProdArray,
 };
