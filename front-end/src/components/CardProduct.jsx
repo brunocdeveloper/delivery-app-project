@@ -39,17 +39,14 @@ export default function CardProduct(props) {
   };
 
   const addByInput = () => {
-    if (cartItens.length > 0) {
-      const foundIndexItem = cartItens.findIndex((item) => item.id === id);
-      // const negativeOne = -1;
-      // if (foundIndexItem === negativeOne) {
-      //   return setCartItens([...cartItens, { id, name, price, quantity }]);
-      // }
-
-      const newCartItem = cartItens;
-      newCartItem[foundIndexItem].quantity = quantity;
-      setCartItens(newCartItem);
+    if (quantity < 1) return;
+    const foundIndexItem = cartItens.findIndex((item) => item.id === id);
+    const negativeOne = -1;
+    if (foundIndexItem === negativeOne) {
+      return setCartItens([...cartItens, { id, name, price, quantity }]);
     }
+    const newCartItem = cartItens;
+    newCartItem[foundIndexItem].quantity = quantity;
   };
 
   const calculateTotal = () => {
@@ -60,7 +57,12 @@ export default function CardProduct(props) {
 
   useEffect(() => {
     calculateTotal();
-  }, [quantity, subTotal, calculateTotal, addByInput]);
+  }, [quantity, subTotal, calculateTotal]);
+
+  useEffect(() => {
+    addByInput();
+    calculateTotal();
+  }, [quantity]);
 
   useEffect(() => {
     addByInput();
@@ -85,7 +87,6 @@ export default function CardProduct(props) {
       break;
     case 'input':
       setQuantity(parseQuantity);
-      addByInput();
       calculateTotal();
       break;
     default:
