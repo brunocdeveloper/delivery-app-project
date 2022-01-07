@@ -3,8 +3,6 @@ const Service = require('../services/Sales');
 const createSale = async (req, res) => {
   try {
     const sale = req.body;
-    console.log(req.body);
-    console.log(req.userInfo)
     const { data: { id } } = req.userInfo;
     const createdSaleID = await Service.createSale(sale, id);
     return res.status(201).json({ message: 'Created', saleId: createdSaleID });
