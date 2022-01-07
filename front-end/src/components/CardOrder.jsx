@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 export default function CardOrder({ order }) {
   const { id, status, sale_date: saleDate, total_price: totalPrice } = order;
+
+  const modifyDate = moment(saleDate).format('DD/MM/YYYY');
 
   return (
     <main>
