@@ -8,14 +8,14 @@ export default function DeliveryInfos({ sellers, products, totalPrice }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const body = {
+    const sale = {
       seller_id: selectedSeller.id,
-      address: selectedAddress,
-      number: selectedNumber,
-      products,
-      totalPrice,
+      delivery_address: selectedAddress,
+      delivery_number: selectedNumber,
+      prodArray: products,
+      total_price: totalPrice,
     };
-    console.log(body);
+    console.log(sale);
   };
 
   return (
