@@ -3,12 +3,6 @@ import NavBar from '../components/NavBar';
 import ProductsTable from '../subcomponents/ProductsTable';
 
 export default function Checkout() {
-  const data = [{
-    description: 'Brahmaaaao',
-    quantity: 10,
-    price: 10,
-  }];
-
   const section1 = {
     name: 'PRODUTOS',
   };
@@ -23,7 +17,7 @@ export default function Checkout() {
         section1={ section1 }
         section2={ section2 }
       />
-      <ProductsTable data={ data } />
+      <ProductsTable />
     </section>
   );
 }

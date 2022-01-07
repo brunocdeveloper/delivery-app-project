@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useContext } from 'react';
 import DeliveryInfos from './DeliveryInfos';
+import AppContext from '../context/AppContext';
 
-export default function ProductsTable(props) {
-  const { data } = props;
-  const [products, setProducts] = useState(data);
+export default function ProductsTable() {
+  const { cartItens, setCartItens } = useContext(AppContext);
   const [total, setTotal] = useState(0);
 
-  const removeItem = (description) => {
-    const removedItem = products.filter((product) => product.description !== description);
-    setProducts(removedItem);
+  const removeItem = (name) => {
+    const removedItem = cartItens.filter((product) => product.name !== name);
+    setCartItens(removedItem);
   };
 
   const calculateTotal = () => {
-    const totalPrice = products
+    const totalPrice = cartItens
       .reduce((acc, { price, quantity }) => acc + (price * quantity), 0);
     setTotal(totalPrice);
   };
 
   useEffect(() => {
     calculateTotal();
-  }, [products, calculateTotal]);
+  }, [cartItens, calculateTotal]);
 
   const sellers = [{
     id: 1,
@@ -45,7 +44,7 @@ export default function ProductsTable(props) {
           </tr>
         </thead>
         <tbody>
-          {products.map((product, i) => (
+          {cartItens.map((product, i) => (
             <tr key={ product.item }>
               <td
                 data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
@@ -55,7 +54,7 @@ export default function ProductsTable(props) {
               <td
                 data-testid={ `customer_checkout__element-order-table-name-${i}` }
               >
-                {product.description}
+                {product.name}
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
@@ -75,7 +74,7 @@ export default function ProductsTable(props) {
               <button
                 type="button"
                 data-testid={ `customer_checkout__element-order-table-remove-${i}` }
-                onClick={ () => removeItem(product.description) }
+                onClick={ () => removeItem(product.name) }
               >
                 Remover
               </button>
@@ -93,18 +92,9 @@ export default function ProductsTable(props) {
       </div>
       <DeliveryInfos
         sellers={ sellers }
-        products={ products }
+        cartItens={ cartItens }
         totalPrice={ total }
       />
     </div>
   );
 }
-
-// proptypes
-ProductsTable.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    description: PropTypes.string,
-    quantity: PropTypes.number,
-    price: PropTypes.number,
-  })).isRequired,
-};
