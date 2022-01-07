@@ -5,10 +5,14 @@ import AppContext from '../context/AppContext';
 
 export default function ListProducts({ products }) {
   const { subTotal, handleRedirect } = useContext(AppContext);
-
   const productsRefactor = products.map((product) => ({
     ...product, quantity: 0,
   }));
+
+  const enableButton = () => {
+    if (subTotal <= 0) return true;
+    return false;
+  };
 
   return (
     <section>
@@ -18,10 +22,12 @@ export default function ListProducts({ products }) {
         </div>
       )) }
       <button
+        disabled={ enableButton() }
         type="button"
-        data-testid="data-testid='customer_products__button-cart"
+        data-testid="customer_products__button-cart"
         onClick={ () => handleRedirect('/customer/checkout') }
       >
+        Ver Carrinho: R$
         <span data-testid="customer_products__checkout-bottom-value">
           { subTotal && subTotal.toFixed(2).replace('.', ',') }
         </span>
