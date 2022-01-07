@@ -20,7 +20,7 @@ export default function ProductsTable() {
   useEffect(() => {
     calculateTotal();
   }, [cartItens, calculateTotal]);
- 
+
   return (
     <div className="products-table">
       <table>

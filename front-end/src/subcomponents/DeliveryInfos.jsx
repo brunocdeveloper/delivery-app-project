@@ -52,11 +52,15 @@ export default function DeliveryInfos({ totalPrice }) {
           <select
             id="delivery-seller"
             onChange={ (e) => setSelectedSeller(e.target.value) }
+            data-testid="customer_checkout__select-seller"
           >
-            <option value="">Selecione</option>
+            <option
+              value=""
+            >
+              Selecione
+            </option>
             { sellers && sellers.map((seller) => (
               <option
-                data-testid="customer_checkout__select-seller"
                 key={ seller.id }
                 value={ seller.id }
               >

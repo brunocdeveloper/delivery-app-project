@@ -26,8 +26,9 @@ module.exports = {
       quantity: {
         allowNull: false,
         type: Sequelize.INTEGER,
-      }
-    });
+      },      
+    },
+    );
   },
 
   down: async (queryInterface, _Sequelize) => {
