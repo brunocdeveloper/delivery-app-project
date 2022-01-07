@@ -9,9 +9,9 @@ const jwtConfig = {
 
 const organizeProdArray = (saleObj, saleId) => {
   const { prodArray } = saleObj;
-  return prodArray.map(({ product_id, quantity }) => ({
-    sale_id: saleId,
-    product_id,
+  return prodArray.map(({ productId, quantity }) => ({
+    saleId,
+    productId,
     quantity,
   }));
 };
