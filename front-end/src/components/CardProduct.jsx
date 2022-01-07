@@ -37,16 +37,14 @@ export default function CardProduct(props) {
   };
 
   const addByInput = () => {
-    if (cartItens.length === 0) return;
+    if (quantity < 1) return;
     const foundIndexItem = cartItens.findIndex((item) => item.id === id);
     const negativeOne = -1;
     if (foundIndexItem === negativeOne) {
       return setCartItens([...cartItens, { id, name, price, quantity }]);
     }
-
     const newCartItem = cartItens;
     newCartItem[foundIndexItem].quantity = quantity;
-    setCartItens(newCartItem);
   };
 
   const calculateTotal = () => {
@@ -57,9 +55,12 @@ export default function CardProduct(props) {
 
   useEffect(() => {
     calculateTotal();
+  }, [quantity, subTotal, calculateTotal]);
+
+  useEffect(() => {
     addByInput();
-    console.log(cartItens);
-  }, [quantity, subTotal, calculateTotal, addByInput]);
+    calculateTotal();
+  }, [quantity]);
 
   const addOrRemoveQuantity = ({ target }) => {
     const parseQuantity = Number(target.value);
@@ -80,7 +81,6 @@ export default function CardProduct(props) {
       break;
     case 'input':
       setQuantity(parseQuantity);
-      addItem();
       calculateTotal();
       break;
     default:
