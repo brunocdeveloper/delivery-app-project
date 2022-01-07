@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     total_price: DataTypes.DECIMAL,
     delivery_address: DataTypes.STRING,
     delivery_number: DataTypes.STRING,
-    user_id: { type: DataTypes.INTEGER, foreignKey: true },
+    userId: { type: DataTypes.INTEGER, foreignKey: true,  field: 'user_id' },
     seller_id: { type: DataTypes.INTEGER, foreignKey: true },
     sale_date: { type: DataTypes.DATE },
     status: { type: DataTypes.STRING },
