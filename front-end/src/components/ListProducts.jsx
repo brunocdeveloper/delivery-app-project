@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import CardProduct from './CardProduct';
 import AppContext from '../context/AppContext';
 
 export default function ListProducts({ products }) {
-  const { subTotal } = useContext(AppContext);
+  const { subTotal, handleRedirect } = useContext(AppContext);
 
   const productsRefactor = products.map((product) => ({
     ...product, quantity: 0,
@@ -18,14 +17,15 @@ export default function ListProducts({ products }) {
           <CardProduct product={ product } />
         </div>
       )) }
-      <Link to="/customer/checkout">
-        <button
-          type="button"
-          data-testid="customer_products__checkout-bottom-value"
-        >
+      <button
+        type="button"
+        data-testid="data-testid='customer_products__button-cart"
+        onClick={ () => handleRedirect('/customer/checkout') }
+      >
+        <span data-testid="customer_products__checkout-bottom-value">
           { subTotal && subTotal.toFixed(2).replace('.', ',') }
-        </button>
-      </Link>
+        </span>
+      </button>
     </section>
   );
 }

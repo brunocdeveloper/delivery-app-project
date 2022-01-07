@@ -20,16 +20,7 @@ export default function ProductsTable() {
   useEffect(() => {
     calculateTotal();
   }, [cartItens, calculateTotal]);
-
-  const sellers = [{
-    id: 1,
-    name: 'Vendedora 1',
-  },
-  {
-    id: 2,
-    name: 'Vendedora 2',
-  }];
-
+ 
   return (
     <div className="products-table">
       <table>
@@ -64,12 +55,12 @@ export default function ProductsTable() {
               <td
                 data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
               >
-                {product.price}
+                {product.price.replace('.', ',')}
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
               >
-                {product.price * product.quantity}
+                {(product.price * product.quantity).toFixed(2).replace('.', ',')}
               </td>
               <button
                 type="button"
@@ -87,11 +78,10 @@ export default function ProductsTable() {
           data-testid="customer_checkout__element-order-total-price"
         >
           Total: R$
-          {total}
+          {total.toFixed(2).replace('.', ',')}
         </span>
       </div>
       <DeliveryInfos
-        sellers={ sellers }
         cartItens={ cartItens }
         totalPrice={ total }
       />

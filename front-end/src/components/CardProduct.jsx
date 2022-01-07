@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 
 export default function CardProduct(props) {
-  const { product: { id, name, price, url_image: urlImage } } = props;
+  const { product: { id, name, price, urlImage } } = props;
   const [quantity, setQuantity] = useState(0);
   const { cartItens, setCartItens, setSubTotal, subTotal } = useContext(AppContext);
   const changePriceToComa = (value) => value.toString().replace(/\./, ',');
@@ -148,7 +148,7 @@ CardProduct.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
-    url_image: PropTypes.string.isRequired,
+    urlImage: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
   }).isRequired,
 };

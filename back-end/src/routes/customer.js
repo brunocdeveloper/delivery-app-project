@@ -8,7 +8,7 @@ router.get('/products', prodCtrl.getProducts);
 
 router.post('/checkout', validateJWT, salesCtrl.createSale);
 
-router.get('/checkout', validateJWT, usersCtrl.getUsersByRole);
+router.post('/checkout/get-users', validateJWT, usersCtrl.getUsersByRole);
 
 // router.post('/orders/:id');
 

@@ -1,21 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import AppContext from '../context/AppContext';
+import getUsersByRole from '../api/users';
+import createSale from '../api/customer';
 
-export default function DeliveryInfos({ sellers, products, totalPrice }) {
-  const [selectedSeller, setSelectedSeller] = useState(sellers[0]);
+export default function DeliveryInfos({ totalPrice }) {
+  const [selectedSeller, setSelectedSeller] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedNumber, setSelectedNumber] = useState(null);
+  const [sellers, setSellers] = useState([]);
+  const [userToken, setUserToken] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const { cartItens, handleRedirect } = useContext(AppContext);
+
+  const handleSellers = async (token) => {
+    const users = await getUsersByRole(token, { role: 'seller' });
+    setSellers(users);
+  };
+
+  useEffect(() => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    setUserToken(token);
+    handleSellers(token);
+  }, []);
+
+  useEffect(() => {
+    console.log(selectedSeller);
+  }, [selectedSeller]);
+
+  const handleSubmit = async () => {
     const sale = {
-      seller_id: selectedSeller.id,
-      delivery_address: selectedAddress,
-      delivery_number: selectedNumber,
-      prodArray: products,
-      total_price: totalPrice,
+      sellerId: Number(selectedSeller),
+      deliveryAddress: selectedAddress,
+      deliveryNumber: selectedNumber,
+      prodArray: cartItens,
+      totalPrice: totalPrice.toFixed(2),
     };
+    const saleId = await createSale(userToken, sale);
     console.log(sale);
+    handleRedirect(`/customer/orders/${saleId}`);
   };
 
   return (
@@ -26,13 +49,16 @@ export default function DeliveryInfos({ sellers, products, totalPrice }) {
           htmlFor="delivery-seller"
         >
           <span>P.Vendedora Responsável:</span>
-          <select>
-            {sellers.map((seller) => (
+          <select
+            id="delivery-seller"
+            onChange={ (e) => setSelectedSeller(e.target.value) }
+          >
+            <option value="">Selecione</option>
+            { sellers && sellers.map((seller) => (
               <option
                 data-testid="customer_checkout__select-seller"
                 key={ seller.id }
                 value={ seller.id }
-                onChange={ (e) => setSelectedSeller(e.target.value) }
               >
                 {seller.name}
               </option>
@@ -73,15 +99,5 @@ export default function DeliveryInfos({ sellers, products, totalPrice }) {
 
 // Proptypes
 DeliveryInfos.propTypes = {
-  sellers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-  })).isRequired,
-  products: PropTypes.arrayOf(PropTypes.shape({
-    item: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-  })).isRequired,
   totalPrice: PropTypes.number.isRequired,
 };
