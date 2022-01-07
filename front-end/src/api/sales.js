@@ -2,7 +2,7 @@ const axios = require('axios').default;
 
 const url = 'http://localhost:3001';
 
-export default async function getAllSales() {
+export async function getAllSales() {
   try {
     const { data } = await axios({
       method: 'get',
@@ -14,7 +14,7 @@ export default async function getAllSales() {
   }
 }
 
-export default async function getByIdUser() {
+export async function getByIdUser() {
   try {
     const { data } = await axios({
       method: 'get',

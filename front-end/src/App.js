@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Products from './pages/Products';
 import Generic from './pages/Generic';
+import CustomerOrders from './pages/CustomerOrders';
 import AppProvider from './context/AppProvider';
 
 function App() {
@@ -17,8 +18,9 @@ function App() {
           </Route>
           <Route exact path="/login" component={ Login } />
           <Route exact path="/register" component={ Register } />
-          <Route exact path="/customer/products" component={ Products } />
+          <Route exact path="/customer/products" component={ Products } />          
           <Route exact path="/generic" component={ Generic } />
+          <Route exact path="/customer/orders" component={ CustomerOrders } />
         </Switch>
       </AppProvider>
     </Router>
