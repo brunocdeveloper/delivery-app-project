@@ -19,7 +19,7 @@ function AppProvider({ children }) {
     email: '',
     password: '',
   });
-  console.log(cartItens);
+
   const history = useHistory();
 
   const handleRedirect = (path) => {
