@@ -16,7 +16,8 @@ export default function NavBar(props) {
 
   const currentUser = () => {
     const data = JSON.parse(localStorage.getItem('user'));
-    if (!data) return handleRedirect('/');
+    // if (!data) return handleRedirect('/');
+    if (!data) return 'MODO-DEV';
 
     const { name } = data;
     return name;
