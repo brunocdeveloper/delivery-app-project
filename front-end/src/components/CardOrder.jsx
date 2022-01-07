@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 export default function CardOrder({ order }) {
-  const { id, status, sale_date: saleDate, total_price: totalPrice } = order;
+  const { id, status, saleDate, totalPrice } = order;
 
   const modifyDate = moment(saleDate).format('DD/MM/YYYY');
 
@@ -43,7 +43,7 @@ CardOrder.propTypes = {
   order: PropTypes.shape({
     id: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
-    sale_date: PropTypes.string.isRequired,
-    total_price: PropTypes.number.isRequired,
+    saleDate: PropTypes.string.isRequired,
+    totalPrice: PropTypes.number.isRequired,
   })
 }
