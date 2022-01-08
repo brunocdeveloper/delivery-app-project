@@ -10,7 +10,6 @@ router.post('/checkout/get-users', validateJWT, usersCtrl.getUsersByRole);
 
 router.post('/checkout', validateJWT, salesCtrl.createSale);
 
-
 // router.post('/orders/:id');
 
 module.exports = router;
