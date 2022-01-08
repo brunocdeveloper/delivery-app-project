@@ -64,10 +64,6 @@ export default function CardProduct(props) {
     calculateTotal();
   }, [quantity]);
 
-  useEffect(() => {
-    addByInput();
-  }, [addByInput]);
-
   const addOrRemoveQuantity = ({ target }) => {
     const parseQuantity = Number(target.value);
     switch (target.name) {
