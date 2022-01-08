@@ -1,4 +1,4 @@
-const { sales, salesProducts } = require('../database/models');
+const { sales, sales_products: salesProducts } = require('../database/models');
 const { organizeProdArray } = require('../helpers');
 
 const createSale = async (saleObj, id) => {
