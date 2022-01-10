@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AppContext from '../context/AppContext';
 import NavBar from '../components/NavBar';
 import CardOrder from '../components/CardOrder';
-import { getByIdUser } from '../api/sales';
+import { getByIdUserSale } from '../api/sales';
 
 export default function CustomerOrders() {
   const { orders, setOrders } = useContext(AppContext);
@@ -17,7 +17,7 @@ export default function CustomerOrders() {
 
   const getOrders = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const result = await getByIdUser(user.id);
+    const result = await getByIdUserSale(user.id);
     setOrders(result);
   };
 
@@ -25,12 +25,11 @@ export default function CustomerOrders() {
     getOrders();
   }, []);
 
-
   return (
     <section>
       <NavBar section1={ section1 } section2={ section2 } />
       { orders && orders
         .map((order, index) => <CardOrder key={ index } order={ order } />) }
     </section>
-  )
+  );
 }

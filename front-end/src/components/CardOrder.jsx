@@ -10,32 +10,32 @@ export default function CardOrder({ order }) {
 
   return (
     <main>
-      <Link to={ `/customer/orders/${id}`}>
-      <h3
+      <Link to={ `/customer/orders/${id}` }>
+        <h3
           data-testid={ `customer_orders__element-order-id-${id}` }
         >
           { `Pedido ${id}` }
-        </h3>      
-      <section>
-        <h3
-          data-testid={ `customer_orders__element-delivery-status-${id}` }
-        >
-          { status }
         </h3>
-      </section>
-      <section>
-        <span
-          data-testid={ `customer_orders__element-order-date-${id}` }
-        >
-          { modifyDate }
-        </span>
-        <span
-          data-testid={ `customer_orders__element-card-price-${id}` }
-        >
-          { changePriceToComa(totalPrice) }
-        </span>
-      </section>
-      </Link>        
+        <section>
+          <h3
+            data-testid={ `customer_orders__element-delivery-status-${id}` }
+          >
+            {status}
+          </h3>
+        </section>
+        <section>
+          <span
+            data-testid={ `customer_orders__element-order-date-${id}` }
+          >
+            {modifyDate}
+          </span>
+          <span
+            data-testid={ `customer_orders__element-card-price-${id}` }
+          >
+            {changePriceToComa(totalPrice)}
+          </span>
+        </section>
+      </Link>
     </main>
   );
 }
@@ -46,5 +46,5 @@ CardOrder.propTypes = {
     status: PropTypes.string.isRequired,
     saleDate: PropTypes.string.isRequired,
     totalPrice: PropTypes.number.isRequired,
-  })
-}
+  }).isRequired,
+};

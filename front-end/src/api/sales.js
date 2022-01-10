@@ -6,7 +6,7 @@ export async function getAllSales() {
   try {
     const { data } = await axios({
       method: 'get',
-      url: `${url}/sales`,
+      url: `${url}/customer/orders`,
     });
     return data;
   } catch (e) {
@@ -14,11 +14,11 @@ export async function getAllSales() {
   }
 }
 
-export async function getByIdUser() {
+export async function getByIdUserSale() {
   try {
     const { data } = await axios({
       method: 'get',
-      url: `${url}/sales/${id}`,
+      url: `${url}/customer/orders/${id}`,
     });
     return data;
   } catch (e) {
