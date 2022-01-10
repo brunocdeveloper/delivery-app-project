@@ -10,10 +10,6 @@ router.post('/checkout/get-users', validateJWT, usersCtrl.getUsersByRole);
 
 router.post('/checkout', validateJWT, salesCtrl.createSale);
 
-// router.post('/orders/:id');
+router.get('/orders/:id', validateJWT, salesCtrl.getOrderDetailsById);
 
 module.exports = router;
-
-// const moment = require('moment');
-// const localDate = new Date();
-// console.log(moment.utc(localDate).format());
