@@ -3,6 +3,7 @@ import './App.css';
 import { Redirect, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Admin from './pages/Admin';
 import Products from './pages/Products';
 import Generic from './pages/Generic';
 import CustomerOrders from './pages/CustomerOrders';
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/generic" component={ Generic } />
           <Route exact path="/customer/orders" component={ CustomerOrders } />
           <Route exact path="/customer/orders/:id" component={ CustomerOrdersDetails } />
+          <Route exact path="/admin" component={ Admin } />
         </Switch>
       </AppProvider>
     </Router>
