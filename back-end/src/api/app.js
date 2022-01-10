@@ -23,4 +23,6 @@ app.use('/register', routes.register);
 
 app.use('/customer', routes.customer);
 
+app.use('/seller', routes.seller);
+
 module.exports = app;
