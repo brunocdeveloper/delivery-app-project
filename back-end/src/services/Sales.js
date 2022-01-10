@@ -1,5 +1,6 @@
-const { sales, salesProducts } = require('../database/models');
+const { sales, salesProducts, products, users } = require('../database/models');
 const { organizeProdArray } = require('../helpers');
+const moment = require('moment');
 
 const createSale = async (saleObj, id) => {
   const { prodArray, ...newObj } = saleObj;
@@ -11,8 +12,20 @@ const createSale = async (saleObj, id) => {
 };
 
 const getOrderDetailsById = async (id) => {
-  const orderDetails = await sales.findByPk(id);
-  console.log(orderDetails);
+  const orderDetails = await sales.findByPk(id, {
+    include: [
+      { model: products, as: 'product', attributes: {} },
+      { model: users, as: 'seller', attributes: {} },
+    ],
+  });
+
+  return orderDetails;
+  // const newSaleDate = moment(orderDetails.saleDate).format('DD/MM/YYYY');
+
+  // return {
+  //   ...orderDetails,
+  //   saleDate: newSaleDate,
+  // };
 };
 
 module.exports = {
