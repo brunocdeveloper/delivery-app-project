@@ -7,6 +7,7 @@ import Products from './pages/Products';
 import Generic from './pages/Generic';
 import AppProvider from './context/AppProvider';
 import Checkout from './pages/Checkout';
+import Orders from './pages/Orders';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/customer/products" component={ Products } />
           <Route exact path="/customer/checkout" component={ Checkout } />
           <Route exact path="/generic" component={ Generic } />
+          <Route exact path="/seller/orders" component={ Orders } />
         </Switch>
       </AppProvider>
     </Router>
