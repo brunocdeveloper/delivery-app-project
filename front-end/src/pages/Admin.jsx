@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AdminForm from '../components/AdminForm';
 
 export default function Admin() {

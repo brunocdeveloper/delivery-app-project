@@ -1,15 +1,6 @@
 import React from 'react';
 
 export default function AdminForm() {
-  const [
-    name,
-    setName,
-    email,
-    setEmail,
-    password,
-    setPassword,
-  ] = useState('');
- 
   return (
     <section>
       <form>
@@ -18,7 +9,7 @@ export default function AdminForm() {
           <input
             type="text"
             id="name"
-            placeholder='Nome e Sobrenome'
+            placeholder="Nome e Sobrenome"
             data-testid="admin_manage__input-name"
           />
         </label>
@@ -42,15 +33,15 @@ export default function AdminForm() {
         </label>
         <label htmlFor="type">
           Tipo
-         <select
-          name="type"
-          id="type"
-          data-testid="admin_manage__select-role"
+          <select
+            name="type"
+            id="type"
+            data-testid="admin_manage__select-role"
           >
-          <option value="select">select</option>
-          <option value="seller">vendedor</option>
-          <option value="customer">cliente</option>
-          <option value="administrator">administrador</option>
+            <option value="select">select</option>
+            <option value="seller">vendedor</option>
+            <option value="customer">cliente</option>
+            <option value="administrator">administrador</option>
           </select>
         </label>
         <button
