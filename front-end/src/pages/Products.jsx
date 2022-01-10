@@ -15,7 +15,6 @@ export default function Products() {
     name: 'MEUS PEDIDOS',
   };
 
-
   const fecthProducts = async () => {
     const result = await getAllProducts();
     setProducts(result);

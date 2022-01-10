@@ -21,15 +21,16 @@ export default function NavBarAdmin() {
 
   return (
     <header>
-      {admin && (
+      { admin && (
         <button
+          type="button"
           data-testid="customer_products__element-navbar-link-orders"
         >
           GERENCIAR USUÁRIOS
         </button>
-      )}
+      ) }
       <span data-testid="customer_products__element-navbar-user-full-name">
-        {currentUser()}
+        { currentUser() }
       </span>
       <button
         type="button"

@@ -15,7 +15,7 @@ export default function AdminForm() {
     const pwdLength = 6;
     const validRegex = new RegExp(
       /^([\w.-]+)@([\w-]+)((\.(\w){2,3})+)$/,
-    ); 
+    );
     const validEmail = validRegex.test(email);
     if (validEmail
       && password.length >= pwdLength
