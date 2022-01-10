@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 export default function CardOrder({ order }) {
@@ -9,13 +10,12 @@ export default function CardOrder({ order }) {
 
   return (
     <main>
-      <section>
-        <h3
+      <Link to={ `/customer/orders/${id}`}>
+      <h3
           data-testid={ `customer_orders__element-order-id-${id}` }
         >
           { `Pedido ${id}` }
         </h3>      
-      </section>
       <section>
         <h3
           data-testid={ `customer_orders__element-delivery-status-${id}` }
@@ -35,6 +35,7 @@ export default function CardOrder({ order }) {
           { changePriceToComa(totalPrice) }
         </span>
       </section>
+      </Link>        
     </main>
   );
 }

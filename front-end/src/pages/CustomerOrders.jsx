@@ -7,18 +7,12 @@ import { getByIdUser } from '../api/sales';
 export default function CustomerOrders() {
   const { orders, setOrders } = useContext(AppContext);
 
-  const funcaoTeste = () => {
-    console.log('TESTOU');
-  };
-
   const section1 = {
-    function1: funcaoTeste,
-    nameSection1: 'Produtos',
+    name: 'PRODUTOS',
   };
 
   const section2 = {
-    function2: funcaoTeste,
-    nameSection2: 'Meus Pedidos',
+    name: 'MEUS PEDIDOS',
   };
 
   const getOrders = async () => {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 
 export default function CardProduct(props) {
-  const { product: { id, name, price, url_image: urlImage } } = props;
+  const { product: { id, name, price, urlImage } } = props;
   const [quantity, setQuantity] = useState(0);
   const { cartItens, setCartItens, setSubTotal, subTotal } = useContext(AppContext);
   const changePriceToComa = (value) => value.toString().replace(/\./, ',');
@@ -28,7 +28,9 @@ export default function CardProduct(props) {
     const foundIndexItem = cartItens.findIndex((item) => item.id === id);
     const negativeOne = -1;
     if (foundIndexItem === negativeOne) {
-      return setCartItens([...cartItens, { id, name, price, quantity: quantity + 1 }]);
+      const newCartItens = [...cartItens, { id, name, price, quantity: quantity + 1 }];
+      setCartItens(newCartItens);
+      return;
     }
 
     const newCartItem = cartItens;
@@ -37,16 +39,14 @@ export default function CardProduct(props) {
   };
 
   const addByInput = () => {
-    if (cartItens.length === 0) return;
+    if (quantity < 1) return;
     const foundIndexItem = cartItens.findIndex((item) => item.id === id);
     const negativeOne = -1;
     if (foundIndexItem === negativeOne) {
       return setCartItens([...cartItens, { id, name, price, quantity }]);
     }
-
     const newCartItem = cartItens;
     newCartItem[foundIndexItem].quantity = quantity;
-    setCartItens(newCartItem);
   };
 
   const calculateTotal = () => {
@@ -57,9 +57,12 @@ export default function CardProduct(props) {
 
   useEffect(() => {
     calculateTotal();
+  }, [quantity, subTotal, calculateTotal]);
+
+  useEffect(() => {
     addByInput();
-    console.log(cartItens);
-  }, [quantity, subTotal, calculateTotal, addByInput]);
+    calculateTotal();
+  }, [quantity]);
 
   const addOrRemoveQuantity = ({ target }) => {
     const parseQuantity = Number(target.value);
@@ -80,7 +83,6 @@ export default function CardProduct(props) {
       break;
     case 'input':
       setQuantity(parseQuantity);
-      addItem();
       calculateTotal();
       break;
     default:
@@ -142,7 +144,7 @@ CardProduct.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
-    url_image: PropTypes.string.isRequired,
+    urlImage: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
   }).isRequired,
 };

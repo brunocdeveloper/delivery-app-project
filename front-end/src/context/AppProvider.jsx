@@ -22,6 +22,8 @@ function AppProvider({ children }) {
 
   const history = useHistory();
 
+  console.log(cartItens);
+
   const handleRedirect = (path) => {
     history.push(`${path}`);
   };
