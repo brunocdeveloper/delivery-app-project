@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
 import NavBar from '../components/NavBar';
 
-export default function Generic() {
+export default function OrderDetails() {
   const {
     handleRedirect,
   } = useContext(AppContext);
@@ -24,14 +24,14 @@ export default function Generic() {
     function2: redirectOrders,
     nameSection2: 'Meus Pedidos',
   };
+
+  const getData = () => {
+    console.log('AXIOS - GET orders/:id');
+  };
   return (
     <>
       <NavBar section1={ section1 } section2={ section2 } />
       <span>Detalhe do Pedido</span>
-      <div>
-
-
-      </div>
       <span
         data-testid={ `customer_order_details__element-order-details-label-order-${id}` }
       >
