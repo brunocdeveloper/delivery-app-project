@@ -10,6 +10,12 @@ const createSale = async (saleObj, id) => {
   return { saleId: createdSale.id };
 };
 
+const getOrderDetailsById = async (id) => {
+  const orderDetails = await sales.findByPk(id);
+  console.log(orderDetails);
+};
+
 module.exports = {
   createSale,
+  getOrderDetailsById,
 };

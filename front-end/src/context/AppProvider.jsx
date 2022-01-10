@@ -49,13 +49,29 @@ function AppProvider({ children }) {
     setIsValidEmail(true);
   };
 
+  const redirectTo = (role) => {
+    switch (role) {
+    case 'customer':
+      handleRedirect('/customer/products');
+      break;
+    case 'seller':
+      handleRedirect('/seller/orders');
+      break;
+    case 'admin':
+      handleRedirect('/admin');
+      break;
+    default:
+      break;
+    }
+  };
+
   const handleLoginSubmit = async () => {
     try {
       const userWithToken = await handleLogin(user);
-      if (userWithToken && userWithToken.token && userWithToken.role === 'customer') {
+      if (userWithToken && userWithToken.token) {
         const { name, email, role, token } = userWithToken;
         await localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
-        handleRedirect('/customer/products');
+        redirectTo(role);
       }
       return;
     } catch (error) {
