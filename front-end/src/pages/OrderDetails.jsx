@@ -1,8 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import AppContext from '../context/AppContext';
 import NavBar from '../components/NavBar';
+import OrderTable from '../components/OrderTable';
 
 export default function OrderDetails() {
+  const [order, setOrder] = useState(null);
+  const [products, setProducts] = useState(null);
+
   const {
     handleRedirect,
   } = useContext(AppContext);
@@ -17,7 +21,7 @@ export default function OrderDetails() {
 
   const section1 = {
     function1: redirectProducts,
-    nameSection1: 'Produtos',
+    nameSection1: 'TESTE',
   };
 
   const section2 = {
@@ -26,54 +30,44 @@ export default function OrderDetails() {
   };
 
   const getData = () => {
+    const data = null;
     console.log('AXIOS - GET orders/:id');
+    setOrder(data);
+    setProducts(data.products);
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const dataidCommon = 'customer_order_details__element-order-details-label';
   return (
     <>
       <NavBar section1={ section1 } section2={ section2 } />
       <span>Detalhe do Pedido</span>
       <span
-        data-testid={ `customer_order_details__element-order-details-label-order-${id}` }
+        data-testid={ `${dataidCommon}-order-id` }
       >
-        Pedido XXX
+        { `Pedido ${order.id}`}
       </span>
       <span> P.Vendedora:</span>
       <span
-        data-testid="customer_order_details__element-order-details-label-seller-name"
+        data-testid={ `${dataidCommon}-selles-name` }
       >
-        {' '}
-        Fulana Fulana
+        { `${order.seller}`}
       </span>
       <span
-        data-testid="customer_order_details__element-order-details-label-order-date"
+        data-testid={ `${dataidCommon}-order-date` }
       >
-        {' '}
-        XX/XX/XX
+        { `${order.date}`}
       </span>
       <span
-        data-testid="customer_order_details__element-order-details-label-delivery-status"
+        data-testid={ `${dataidCommon}-delivery-status` }
       >
-        Status
+        { `${order.status}`}
       </span>
       <button type="button"> Marcar como entregue</button>
-      <table>
-        <thead>
-          <th>
-            PEDIDO XXXX
-
-          </th>
-          <td>P. Vendedora:</td>
-          <td> FULANA FULANA</td>
-          <th> 01/01/2022</th>
-          <td> STATUS PEDIDO</td>
-          <td><button type="button">Marcar como entregue</button></td>
-        </thead>
-        <th>Hi</th>
-        <th>Hi2</th>
-        <tbody>
-          <tr>Body</tr>
-        </tbody>
-      </table>
+      <OrderTable products={ products } />
     </>
   );
 }

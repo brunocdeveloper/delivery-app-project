@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../context/AppContext';
 import NavBar from '../components/NavBar';
 import ProductsTable from '../subcomponents/ProductsTable';
 
 export default function Checkout() {
+  const {
+    handleRedirect,
+  } = useContext(AppContext);
+
+  const redirectProducts = () => {
+    handleRedirect('/customer/products');
+  };
+
+  const redirectOrders = () => {
+    handleRedirect('/customer/orders');
+  };
+
   const section1 = {
-    name: 'PRODUTOS',
+    function1: redirectProducts,
+    nameSection1: 'Produtos',
   };
 
   const section2 = {
-    name: 'MEUS PEDIDOS',
+    function2: redirectOrders,
+    nameSection2: 'Meus Pedidos',
   };
 
   return (
