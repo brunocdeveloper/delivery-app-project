@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'products',
   });
   products.associate = (models) => {
-    products.hasMany(models.sales_products,
+    products.hasMany(models.salesProducts,
       { foreignKey: 'productId', as: 'product' });
     };
 

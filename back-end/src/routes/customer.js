@@ -6,9 +6,9 @@ const usersCtrl = require('../controllers/Users');
 
 router.get('/products', prodCtrl.getProducts);
 
-router.post('/checkout', validateJWT, salesCtrl.createSale);
+router.post('/checkout/get-users', validateJWT, usersCtrl.getUsersByRole);
 
-router.get('/checkout', validateJWT, usersCtrl.getUsersByRole);
+router.post('/checkout', validateJWT, salesCtrl.createSale);
 
 // router.post('/orders/:id');
 
