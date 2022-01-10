@@ -15,6 +15,7 @@ function AppProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [cartItens, setCartItens] = useState([]);
   const [subTotal, setSubTotal] = useState();
+  const [orders, setOrders] = useState([]);
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -96,6 +97,8 @@ function AppProvider({ children }) {
     setCartItens,
     subTotal,
     setSubTotal,
+    orders, 
+    setOrders,
   };
 
   AppProvider.propTypes = {

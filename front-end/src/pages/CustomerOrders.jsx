@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import AppContext from '../context/AppContext';
 import NavBar from '../components/NavBar';
 import CardOrder from '../components/CardOrder';
-import { getByIdUserSale } from '../api/sales';
+import getUserOrders from '../api/getOrders';
 
 export default function CustomerOrders() {
   const { orders, setOrders } = useContext(AppContext);
@@ -17,7 +17,7 @@ export default function CustomerOrders() {
 
   const getOrders = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const result = await getByIdUserSale(user.id);
+    const result = await getUserOrders(user.id);
     setOrders(result);
   };
 
