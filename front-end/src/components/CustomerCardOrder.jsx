@@ -30,6 +30,7 @@ export default function CustomerCardOrder({ order }) {
             data-testid={ `customer_orders__element-order-date-${id}` }
           >
             {modifyDate}
+            {' '}
           </span>
           <span
             data-testid={ `customer_orders__element-card-price-${id}` }

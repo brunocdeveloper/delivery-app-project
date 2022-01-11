@@ -5,14 +5,24 @@ import NavBar from '../components/NavBar';
 import ListProducts from '../components/ListProducts';
 
 export default function Products() {
-  const { products, setProducts } = useContext(AppContext);
+  const { products, setProducts, handleRedirect } = useContext(AppContext);
+
+  const redirectProducts = () => {
+    handleRedirect('/customer/products');
+  };
+
+  const redirectOrders = () => {
+    handleRedirect('/customer/orders');
+  };
 
   const section1 = {
-    name: 'PRODUTOS',
+    function1: redirectProducts,
+    name: 'Produtos',
   };
 
   const section2 = {
-    name: 'MEUS PEDIDOS',
+    function2: redirectOrders,
+    name: 'Meus Pedidos',
   };
 
   const fecthProducts = async () => {
