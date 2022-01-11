@@ -1,4 +1,4 @@
-const { sales, salesProducts } = require('../database/models');
+const { sales, salesProducts, products, users } = require('../database/models');
 const { organizeProdArray } = require('../helpers');
 
 const createSale = async (saleObj, id) => {
@@ -10,6 +10,18 @@ const createSale = async (saleObj, id) => {
   return { saleId: createdSale.id };
 };
 
+const getOrderDetailsById = async (id) => {
+  const orderDetails = await sales.findByPk(id, {
+    include: [
+      { model: products, as: 'product', attributes: {} },
+      { model: users, as: 'seller', attributes: {} },
+    ],
+  });
+
+  return orderDetails;
+};
+
 module.exports = {
   createSale,
+  getOrderDetailsById,
 };
