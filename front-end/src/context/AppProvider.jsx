@@ -97,7 +97,7 @@ function AppProvider({ children }) {
     setCartItens,
     subTotal,
     setSubTotal,
-    orders, 
+    orders,
     setOrders,
   };
 
