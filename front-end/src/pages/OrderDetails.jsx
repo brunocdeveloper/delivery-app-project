@@ -89,7 +89,9 @@ export default function OrderDetails() {
       >
         {order && `${order.status}`}
       </span>
-      <button type="button"> Marcar como entregue</button>
+      <button 
+      data-testid="customer_order_details__button-delivery-check" 
+      type="button"> Marcar como entregue</button>
       <OrderTable products={ products } />
     </>
   );
