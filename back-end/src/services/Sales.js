@@ -1,6 +1,5 @@
 const { sales, salesProducts, products, users } = require('../database/models');
 const { organizeProdArray } = require('../helpers');
-// const moment = require('moment');
 
 const createSale = async (saleObj, id) => {
   const { prodArray, ...newObj } = saleObj;
@@ -20,12 +19,6 @@ const getOrderDetailsById = async (id) => {
   });
 
   return orderDetails;
-  // const newSaleDate = moment(orderDetails.saleDate).format('DD/MM/YYYY');
-
-  // return {
-  //   ...orderDetails,
-  //   saleDate: newSaleDate,
-  // };
 };
 
 module.exports = {
