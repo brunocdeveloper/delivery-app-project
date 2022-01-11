@@ -1,5 +1,6 @@
 import { React, useContext } from 'react';
 import AppContext from '../context/AppContext';
+import '../styles/login.css';
 
 export default function Login() {
   const {
@@ -21,12 +22,13 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form>
-        <label htmlFor="email-login">
+    <section className="login-container">
+      <h1 className="title-login">TRYBEER</h1>
+      <form className="login-form-container">
+        <label htmlFor="email-login" className="label-email">
           Login
           <input
+            className="input-email"
             id="email-login"
             type="email"
             name="email"
@@ -34,9 +36,10 @@ export default function Login() {
             onChange={ (e) => handleChangeInputs(e) }
           />
         </label>
-        <label htmlFor="password-login">
+        <label htmlFor="password-login" className="label-pwd">
           Senha
           <input
+            className="input-pwd"
             id="password-login"
             type="password"
             name="password"
@@ -44,27 +47,32 @@ export default function Login() {
             onChange={ (e) => handleChangeInputs(e) }
           />
         </label>
-        <button
-          type="button"
-          data-testid="common_login__button-login"
-          disabled={ !validateLogin() }
-          onClick={ () => handleLoginSubmit() }
-        >
-          Login
-        </button>
-        <button
-          type="button"
-          data-testid="common_login__button-register"
-          onClick={ () => handleRedirect('/register') }
-        >
-          Ainda não tenho conta
-        </button>
-        <span
-          data-testid="common_login__element-invalid-email"
-        >
-          Elemento oculto (Mensagem de erro)
-        </span>
+        <section className="btn-container">
+          <button
+            className="btn-login"
+            type="button"
+            data-testid="common_login__button-login"
+            disabled={ !validateLogin() }
+            onClick={ () => handleLoginSubmit() }
+          >
+            LOGIN
+          </button>
+          <button
+            className="btn-register"
+            type="button"
+            data-testid="common_login__button-register"
+            onClick={ () => handleRedirect('/register') }
+          >
+            Ainda não tenho conta
+          </button>
+        </section>
       </form>
-    </div>
+      <span
+        className="span-error"
+        data-testid="common_login__element-invalid-email"
+      >
+        Elemento oculto (Mensagem de erro)
+      </span>
+    </section>
   );
 }

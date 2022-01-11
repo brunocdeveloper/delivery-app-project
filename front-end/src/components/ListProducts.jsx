@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import CardProduct from './CardProduct';
 import AppContext from '../context/AppContext';
+import '../styles/listProduct.css';
 
 export default function ListProducts({ products }) {
   const { subTotal, handleRedirect } = useContext(AppContext);
@@ -15,7 +16,7 @@ export default function ListProducts({ products }) {
   };
 
   return (
-    <section>
+    <main className="list-product-container">
       { products && productsRefactor.map((product, index) => (
         <div key={ index }>
           <CardProduct product={ product } />
@@ -32,7 +33,7 @@ export default function ListProducts({ products }) {
           { subTotal && subTotal.toFixed(2).replace('.', ',') }
         </span>
       </button>
-    </section>
+    </main>
   );
 }
 
