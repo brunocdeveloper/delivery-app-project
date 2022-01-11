@@ -18,12 +18,12 @@ export default function Checkout() {
 
   const section1 = {
     function1: redirectProducts,
-    nameSection1: 'Produtos',
+    name: 'Produtos',
   };
 
   const section2 = {
     function2: redirectOrders,
-    nameSection2: 'Meus Pedidos',
+    name: 'Meus Pedidos',
   };
 
   return (
