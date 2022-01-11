@@ -26,7 +26,7 @@ export default function NavBar(props) {
     <header>
       { section1 && (
         <button
-          onClick={ () => section1.function1() }
+          onClick={ () => handleRedirect('/customer/products') }
           type="button"
           data-testid="customer_products__element-navbar-link-products"
         >
@@ -34,7 +34,7 @@ export default function NavBar(props) {
         </button>)}
       { section2 && (
         <button
-          onClick={ () => section2.function2() }
+          onClick={ () => handleRedirect('/customer/orders') }
           type="button"
           data-testid="customer_products__element-navbar-link-orders"
         >

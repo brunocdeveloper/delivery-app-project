@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-export default function CardOrder({ order }) {
+export default function CustomerCardOrder({ order }) {
   const { id, status, saleDate, totalPrice } = order;
 
   const modifyDate = moment(saleDate).format('DD/MM/YYYY');
+
+  const changePriceToComa = (value) => value.toString().replace(/\./, ',');
 
   return (
     <main>
@@ -40,7 +42,7 @@ export default function CardOrder({ order }) {
   );
 }
 
-CardOrder.propTypes = {
+CustomerCardOrder.propTypes = {
   order: PropTypes.shape({
     id: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
