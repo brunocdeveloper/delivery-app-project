@@ -69,7 +69,7 @@ export default function OrderDetails() {
       <NavBar section1={ section1 } section2={ section2 } />
       <span>Detalhe do Pedido</span>
       <span
-        data-testid={ `${dataidCommon}-order-id` }
+        data-testid={ `${dataidCommon}-order` }
       >
         { order && `Pedido ${order.id}`}
       </span>
