@@ -22,7 +22,7 @@ export default function OrderTable(props) {
         { products && products.map((p, i) => (
           <tr key={ p.name }>
             <td data-testid={ `${dataidCommon}-table-item-number-${i}` }>{p.id}</td>
-            <td data-testid={ `${dataidCommon}--table-name${i}` }>{p.name}</td>
+            <td data-testid={ `${dataidCommon}-table-name-${i}` }>{p.name}</td>
             <td data-testid={ `${dataidCommon}-table-quantity-${i}` }>
               {p.salesProducts.quantity}
             </td>

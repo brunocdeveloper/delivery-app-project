@@ -13,7 +13,7 @@ const createSale = async (saleObj, id) => {
 const getOrderDetailsById = async (id) => {
   const orderDetails = await sales.findByPk(id, {
     include: [
-      { model: products, as: 'product', attributes: {} },
+      { model: products, as: 'products', attributes: {} },
       { model: users, as: 'seller', attributes: {} },
     ],
   });

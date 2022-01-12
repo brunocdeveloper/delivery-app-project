@@ -4,6 +4,7 @@ import { Redirect, Switch, Route, BrowserRouter as Router } from 'react-router-d
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Products from './pages/Products';
+import CustomerOrders from './pages/CustomerOrders';
 import OrderDetails from './pages/OrderDetails';
 import AppProvider from './context/AppProvider';
 import Checkout from './pages/Checkout';
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/customer/orders/:id" component={ OrderDetails } />
           <Route exact path="/customer/products" component={ Products } />
           <Route exact path="/customer/checkout" component={ Checkout } />
+          <Route exact path="/customer/orders" component={ CustomerOrders } />
         </Switch>
       </AppProvider>
     </Router>

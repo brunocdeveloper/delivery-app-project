@@ -1,12 +1,14 @@
-import { React, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 export default function Login() {
   const {
-    handleRedirect,
     user,
     handleLoginSubmit,
     handleChangeInputs,
+    redirectTo,
+    setRedirectTo,
   } = useContext(AppContext);
 
   const validateLogin = () => {
@@ -19,6 +21,25 @@ export default function Login() {
     if (validEmail && password.length >= magicNumber) return true;
     return false;
   };
+
+  const checkLocalStorage = () => {
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    if (userInfo && userInfo.token) {
+      return setRedirectTo({
+        pathName: '/customer/products',
+        shouldRedirect: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    checkLocalStorage();
+    return () => {
+      setRedirectTo({ ...redirectTo, shouldRedirect: false });
+    };
+  }, []);
+
+  if (redirectTo.shouldRedirect) return <Redirect to={ redirectTo.pathName } />;
 
   return (
     <div>
@@ -55,7 +76,7 @@ export default function Login() {
         <button
           type="button"
           data-testid="common_login__button-register"
-          onClick={ () => handleRedirect('/register') }
+          onClick={ () => setRedirectTo({ pathName: '/register', shouldRedirect: true }) }
         >
           Ainda não tenho conta
         </button>

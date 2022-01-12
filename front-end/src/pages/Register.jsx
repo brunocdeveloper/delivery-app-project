@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import registerUser from '../api/register';
 
@@ -20,6 +21,7 @@ export default function Register() {
     setErr,
     handleLoginSubmit,
     handleChangeInputs,
+    redirectTo,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -57,6 +59,8 @@ export default function Register() {
       break;
     }
   };
+
+  if (redirectTo.shouldRedirect) return <Redirect to={ redirectTo.pathName } />;
 
   return (
     <section className="registerContainer">

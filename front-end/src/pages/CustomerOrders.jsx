@@ -1,25 +1,26 @@
 import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
-import getAllProducts from '../api/products';
 import NavBar from '../components/NavBar';
-import ListProducts from '../components/ListProducts';
+import CustomerCardOrder from '../components/CustomerCardOrder';
+import getUserOrders from '../api/getOrders';
 
-export default function Products() {
+export default function CustomerOrders() {
   const {
-    products,
-    setProducts,
+    orders,
+    setOrders,
     redirectTo,
     setRedirectTo,
   } = useContext(AppContext);
 
-  const fecthProducts = async () => {
-    const result = await getAllProducts();
-    setProducts(result);
+  const getOrders = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const result = await getUserOrders('customer', user.token);
+    setOrders(result);
   };
 
   useEffect(() => {
-    fecthProducts();
+    getOrders();
   }, []);
 
   useEffect(() => {
@@ -34,10 +35,10 @@ export default function Products() {
   }
 
   return (
-    <>
+    <section>
       <NavBar button1="Produtos" button2="Meus Pedidos" />
-      <h3>Produtos</h3>
-      <ListProducts products={ products } />
-    </>
+      { orders && orders
+        .map((order, index) => <CustomerCardOrder key={ index } order={ order } />) }
+    </section>
   );
 }
