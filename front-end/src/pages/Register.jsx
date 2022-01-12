@@ -11,6 +11,7 @@ export default function Register() {
     setRgEmail,
     rgPwd,
     setRgPwd,
+    rgRole,
     err,
     validName,
     isValidEmail,
@@ -34,7 +35,7 @@ export default function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const payload = { rgName, rgEmail, rgPwd };
+    const payload = { rgName, rgEmail, rgPwd, rgRole };
     const registered = await registerUser(payload);
     if (!registered) return;
     await handleLoginSubmit();
