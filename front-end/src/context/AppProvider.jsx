@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 import handleLogin from '../api/login';
@@ -15,18 +14,15 @@ function AppProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [cartItens, setCartItens] = useState([]);
   const [subTotal, setSubTotal] = useState();
+  const [orders, setOrders] = useState([]);
+  const [redirectTo, setRedirectTo] = useState({
+    pathName: '/',
+    shouldRedirect: false,
+  });
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-
-  const history = useHistory();
-
-  console.log(cartItens);
-
-  const handleRedirect = (path) => {
-    history.push(`${path}`);
-  };
 
   const vldtPwd = (password) => {
     const number = 6;
@@ -49,16 +45,16 @@ function AppProvider({ children }) {
     setIsValidEmail(true);
   };
 
-  const redirectTo = (role) => {
+  const redirectToOwnerPage = (role) => {
     switch (role) {
     case 'customer':
-      handleRedirect('/customer/products');
+      setRedirectTo({ pathName: '/customer/products', shouldRedirect: true });
       break;
     case 'seller':
-      handleRedirect('/seller/orders');
+      setRedirectTo({ pathName: '/seller/orders', shouldRedirect: true });
       break;
     case 'admin':
-      handleRedirect('/admin');
+      setRedirectTo({ pathName: '/admin/manage', shouldRedirect: true });
       break;
     default:
       break;
@@ -71,7 +67,7 @@ function AppProvider({ children }) {
       if (userWithToken && userWithToken.token) {
         const { name, email, role, token } = userWithToken;
         await localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
-        redirectTo(role);
+        redirectToOwnerPage(role);
       }
       return;
     } catch (error) {
@@ -101,7 +97,6 @@ function AppProvider({ children }) {
     vldtPwd,
     vldtName,
     vldtEmail,
-    handleRedirect,
     products,
     setProducts,
     user,
@@ -112,6 +107,10 @@ function AppProvider({ children }) {
     setCartItens,
     subTotal,
     setSubTotal,
+    orders,
+    setOrders,
+    redirectTo,
+    setRedirectTo,
   };
 
   AppProvider.propTypes = {

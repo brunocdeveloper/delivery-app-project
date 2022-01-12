@@ -1,52 +1,66 @@
-import { React, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 
 export default function NavBar(props) {
-  const { section1, section2 } = props;
+  const { button1, button2 } = props;
 
   const {
-    handleRedirect,
+    redirectTo,
+    setRedirectTo,
   } = useContext(AppContext);
+
+  useEffect(() => {
+    console.log('');
+    return () => {
+      setRedirectTo({ ...redirectTo, shouldRedirect: false });
+    };
+  }, []);
 
   const logout = () => {
     localStorage.removeItem('user');
-    handleRedirect('/');
+    setRedirectTo({ pathName: '/login', shouldRedirect: true });
   };
 
   const currentUser = () => {
     const data = JSON.parse(localStorage.getItem('user'));
-    if (!data) return handleRedirect('/');
-
     const { name } = data;
     return name;
   };
 
+  const navigateTo = (pathName) => {
+    setRedirectTo({ pathName, shouldRedirect: true });
+  };
+
+  if (redirectTo.shouldRedirect) {
+    return <Redirect to={ redirectTo.pathName } />;
+  }
+
   return (
     <header>
-      { section1 && (
+      { button1 && (
         <button
-          onClick={ () => section1.function1() }
+          onClick={ () => navigateTo('/customer/products') }
           type="button"
           data-testid="customer_products__element-navbar-link-products"
         >
-          {section1.name}
+          {button1}
         </button>)}
-      { section2 && (
-        <button
-          onClick={ () => section2.function2() }
-          type="button"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          {section2.name}
-        </button>)}
+      <button
+        onClick={ () => navigateTo('/customer/orders') }
+        type="button"
+        data-testid="customer_products__element-navbar-link-orders"
+      >
+        {button2}
+      </button>
       <span data-testid="customer_products__element-navbar-user-full-name">
         {currentUser()}
       </span>
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-logout"
-        onClick={ logout }
+        onClick={ () => logout() }
       >
         Sair
       </button>
@@ -55,6 +69,6 @@ export default function NavBar(props) {
 }
 
 NavBar.propTypes = {
-  section1: PropTypes.objectOf.isRequired,
-  section2: PropTypes.objectOf.isRequired,
+  button1: PropTypes.string.isRequired,
+  button2: PropTypes.string.isRequired,
 };

@@ -1,23 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import NavBar from '../components/NavBar';
-import CardOrder from '../components/CardOrder';
+import CustomerCardOrder from '../components/CustomerCardOrder';
 import getUserOrders from '../api/getOrders';
 
 export default function CustomerOrders() {
-  const { orders, setOrders } = useContext(AppContext);
-
-  const section1 = {
-    name: 'PRODUTOS',
-  };
-
-  const section2 = {
-    name: 'MEUS PEDIDOS',
-  };
+  const {
+    orders,
+    setOrders,
+    redirectTo,
+    setRedirectTo,
+  } = useContext(AppContext);
 
   const getOrders = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const result = await getUserOrders(user.id);
+    const result = await getUserOrders('customer', user.token);
     setOrders(result);
   };
 
@@ -25,11 +23,22 @@ export default function CustomerOrders() {
     getOrders();
   }, []);
 
+  useEffect(() => {
+    console.log('');
+    return () => {
+      setRedirectTo({ ...redirectTo, shouldRedirect: false });
+    };
+  }, []);
+
+  if (redirectTo.shouldRedirect) {
+    return <Redirect to={ redirectTo.pathName } />;
+  }
+
   return (
     <section>
-      <NavBar section1={ section1 } section2={ section2 } />
+      <NavBar button1="Produtos" button2="Meus Pedidos" />
       { orders && orders
-        .map((order, index) => <CardOrder key={ index } order={ order } />) }
+        .map((order, index) => <CustomerCardOrder key={ index } order={ order } />) }
     </section>
   );
 }
