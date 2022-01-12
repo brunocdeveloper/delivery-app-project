@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import registerUser from '../api/register';
 import AppContext from '../context/AppContext';
 
 export default function AdminForm() {
@@ -35,8 +36,12 @@ export default function AdminForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const user = JSON.parse(localStorage.getItem('user'));
     const payload = { rgName, rgEmail, rgPwd, rgRole };
-    await registerUser(payload);
+    await registerUser(payload, user.token);
+    setRgEmail('');
+    setRgName('');
+    setRgPwd('');
   };
 
   const handleOnChangeInput = (e) => {
@@ -125,6 +130,11 @@ export default function AdminForm() {
           CADASTRAR
         </button>
       </form>
+      <span
+        data-testid="admin_manage__element-invalid-register"
+      >
+        { isDisabled && 'Erro no sistema' }
+      </span>
     </section>
   );
 }
