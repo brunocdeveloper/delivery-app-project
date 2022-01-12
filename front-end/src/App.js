@@ -26,11 +26,7 @@ function App() {
           <Route exact path="/customer/checkout" component={ Checkout } />
           <Route exact path="/seller/orders" component={ Orders } />
           <Route exact path="/customer/orders" component={ CustomerOrders } />
-<<<<<<< HEAD
-          <Route exact path="/customer/orders/:id" component={ CustomerOrdersDetails } />
           <Route exact path="/admin" component={ Admin } />
-=======
->>>>>>> 05b297b0057940f34843cf6308700ee47d630cbf
         </Switch>
       </AppProvider>
     </Router>
