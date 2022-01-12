@@ -38,7 +38,6 @@ beforeEach(async () => {
   };
 
   showCurrentOrderInfo(currentOrder, global.__TESTDESC__);
-
   expect(
     (await action.common.navigate.logout.default(page)) &&
       (await action.common.navigate.login.default(page, "seller"))
