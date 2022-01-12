@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import OrdersCard from '../subcomponents/OrdersCard';
 import getUserOrders from '../api/getOrders';
@@ -6,12 +7,7 @@ import AppContext from '../context/AppContext';
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
-
-  const { handleRedirect } = useContext(AppContext);
-
-  const redirectOrders = () => {
-    handleRedirect('/customer/orders');
-  };
+  const { setRedirectTo, redirectTo } = useContext(AppContext);
 
   const handleOrders = async (token) => {
     const ordersList = await getUserOrders('seller', token);
@@ -24,14 +20,20 @@ export default function Orders() {
     handleOrders(token);
   }, []);
 
-  const section2 = {
-    function2: redirectOrders,
-    name: 'Pedidos',
-  };
+  useEffect(() => {
+    console.log('');
+    return () => {
+      setRedirectTo({ ...redirectTo, shouldRedirect: false });
+    };
+  }, []);
+
+  if (redirectTo.shouldRedirect) {
+    return <Redirect to={ redirectTo.pathName } />;
+  }
 
   return (
     <section>
-      <NavBar section2={ section2 } />
+      <NavBar button2="Pedidos" />
       { orders && orders.map((pedido) => (
         <OrdersCard
           pedidos={ pedido }
