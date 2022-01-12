@@ -21,7 +21,16 @@ const getOrderDetailsById = async (id) => {
   return orderDetails;
 };
 
+const changeOrderStatus = async (id, status) => {
+  const order = await sales.findByPk(id);
+  if (!order) throw new Error('Order not found');
+  if (order.status === 'Entregue') throw new Error('Order already delivered');
+  await order.update({ status });
+  return { status };
+};
+
 module.exports = {
   createSale,
   getOrderDetailsById,
+  changeOrderStatus,
 };

@@ -7,6 +7,7 @@ function AppProvider({ children }) {
   const [rgName, setRgName] = useState('');
   const [rgEmail, setRgEmail] = useState('');
   const [rgPwd, setRgPwd] = useState('');
+  const [rgRole, setRgRole] = useState('');
   const [err, setErr] = useState(true);
   const [validName, setValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -86,6 +87,8 @@ function AppProvider({ children }) {
     setRgEmail,
     rgPwd,
     setRgPwd,
+    rgRole,
+    setRgRole,
     err,
     setErr,
     validName,
