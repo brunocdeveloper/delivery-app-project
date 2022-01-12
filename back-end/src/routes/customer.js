@@ -12,4 +12,6 @@ router.post('/checkout', validateJWT, salesCtrl.createSale);
 
 router.get('/orders/:id', validateJWT, salesCtrl.getOrderDetailsById);
 
+router.get('/orders', validateJWT, usersCtrl.getUserOrders);
+
 module.exports = router;

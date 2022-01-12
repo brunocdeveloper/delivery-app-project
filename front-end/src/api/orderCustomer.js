@@ -6,7 +6,6 @@ export default async function getCustomerOrderDetailsById(id, token) {
       method: 'get',
       url: `http://localhost:3001/customer/orders/${id}`,
       headers: { authorization: token },
-      data: body,
     });
     const formatedData = formatData(data.saleDate);
 

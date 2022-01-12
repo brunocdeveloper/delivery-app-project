@@ -1,45 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import NavBar from '../components/NavBar';
 import OrdersCard from '../subcomponents/OrdersCard';
+import getUserOrders from '../api/getOrders';
+import AppContext from '../context/AppContext';
 
 export default function Orders() {
-  const funcaoTeste = () => {
-    console.log('TESTOU');
+  const [orders, setOrders] = useState([]);
+
+  const { handleRedirect } = useContext(AppContext);
+
+  const redirectOrders = () => {
+    handleRedirect('/customer/orders');
   };
 
-  const section1 = {
-    function1: funcaoTeste,
-    nameSection1: 'PEDIDOS',
+  const handleOrders = async (token) => {
+    const ordersList = await getUserOrders('seller', token);
+    console.log(ordersList);
+    setOrders(ordersList);
   };
 
-  const pedidos = [
-    {
-      id: '1',
-      data: '01/01/2021',
-      valor: 'R$ 100,00',
-      status: 'Pendente',
-      address: 'Rua A, nº 2',
-    },
-    {
-      id: '2',
-      data: '01/01/2022',
-      valor: 'R$ 200,00',
-      status: 'Preparando',
-      address: 'Rua A, nº 1',
-    },
-    {
-      id: '3',
-      data: '01/01/2020',
-      valor: 'R$ 150,00',
-      status: 'ENtregue',
-      address: 'Rua A, nº 1',
-    },
-  ];
+  useEffect(() => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    handleOrders(token);
+  }, []);
+
+  const section2 = {
+    function2: redirectOrders,
+    name: 'Pedidos',
+  };
 
   return (
     <section>
-      <NavBar section1={ section1 } />
-      { pedidos.map((pedido) => (
+      <NavBar section2={ section2 } />
+      { orders && orders.map((pedido) => (
         <OrdersCard
           pedidos={ pedido }
           key={ pedido.id }

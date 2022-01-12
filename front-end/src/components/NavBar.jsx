@@ -46,7 +46,7 @@ export default function NavBar(props) {
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-logout"
-        onClick={ logout }
+        onClick={ () => logout() }
       >
         Sair
       </button>

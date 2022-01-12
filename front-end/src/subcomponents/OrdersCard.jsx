@@ -1,16 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AppContext from '../context/AppContext';
 
 export default function OrdersCard({ pedidos }) {
-  const { id, data, valor, status, address } = pedidos;
-  const {
-    handleRedirect,
-  } = useContext(AppContext);
+  const { id, saleDate, totalPrice, status, deliveryAddress, deliveryNumber } = pedidos;
   return (
-    <button
-      type="button"
-      onClick={ () => handleRedirect(`/seller/orders/${id}`) }
+    <Link
+      to={ `/seller/orders/${id}` }
     >
       <div className="card">
         <p
@@ -19,21 +15,30 @@ export default function OrdersCard({ pedidos }) {
           { `Pedido: ${id}` }
         </p>
         <p data-testid={ `seller_orders__element-delivery-status-${id}` }>{ status }</p>
-        <p data-testid={ `seller_orders__element-order-date-${id}` }>{ data }</p>
-        <p data-testid={ `seller_orders__element-card-price-${id}` }>{ valor }</p>
-        <p data-testid={ `seller_orders__element-card-address-${id}` }>{ address }</p>
+        <p data-testid={ `seller_orders__element-order-date-${id}` }>{ saleDate }</p>
+        <p
+          data-testid={ `seller_orders__element-card-price-${id}` }
+        >
+          { `R$: ${totalPrice}` }
+        </p>
+        <p
+          data-testid={ `seller_orders__element-card-address-${id}` }
+        >
+          { `${deliveryAddress} - ${deliveryNumber}` }
+        </p>
       </div>
-    </button>
+    </Link>
   );
 }
 
 // Proptypes
 OrdersCard.propTypes = {
   pedidos: PropTypes.shape({
-    id: PropTypes.number,
-    data: PropTypes.string,
-    valor: PropTypes.string,
-    status: PropTypes.string,
-    address: PropTypes.string,
+    id: PropTypes.number.isRequired,
+    saleDate: PropTypes.string.isRequired,
+    totalPrice: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    deliveryAddress: PropTypes.string.isRequired,
+    deliveryNumber: PropTypes.number.isRequired,
   }).isRequired,
 };

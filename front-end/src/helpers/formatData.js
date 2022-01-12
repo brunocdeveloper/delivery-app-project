@@ -1,5 +1,5 @@
-import moment from "moment";
+import moment from 'moment';
 
-const formatData = (data) => newSaleDate = moment(data).format('DD/MM/YYYY');
-
-module.exports = { formatData };
+export default function formatData(data) {
+  return moment(data).format('DD/MM/YYYY');
+}
