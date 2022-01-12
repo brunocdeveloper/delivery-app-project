@@ -5,6 +5,7 @@ export default async function registerUser(payload) {
     name: payload.rgName,
     password: payload.rgPwd,
     email: payload.rgEmail,
+    role: payload.rgRole,
   };
   try {
     const { data } = await axios({

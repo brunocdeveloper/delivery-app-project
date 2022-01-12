@@ -1,26 +1,65 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import AppContext from '../context/AppContext';
 
 export default function AdminForm() {
-  const [
-    admName,
-    admSetName,
-    email,
-    setEmail,
-    password,
-    setPassword,
-  ] = useState('');
+  const {
+    rgName,
+    setRgName,
+    rgEmail,
+    setRgEmail,
+    rgPwd,
+    setRgPwd,
+    validName,
+    isValidEmail,
+    validPwd,
+    vldtPwd,
+    vldtName,
+    vldtEmail,
+    rgRole,
+    setRgRole,
+  } = useContext(AppContext);
+  const [isRoleValid, setIsRoleValid] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
-  const validateLogin = () => {
-    const nameLenght = 12;
-    const pwdLength = 6;
-    const validRegex = new RegExp(
-      /^([\w.-]+)@([\w-]+)((\.(\w){2,3})+)$/,
-    );
-    const validEmail = validRegex.test(email);
-    if (validEmail
-      && password.length >= pwdLength
-      && admName.length >= nameLenght) return true;
-    return false;
+  const vldtRole = (role) => {
+    if (!role) return setIsRoleValid(false);
+    setIsRoleValid(true);
+  };
+
+  useEffect(() => {
+    if (validName && isValidEmail && validPwd && isRoleValid) {
+      return setIsDisabled(false);
+    }
+    setIsDisabled(true);
+  }, [rgEmail, rgName, rgPwd, rgRole]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const payload = { rgName, rgEmail, rgPwd, rgRole };
+    await registerUser(payload);
+  };
+
+  const handleOnChangeInput = (e) => {
+    switch (e.target.name) {
+    case 'name':
+      setRgName(e.target.value);
+      vldtName(e.target.value);
+      break;
+    case 'email':
+      setRgEmail(e.target.value);
+      vldtEmail(e.target.value);
+      break;
+    case 'password':
+      setRgPwd(e.target.value);
+      vldtPwd(e.target.value);
+      break;
+    case 'role':
+      setRgRole(e.target.value);
+      vldtRole(e.target.value);
+      break;
+    default:
+      break;
+    }
   };
 
   return (
@@ -32,9 +71,10 @@ export default function AdminForm() {
             type="text"
             name="name"
             id="name"
+            value={ rgName }
             placeholder="Nome e Sobrenome"
             data-testid="admin_manage__input-name"
-            onChange={ (e) => admSetName(e.target.value) }
+            onChange={ (e) => handleOnChangeInput(e) }
           />
         </label>
         <label htmlFor="email">
@@ -43,30 +83,34 @@ export default function AdminForm() {
             type="text"
             name="email"
             id="email"
+            value={ rgEmail }
             placeholder="seu-email@site.com.br"
             data-testid="admin_manage__input-email"
-            onChange={ (e) => setEmail(e.target.value) }
+            onChange={ (e) => handleOnChangeInput(e) }
           />
         </label>
         <label htmlFor="password">
           Senha
           <input
-            type="text"
+            type="password"
             name="password"
             id="password"
+            value={ rgPwd }
             placeholder="******"
             data-testid="admin_manage__input-password"
-            onChange={ (e) => setPassword(e.target.value) }
+            onChange={ (e) => handleOnChangeInput(e) }
           />
         </label>
         <label htmlFor="type">
           Tipo
           <select
-            name="type"
+            name="role"
             id="type"
+            value={ rgRole }
             data-testid="admin_manage__select-role"
+            onChange={ (e) => handleOnChangeInput(e) }
           >
-            <option value="select">select</option>
+            <option value="">selecione</option>
             <option value="seller">vendedor</option>
             <option value="customer">cliente</option>
             <option value="administrator">administrador</option>
@@ -75,7 +119,8 @@ export default function AdminForm() {
         <button
           type="button"
           data-testid="admin_manage__button-register"
-          disabled={ !validateLogin() }
+          disabled={ isDisabled }
+          onClick={ (e) => handleSubmit(e) }
         >
           CADASTRAR
         </button>
