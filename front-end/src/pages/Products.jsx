@@ -9,33 +9,9 @@ export default function Products() {
   const {
     products,
     setProducts,
-    doesRedirect,
-    setDoesRedirect,
-    pathName,
-    setPathName,
+    redirectTo,
+    setRedirectTo,
   } = useContext(AppContext);
-
-  const redirectProducts = () => {
-    console.log('CLICOU NO PRODUTO');
-    setPathName('/customer/products');
-    setDoesRedirect(true);
-  };
-
-  const redirectOrders = () => {
-    console.log('CLICOU NO ORDER');
-    setPathName('/customer/orders');
-    setDoesRedirect(true);
-  };
-
-  const section1 = {
-    function1: redirectProducts,
-    name: 'Produtos',
-  };
-
-  const section2 = {
-    function2: redirectOrders,
-    name: 'Meus Pedidos',
-  };
 
   const fecthProducts = async () => {
     const result = await getAllProducts();
@@ -43,21 +19,23 @@ export default function Products() {
   };
 
   useEffect(() => {
-    // setDoesRedirect(false);
     fecthProducts();
-    return () => {
-      setDoesRedirect(false);
-    };
-  }, [doesRedirect, pathName]);
+  }, []);
 
-  if (doesRedirect) {
-    console.log(pathName, 'PATHNAME');
-    return <Redirect to={ pathName } />;
+  useEffect(() => {
+    console.log('');
+    return () => {
+      setRedirectTo({ ...redirectTo, shouldRedirect: false });
+    };
+  }, []);
+
+  if (redirectTo.shouldRedirect) {
+    return <Redirect to={ redirectTo.pathName } />;
   }
 
   return (
     <>
-      <NavBar section1={ section1 } section2={ section2 } />
+      <NavBar button1="Produtos" button2="Meus Pedidos" />
       <h3>Produtos</h3>
       <ListProducts products={ products } />
     </>

@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import AppContext from '../context/AppContext';
 import NavBar from '../components/NavBar';
 import OrderTable from '../components/OrderTable';
 import getCustomerOrderDetailsByIdfrom from '../api/orderCustomer';
@@ -9,30 +8,8 @@ export default function OrderDetails() {
   const [order, setOrder] = useState(null);
   const [items, setItems] = useState([]);
 
-  const {
-    handleRedirect,
-  } = useContext(AppContext);
-
   const history = useHistory();
   const path = history.location.pathname;
-
-  const redirectProducts = () => {
-    handleRedirect('/customer/products');
-  };
-
-  const redirectOrders = () => {
-    handleRedirect('/customer/orders');
-  };
-
-  const section1 = {
-    function1: redirectProducts,
-    name: 'Produtos',
-  };
-
-  const section2 = {
-    function2: redirectOrders,
-    name: 'Meus Pedidos',
-  };
 
   const getData = async () => {
     const { token } = JSON.parse(localStorage.getItem('user'));
@@ -66,16 +43,16 @@ export default function OrderDetails() {
   const dataidCommon = 'customer_order_details__element-order-details-label';
   return (
     <>
-      <NavBar section1={ section1 } section2={ section2 } />
+      <NavBar button1="Produtos" button2="Meus Pedidos" />
       <span>Detalhe do Pedido</span>
       <span
-        data-testid={ `${dataidCommon}-order` }
+        data-testid={ `${dataidCommon}-order-id` }
       >
         { order && `Pedido ${order.id}` }
       </span>
       <span> P.Vendedora:</span>
       <span
-        data-testid={ `${dataidCommon}-selles-name` }
+        data-testid={ `${dataidCommon}-seller-name` }
       >
         { order && `${order.seller.name}` }
       </span>

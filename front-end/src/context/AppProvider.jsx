@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 import handleLogin from '../api/login';
@@ -16,20 +15,16 @@ function AppProvider({ children }) {
   const [cartItens, setCartItens] = useState([]);
   const [subTotal, setSubTotal] = useState();
   const [orders, setOrders] = useState([]);
-  const [doesRedirect, setDoesRedirect] = useState(false);
-  const [pathName, setPathName] = useState('/');
+  const [redirectTo, setRedirectTo] = useState({
+    pathName: '/',
+    shouldRedirect: false,
+  });
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
 
-  // const history = useHistory();
-
-  console.log(cartItens);
-
-  const handleRedirect = (path) => {
-    <Redirect push to={ path } />;
-  };
+  console.log(redirectTo.pathName, redirectTo.shouldRedirect);
 
   const vldtPwd = (password) => {
     const number = 6;
@@ -52,19 +47,16 @@ function AppProvider({ children }) {
     setIsValidEmail(true);
   };
 
-  const redirectTo = (role) => {
+  const redirectToOwnerPage = (role) => {
     switch (role) {
     case 'customer':
-      setPathName('/customer/products');
-      setDoesRedirect(true);
+      setRedirectTo({ pathName: '/customer/products', shouldRedirect: true });
       break;
     case 'seller':
-      setPathName('/seller/orders');
-      setDoesRedirect(true);
+      setRedirectTo({ pathName: '/seller/orders', shouldRedirect: true });
       break;
     case 'admin':
-      setPathName('/admin/manage');
-      setDoesRedirect(true);
+      setRedirectTo({ pathName: '/admin/manage', shouldRedirect: true });
       break;
     default:
       break;
@@ -77,7 +69,7 @@ function AppProvider({ children }) {
       if (userWithToken && userWithToken.token) {
         const { name, email, role, token } = userWithToken;
         await localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
-        redirectTo(role);
+        redirectToOwnerPage(role);
       }
       return;
     } catch (error) {
@@ -107,7 +99,6 @@ function AppProvider({ children }) {
     vldtPwd,
     vldtName,
     vldtEmail,
-    handleRedirect,
     products,
     setProducts,
     user,
@@ -120,10 +111,8 @@ function AppProvider({ children }) {
     setSubTotal,
     orders,
     setOrders,
-    doesRedirect,
-    setDoesRedirect,
-    pathName,
-    setPathName,
+    redirectTo,
+    setRedirectTo,
   };
 
   AppProvider.propTypes = {
