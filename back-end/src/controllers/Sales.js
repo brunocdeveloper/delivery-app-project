@@ -23,7 +23,20 @@ const getOrderDetailsById = async (req, res) => {
   }
 };
 
+const changeOrderStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const order = await Service.changeOrderStatus(id, status);
+    return res.status(200).json(order);
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ message: e.message });
+  }
+};
+
 module.exports = {
   createSale,
   getOrderDetailsById,
+  changeOrderStatus,
 };
