@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 import handleLogin from '../api/login';
@@ -16,17 +16,19 @@ function AppProvider({ children }) {
   const [cartItens, setCartItens] = useState([]);
   const [subTotal, setSubTotal] = useState();
   const [orders, setOrders] = useState([]);
+  const [doesRedirect, setDoesRedirect] = useState(false);
+  const [pathName, setPathName] = useState('/');
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
 
-  const history = useHistory();
+  // const history = useHistory();
 
   console.log(cartItens);
 
   const handleRedirect = (path) => {
-    history.push(`${path}`);
+    <Redirect push to={ path } />;
   };
 
   const vldtPwd = (password) => {
@@ -53,13 +55,16 @@ function AppProvider({ children }) {
   const redirectTo = (role) => {
     switch (role) {
     case 'customer':
-      handleRedirect('/customer/products');
+      setPathName('/customer/products');
+      setDoesRedirect(true);
       break;
     case 'seller':
-      handleRedirect('/seller/orders');
+      setPathName('/seller/orders');
+      setDoesRedirect(true);
       break;
     case 'admin':
-      handleRedirect('/admin');
+      setPathName('/admin/manage');
+      setDoesRedirect(true);
       break;
     default:
       break;
@@ -115,6 +120,10 @@ function AppProvider({ children }) {
     setSubTotal,
     orders,
     setOrders,
+    doesRedirect,
+    setDoesRedirect,
+    pathName,
+    setPathName,
   };
 
   AppProvider.propTypes = {

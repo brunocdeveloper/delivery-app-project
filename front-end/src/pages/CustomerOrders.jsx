@@ -24,6 +24,7 @@ export default function CustomerOrders() {
     function2: redirectOrders,
     name: 'Meus Pedidos',
   };
+
   const getOrders = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
     // console.log(user, 'USER');

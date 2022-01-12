@@ -1,4 +1,5 @@
-import { React, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 export default function Login() {
@@ -7,6 +8,10 @@ export default function Login() {
     user,
     handleLoginSubmit,
     handleChangeInputs,
+    doesRedirect,
+    setDoesRedirect,
+    pathName,
+    setPathName,
   } = useContext(AppContext);
 
   const validateLogin = () => {
@@ -19,6 +24,15 @@ export default function Login() {
     if (validEmail && password.length >= magicNumber) return true;
     return false;
   };
+
+  useEffect(() => {
+    setPathName('/');
+    return () => {
+      setDoesRedirect(false);
+    };
+  }, []);
+
+  if (doesRedirect) return <Redirect to={ pathName } />;
 
   return (
     <div>

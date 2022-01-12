@@ -7,7 +7,7 @@ import getCustomerOrderDetailsByIdfrom from '../api/orderCustomer';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState(null);
-  const [products, setProducts] = useState([]);
+  const [items, setItems] = useState([]);
 
   const {
     handleRedirect,
@@ -55,8 +55,8 @@ export default function OrderDetails() {
     //     price: '22.5',
     //     quantity: 4,
     //   }];
-    const { product } = data;
-    setProducts(product); // setta no estado order.products
+    const { products } = data;
+    setItems(products); // setta no estado order.products
   };
 
   useEffect(() => {
@@ -71,28 +71,31 @@ export default function OrderDetails() {
       <span
         data-testid={ `${dataidCommon}-order` }
       >
-        { order && `Pedido ${order.id}`}
+        { order && `Pedido ${order.id}` }
       </span>
       <span> P.Vendedora:</span>
       <span
         data-testid={ `${dataidCommon}-selles-name` }
       >
-        { order && `${order.seller.name}`}
+        { order && `${order.seller.name}` }
       </span>
       <span
         data-testid={ `${dataidCommon}-order-date` }
       >
-        {order && `${order.saleDate}`}
+        { order && `${order.saleDate}` }
       </span>
       <span
         data-testid={ `${dataidCommon}-delivery-status` }
       >
-        {order && `${order.status}`}
+        { order && `${order.status}` }
       </span>
-      <button 
-      data-testid="customer_order_details__button-delivery-check" 
-      type="button"> Marcar como entregue</button>
-      <OrderTable products={ products } />
+      <button
+        data-testid="customer_order_details__button-delivery-check"
+        type="button"
+      >
+        Marcar como entregue
+      </button>
+      <OrderTable products={ items } />
     </>
   );
 }

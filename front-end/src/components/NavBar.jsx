@@ -1,4 +1,4 @@
-import { React, useContext } from 'react';
+import { React, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 
@@ -6,12 +6,16 @@ export default function NavBar(props) {
   const { section1, section2 } = props;
 
   const {
-    handleRedirect,
+    doesRedirect,
+    setDoesRedirect,
+    pathName,
+    setPathName,
   } = useContext(AppContext);
 
   const logout = () => {
     localStorage.removeItem('user');
-    handleRedirect('/');
+    setPathName('/');
+    setDoesRedirect(true);
   };
 
   const currentUser = () => {
@@ -22,6 +26,10 @@ export default function NavBar(props) {
     const { name } = data;
     return name;
   };
+
+  useEffect(() => {
+    console.log('OI');
+  }, [pathName, doesRedirect]);
 
   return (
     <header>

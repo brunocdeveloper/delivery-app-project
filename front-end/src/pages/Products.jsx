@@ -1,18 +1,30 @@
 import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import getAllProducts from '../api/products';
 import NavBar from '../components/NavBar';
 import ListProducts from '../components/ListProducts';
 
 export default function Products() {
-  const { products, setProducts, handleRedirect } = useContext(AppContext);
+  const {
+    products,
+    setProducts,
+    doesRedirect,
+    setDoesRedirect,
+    pathName,
+    setPathName,
+  } = useContext(AppContext);
 
   const redirectProducts = () => {
-    handleRedirect('/customer/products');
+    console.log('CLICOU NO PRODUTO');
+    setPathName('/customer/products');
+    setDoesRedirect(true);
   };
 
   const redirectOrders = () => {
-    handleRedirect('/customer/orders');
+    console.log('CLICOU NO ORDER');
+    setPathName('/customer/orders');
+    setDoesRedirect(true);
   };
 
   const section1 = {
@@ -31,8 +43,17 @@ export default function Products() {
   };
 
   useEffect(() => {
+    // setDoesRedirect(false);
     fecthProducts();
-  }, []);
+    return () => {
+      setDoesRedirect(false);
+    };
+  }, [doesRedirect, pathName]);
+
+  if (doesRedirect) {
+    console.log(pathName, 'PATHNAME');
+    return <Redirect to={ pathName } />;
+  }
 
   return (
     <>
