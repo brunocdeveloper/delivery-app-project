@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import OrderTable from '../components/OrderTable';
 import getCustomerOrderDetailsByIdfrom from '../api/orderCustomer';
+import formatValue from '../helpers/formatValues';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState(null);
@@ -16,24 +17,9 @@ export default function OrderDetails() {
     const id = path.split('/').pop();
 
     const data = await getCustomerOrderDetailsByIdfrom(id, token);
-    // const data = {};
-    setOrder(data); // setta estado o Order
-    console.log(data);
-    // const productMock = [
-    //   {
-    //     name: 'cerveja',
-    //     description: 'puromalte',
-    //     price: '22.5',
-    //     quantity: 2,
-    //   },
-    //   {
-    //     name: 'refrigerante',
-    //     description: 'zero açucar',
-    //     price: '22.5',
-    //     quantity: 4,
-    //   }];
+    setOrder(data);
     const { products } = data;
-    setItems(products); // setta no estado order.products
+    setItems(products);
   };
 
   useEffect(() => {
@@ -69,10 +55,16 @@ export default function OrderDetails() {
       <button
         data-testid="customer_order_details__button-delivery-check"
         type="button"
+        disabled
       >
         Marcar como entregue
       </button>
       <OrderTable products={ items } />
+      <span
+        data-testid="customer_order_details__element-order-total-price"
+      >
+        { order && formatValue(order.totalPrice) }
+      </span>
     </>
   );
 }

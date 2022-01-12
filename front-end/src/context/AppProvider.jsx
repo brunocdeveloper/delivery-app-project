@@ -24,8 +24,6 @@ function AppProvider({ children }) {
     password: '',
   });
 
-  console.log(redirectTo.pathName, redirectTo.shouldRedirect);
-
   const vldtPwd = (password) => {
     const number = 6;
     if (!password || password.length < number) return setValidPwd(false);
