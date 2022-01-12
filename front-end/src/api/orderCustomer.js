@@ -1,6 +1,8 @@
-import { formatData } from '../helpers/formatData';
+import formatData from '../helpers/formatData';
 
-export default async function getCustomerOrderDetailsById(id, token) {  
+const axios = require('axios').default;
+
+export default async function getCustomerOrderDetailsById(id, token) {
   try {
     const { data } = await axios({
       method: 'get',
