@@ -22,6 +22,7 @@ export default function Register() {
     handleLoginSubmit,
     handleChangeInputs,
     redirectTo,
+    setRedirectTo,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -59,6 +60,13 @@ export default function Register() {
       break;
     }
   };
+
+  useEffect(() => {
+    console.log('');
+    return () => {
+      setRedirectTo({ ...redirectTo, shouldRedirect: false });
+    };
+  }, []);
 
   if (redirectTo.shouldRedirect) return <Redirect to={ redirectTo.pathName } />;
 
