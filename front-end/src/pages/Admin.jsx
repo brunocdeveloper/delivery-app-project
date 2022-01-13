@@ -4,10 +4,10 @@ import NavBarAdmin from '../components/NavBarAdmin';
 
 export default function Admin() {
   return (
-    <div>
+    <section>
       <NavBarAdmin />
       <h3>Cadastrar novo usuário</h3>
       <AdminForm />
-    </div>
+    </section>
   );
 }
