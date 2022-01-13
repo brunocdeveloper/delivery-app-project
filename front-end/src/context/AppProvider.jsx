@@ -24,6 +24,7 @@ function AppProvider({ children }) {
     email: '',
     password: '',
   });
+  const [usersList, setUsersList] = useState([]);
 
   const vldtPwd = (password) => {
     const number = 6;
@@ -114,6 +115,8 @@ function AppProvider({ children }) {
     setOrders,
     redirectTo,
     setRedirectTo,
+    usersList,
+    setUsersList,
   };
 
   AppProvider.propTypes = {
