@@ -114,6 +114,7 @@ function AppProvider({ children }) {
     setOrders,
     redirectTo,
     setRedirectTo,
+    redirectToOwnerPage,
   };
 
   AppProvider.propTypes = {
