@@ -4,4 +4,6 @@ const usersCtrl = require('../controllers/Users');
 
 router.get('/users', usersCtrl.getUsers);
 
+router.delete('/users', usersCtrl.deleteUser);
+
 module.exports = router;

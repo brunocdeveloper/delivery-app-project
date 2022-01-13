@@ -6,15 +6,15 @@ import AppContext from '../context/AppContext';
 import AdminTable from '../components/AdminTable';
 
 export default function Admin() {
-  const { setUsersList } = useContext(AppContext);
+  const { usersList, setUsersList } = useContext(AppContext);
   const getUsersList = async () => {
     const result = await getUsers();
     setUsersList(result);
   };
 
   useEffect(() => {
-    getUsersList();
-  }, []);
+    if (usersList.length === 0) return getUsersList();
+  }, [usersList]);
 
   return (
     <section>
