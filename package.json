@@ -54,5 +54,7 @@
       "__TESTFILE__": true
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "styled-components": "^5.3.3"
+  }
 }
