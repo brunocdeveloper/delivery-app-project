@@ -4,6 +4,6 @@ const usersCtrl = require('../controllers/Users');
 
 router.get('/users', usersCtrl.getUsers);
 
-router.delete('/users', usersCtrl.deleteUser);
+router.delete('/users', validateJWT, usersCtrl.deleteUser);
 
 module.exports = router;
