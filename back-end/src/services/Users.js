@@ -1,5 +1,5 @@
-const { users, sales } = require('../database/models');
 const { Op } = require('sequelize');
+const { users, sales } = require('../database/models');
 
 const getUsersByRole = async (userRole) => {
   const foundUsers = await users.findAll({ where: { role: userRole } });
