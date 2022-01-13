@@ -25,6 +25,10 @@ export default function NavBar(props) {
 
   const currentUser = () => {
     const data = JSON.parse(localStorage.getItem('user'));
+    if (!data) {
+      setRedirectTo({ pathName: '/login', shouldRedirect: true });
+      return <Redirect to={ redirectTo.pathName } />;
+    }
     const { name } = data;
     return name;
   };
@@ -37,6 +41,11 @@ export default function NavBar(props) {
     return <Redirect to={ redirectTo.pathName } />;
   }
 
+  // const actionButton2 = () => {
+  //   if (button1) return () => navigateTo('/customer/orders');
+  //   return () => navigateTo('/seller/orders');
+  // };
+
   return (
     <header>
       { button1 && (
@@ -47,8 +56,27 @@ export default function NavBar(props) {
         >
           {button1}
         </button>)}
+      {/* { button1
+        ? (
+          <button
+            onClick={ () => navigateTo('/customer/orders') }
+            type="button"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            {button2}
+          </button>)
+        : (
+          <button
+            onClick={ () => navigateTo('/seller/orders') }
+            type="button"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            {button2}
+          </button>)} */}
       <button
-        onClick={ () => navigateTo('/customer/orders') }
+        onClick={ button1
+          ? () => navigateTo('/customer/orders')
+          : () => navigateTo('/seller/orders') }
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
       >
@@ -72,3 +100,11 @@ NavBar.propTypes = {
   button1: PropTypes.string.isRequired,
   button2: PropTypes.string.isRequired,
 };
+
+/* <button
+onClick={ button1
+  ? () => navigateTo('/customer/orders')
+  : () => navigateTo('/seller/orders') }
+type="button"
+data-testid="customer_products__element-navbar-link-orders"
+> */

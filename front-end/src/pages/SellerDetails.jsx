@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import NavBar from '../components/NavBar';
-import OrderTable from '../components/OrderTable';
+import SellerTable from '../components/SellerTable';
 import getCustomerOrderDetailsByIdfrom from '../api/orderCustomer';
 import formatValue from '../helpers/formatValues';
 
-export default function OrderDetails() {
+export default function SellerDetails() {
   const [order, setOrder] = useState(null);
   const [items, setItems] = useState([]);
 
@@ -21,7 +21,7 @@ export default function OrderDetails() {
   const getData = async () => {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const id = path.split('/').pop();
-    console.log('id:', id);
+
     const data = await getCustomerOrderDetailsByIdfrom(id, token);
     setOrder(data);
     const { products } = data;
@@ -43,21 +43,15 @@ export default function OrderDetails() {
     return <Redirect to={ redirectTo.pathName } />;
   }
 
-  const dataidCommon = 'customer_order_details__element-order-details-label';
+  const dataidCommon = 'seller_order_details__element-order-details-label';
   return (
     <>
-      <NavBar button1="Produtos" button2="Meus Pedidos" />
-      <span>Detalhe do Pedido</span>
+      <NavBar button2="Pedidos" />
+      <span> Detalhe do Pedido</span>
       <span
         data-testid={ `${dataidCommon}-order-id` }
       >
         { order && `Pedido ${order.id}` }
-      </span>
-      <span> P.Vendedora:</span>
-      <span
-        data-testid={ `${dataidCommon}-seller-name` }
-      >
-        { order && `${order.seller.name}` }
       </span>
       <span
         data-testid={ `${dataidCommon}-order-date` }
@@ -70,15 +64,22 @@ export default function OrderDetails() {
         { order && `${order.status}` }
       </span>
       <button
-        data-testid="customer_order_details__button-delivery-check"
+        data-testid="seller_order_details__button-preparing-check"
+        type="button"
+        // disabled
+      >
+        Preparar Pedido
+      </button>
+      <button
+        data-testid="seller_order_details__button-dispatch-check"
         type="button"
         disabled
       >
-        Marcar como entregue
+        Saiu para entrega
       </button>
-      <OrderTable products={ items } />
+      <SellerTable products={ items } />
       <span
-        data-testid="customer_order_details__element-order-total-price"
+        data-testid="seller_order_details__element-order-total-price"
       >
         { order && formatValue(order.totalPrice) }
       </span>

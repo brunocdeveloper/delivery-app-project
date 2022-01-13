@@ -54,7 +54,7 @@ function AppProvider({ children }) {
     case 'seller':
       setRedirectTo({ pathName: '/seller/orders', shouldRedirect: true });
       break;
-    case 'admin':
+    case 'administrator':
       setRedirectTo({ pathName: '/admin/manage', shouldRedirect: true });
       break;
     default:
