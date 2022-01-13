@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 import {
   NavBarSubComponent,
-  NameDiv,
   NavOutButton,
   NavButtonOne,
+  NameDiv,
   NavButtonTwo } from '../styles/components/navbar/style';
 
 export default function NavBar(props) {
@@ -69,9 +69,7 @@ export default function NavBar(props) {
         </NavButtonTwo>
       </div>
       <div style={ { display: 'flex' } }>
-        <NameDiv
-          data-testid="customer_divroducts__element-navbar-user-full-name"
-        >
+        <NameDiv data-testid="customer_products__element-navbar-user-full-name">
           {currentUser()}
         </NameDiv>
         <NavOutButton
