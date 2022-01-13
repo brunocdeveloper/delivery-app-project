@@ -25,4 +25,6 @@ app.use('/customer', routes.customer);
 
 app.use('/seller', routes.seller);
 
+app.use('/admin', routes.admin);
+
 module.exports = app;
