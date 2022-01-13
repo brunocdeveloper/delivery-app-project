@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import GlobalButton from '../styles/components/button';
 
 export default function Login() {
   const {
@@ -65,14 +66,15 @@ export default function Login() {
             onChange={ (e) => handleChangeInputs(e) }
           />
         </label>
-        <button
+        <GlobalButton
+          login
           type="button"
           data-testid="common_login__button-login"
           disabled={ !validateLogin() }
           onClick={ () => handleLoginSubmit() }
         >
           Login
-        </button>
+        </GlobalButton>
         <button
           type="button"
           data-testid="common_login__button-register"
