@@ -15,7 +15,7 @@ export default function OrderDetails() {
   const getData = async () => {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const id = path.split('/').pop();
-
+    console.log('id:', id);
     const data = await getCustomerOrderDetailsByIdfrom(id, token);
     setOrder(data);
     const { products } = data;
