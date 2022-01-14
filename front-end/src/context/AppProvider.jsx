@@ -24,6 +24,8 @@ function AppProvider({ children }) {
     email: '',
     password: '',
   });
+  const [usersList, setUsersList] = useState([]);
+  const [addedUser, setAddedUser] = useState(false);
 
   const vldtPwd = (password) => {
     const number = 6;
@@ -114,6 +116,10 @@ function AppProvider({ children }) {
     setOrders,
     redirectTo,
     setRedirectTo,
+    usersList,
+    setUsersList,
+    addedUser,
+    setAddedUser,
     redirectToOwnerPage,
   };
 
