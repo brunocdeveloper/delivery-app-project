@@ -1,19 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
-import AppContext from '../context/AppContext';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import OrderTable from '../components/OrderTable';
 import getCustomerOrderDetailsByIdfrom from '../api/orderCustomer';
 import formatValue from '../helpers/formatValues';
+import updateStatusOrder from '../api/OrderStatus';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState(null);
   const [items, setItems] = useState([]);
-
-  const {
-    redirectTo,
-    setRedirectTo,
-  } = useContext(AppContext);
 
   const history = useHistory();
   const path = history.location.pathname;
@@ -28,20 +23,22 @@ export default function OrderDetails() {
     setItems(products);
   };
 
+  const enableBtnDelivered = () => {
+    if (order && order.status === 'Em Trânsito') {
+      return false;
+    }
+    return true;
+  };
+
   useEffect(() => {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log('');
-    return () => {
-      setRedirectTo({ ...redirectTo, shouldRedirect: false });
-    };
-  }, []);
-
-  if (redirectTo.shouldRedirect) {
-    return <Redirect to={ redirectTo.pathName } />;
-  }
+  const updateStatus = async (status) => {
+    const id = path.split('/').pop();
+    await updateStatusOrder(id, status);
+    getData();
+  };
 
   const dataidCommon = 'customer_order_details__element-order-details-label';
   return (
@@ -72,7 +69,8 @@ export default function OrderDetails() {
       <button
         data-testid="customer_order_details__button-delivery-check"
         type="button"
-        disabled
+        onClick={ () => updateStatus('Entregue') }
+        disabled={ order && enableBtnDelivered() }
       >
         Marcar como entregue
       </button>
