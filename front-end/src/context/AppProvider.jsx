@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 import handleLogin from '../api/login';
@@ -8,6 +7,7 @@ function AppProvider({ children }) {
   const [rgName, setRgName] = useState('');
   const [rgEmail, setRgEmail] = useState('');
   const [rgPwd, setRgPwd] = useState('');
+  const [rgRole, setRgRole] = useState('');
   const [err, setErr] = useState(true);
   const [validName, setValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -16,18 +16,14 @@ function AppProvider({ children }) {
   const [cartItens, setCartItens] = useState([]);
   const [subTotal, setSubTotal] = useState();
   const [orders, setOrders] = useState([]);
+  const [redirectTo, setRedirectTo] = useState({
+    pathName: '/',
+    shouldRedirect: false,
+  });
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-
-  const history = useHistory();
-
-  console.log(cartItens);
-
-  const handleRedirect = (path) => {
-    history.push(`${path}`);
-  };
 
   const vldtPwd = (password) => {
     const number = 6;
@@ -50,13 +46,29 @@ function AppProvider({ children }) {
     setIsValidEmail(true);
   };
 
+  const redirectToOwnerPage = (role) => {
+    switch (role) {
+    case 'customer':
+      setRedirectTo({ pathName: '/customer/products', shouldRedirect: true });
+      break;
+    case 'seller':
+      setRedirectTo({ pathName: '/seller/orders', shouldRedirect: true });
+      break;
+    case 'administrator':
+      setRedirectTo({ pathName: '/admin/manage', shouldRedirect: true });
+      break;
+    default:
+      break;
+    }
+  };
+
   const handleLoginSubmit = async () => {
     try {
       const userWithToken = await handleLogin(user);
-      if (userWithToken && userWithToken.token && userWithToken.role === 'customer') {
+      if (userWithToken && userWithToken.token) {
         const { name, email, role, token } = userWithToken;
         await localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
-        handleRedirect('/customer/products');
+        redirectToOwnerPage(role);
       }
       return;
     } catch (error) {
@@ -75,6 +87,8 @@ function AppProvider({ children }) {
     setRgEmail,
     rgPwd,
     setRgPwd,
+    rgRole,
+    setRgRole,
     err,
     setErr,
     validName,
@@ -86,7 +100,6 @@ function AppProvider({ children }) {
     vldtPwd,
     vldtName,
     vldtEmail,
-    handleRedirect,
     products,
     setProducts,
     user,
@@ -99,6 +112,9 @@ function AppProvider({ children }) {
     setSubTotal,
     orders,
     setOrders,
+    redirectTo,
+    setRedirectTo,
+    redirectToOwnerPage,
   };
 
   AppProvider.propTypes = {

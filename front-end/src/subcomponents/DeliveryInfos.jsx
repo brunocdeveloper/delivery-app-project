@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 import getUsersByRole from '../api/users';
@@ -11,7 +12,18 @@ export default function DeliveryInfos({ totalPrice }) {
   const [sellers, setSellers] = useState([]);
   const [userToken, setUserToken] = useState(null);
 
-  const { cartItens, handleRedirect } = useContext(AppContext);
+  const {
+    cartItens,
+    redirectTo,
+    setRedirectTo,
+  } = useContext(AppContext);
+
+  useEffect(() => {
+    console.log('');
+    return () => {
+      setRedirectTo({ ...redirectTo, shouldRedirect: false });
+    };
+  }, []);
 
   const handleSellers = async (token) => {
     const users = await getUsersByRole(token, { role: 'seller' });
@@ -38,8 +50,16 @@ export default function DeliveryInfos({ totalPrice }) {
     };
     const saleId = await createSale(userToken, sale);
     console.log(sale);
-    handleRedirect(`/customer/orders/${saleId}`);
+    // handleRedirect(`/customer/orders/${saleId}`);
+    setRedirectTo({
+      pathName: `/customer/orders/${saleId}`,
+      shouldRedirect: true,
+    });
   };
+
+  if (redirectTo.shouldRedirect) {
+    return <Redirect to={ redirectTo.pathName } />;
+  }
 
   return (
     <section>

@@ -1,11 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CardProduct from './CardProduct';
 import AppContext from '../context/AppContext';
 import '../styles/components/listProduct.css';
 
 export default function ListProducts({ products }) {
-  const { subTotal, handleRedirect } = useContext(AppContext);
+  const {
+    subTotal,
+    redirectTo,
+    setRedirectTo,
+  } = useContext(AppContext);
+
+  useEffect(() => {
+    console.log('');
+    return () => {
+      setRedirectTo({ pathName: '/customer/checkout', shouldRedirect: false });
+    };
+  }, []);
+
   const productsRefactor = products.map((product) => ({
     ...product, quantity: 0,
   }));
@@ -14,6 +27,14 @@ export default function ListProducts({ products }) {
     if (subTotal <= 0) return true;
     return false;
   };
+
+  const handleRedirect = () => {
+    setRedirectTo({ pathName: '/customer/checkout', shouldRedirect: true });
+  };
+
+  if (redirectTo.shouldRedirect) {
+    return <Redirect to={ redirectTo.pathName } />;
+  }
 
   return (
     <main className="list-product-container">

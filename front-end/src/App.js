@@ -3,12 +3,14 @@ import './App.css';
 import { Redirect, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Admin from './pages/Admin';
 import Products from './pages/Products';
-import Generic from './pages/Generic';
 import CustomerOrders from './pages/CustomerOrders';
-import CustomerOrdersDetails from './pages/CustomerOrderDetails';
+import OrderDetails from './pages/OrderDetails';
 import AppProvider from './context/AppProvider';
 import Checkout from './pages/Checkout';
+import SellerDetails from './pages/SellerDetails';
+import SellerOrder from './pages/SellerOrders';
 
 function App() {
   return (
@@ -20,11 +22,13 @@ function App() {
           </Route>
           <Route exact path="/login" component={ Login } />
           <Route exact path="/register" component={ Register } />
+          <Route exact path="/customer/orders/:id" component={ OrderDetails } />
+          <Route exact path="/seller/orders/:id" component={ SellerDetails } />
+          <Route exact path="/customer/orders" component={ CustomerOrders } />
           <Route exact path="/customer/products" component={ Products } />
           <Route exact path="/customer/checkout" component={ Checkout } />
-          <Route exact path="/generic" component={ Generic } />
-          <Route exact path="/customer/orders" component={ CustomerOrders } />
-          <Route exact path="/customer/orders/:id" component={ CustomerOrdersDetails } />
+          <Route exact path="/admin/manage" component={ Admin } />
+          <Route exact path="/seller/orders" component={ SellerOrder } />
         </Switch>
       </AppProvider>
     </Router>

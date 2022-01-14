@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import registerUser from '../api/register';
 
@@ -10,6 +11,7 @@ export default function Register() {
     setRgEmail,
     rgPwd,
     setRgPwd,
+    rgRole,
     err,
     validName,
     isValidEmail,
@@ -20,6 +22,8 @@ export default function Register() {
     setErr,
     handleLoginSubmit,
     handleChangeInputs,
+    redirectTo,
+    setRedirectTo,
   } = useContext(AppContext);
 
   useEffect(() => {
@@ -31,7 +35,7 @@ export default function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const payload = { rgName, rgEmail, rgPwd };
+    const payload = { rgName, rgEmail, rgPwd, rgRole };
     const registered = await registerUser(payload);
     if (!registered) return;
     await handleLoginSubmit();
@@ -57,6 +61,15 @@ export default function Register() {
       break;
     }
   };
+
+  useEffect(() => {
+    console.log('');
+    return () => {
+      setRedirectTo({ ...redirectTo, shouldRedirect: false });
+    };
+  }, []);
+
+  if (redirectTo.shouldRedirect) return <Redirect to={ redirectTo.pathName } />;
 
   return (
     <section className="registerContainer">

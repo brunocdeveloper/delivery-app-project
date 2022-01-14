@@ -1,14 +1,18 @@
-import { React, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import '../styles/pages/login.css';
 import Logo from '../images/logoZB.gif';
+import GlobalButton from '../styles/components/button';
 
 export default function Login() {
   const {
-    handleRedirect,
     user,
     handleLoginSubmit,
     handleChangeInputs,
+    redirectTo,
+    setRedirectTo,
+    redirectToOwnerPage,
   } = useContext(AppContext);
 
   const validateLogin = () => {
@@ -21,6 +25,20 @@ export default function Login() {
     if (validEmail && password.length >= magicNumber) return true;
     return false;
   };
+
+  const checkLocalStorage = () => {
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    if (userInfo) redirectToOwnerPage(userInfo.role);
+  };
+
+  useEffect(() => {
+    checkLocalStorage();
+    return () => {
+      setRedirectTo({ ...redirectTo, shouldRedirect: false });
+    };
+  }, []);
+
+  if (redirectTo.shouldRedirect) return <Redirect to={ redirectTo.pathName } />;
 
   return (
     <section className="login-container">
@@ -50,25 +68,28 @@ export default function Login() {
             onChange={ (e) => handleChangeInputs(e) }
           />
         </label>
-        <section className="btn-container">
-          <button
-            className="btn-login"
-            type="button"
-            data-testid="common_login__button-login"
-            disabled={ !validateLogin() }
-            onClick={ () => handleLoginSubmit() }
-          >
-            LOGIN
-          </button>
-          <button
-            className="btn-register"
-            type="button"
-            data-testid="common_login__button-register"
-            onClick={ () => handleRedirect('/register') }
-          >
-            Ainda não tenho conta
-          </button>
-        </section>
+        <GlobalButton
+          login
+          type="button"
+          data-testid="common_login__button-login"
+          disabled={ !validateLogin() }
+          onClick={ () => handleLoginSubmit() }
+        >
+          Login
+        </GlobalButton>
+        <GlobalButton
+          register
+          type="button"
+          data-testid="common_login__button-register"
+          onClick={ () => setRedirectTo({ pathName: '/register', shouldRedirect: true }) }
+        >
+          Ainda não tenho conta
+        </GlobalButton>
+        <span
+          data-testid="common_login__element-invalid-email"
+        >
+          Elemento oculto (Mensagem de erro)
+        </span>
       </form>
       <span
         className="span-error"
