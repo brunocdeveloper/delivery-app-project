@@ -10,7 +10,6 @@ export default async function getCustomerOrderDetailsById(id, token) {
       headers: { authorization: token },
     });
     const formatedData = formatData(data.saleDate);
-
     return { ...data, saleDate: formatedData };
   } catch (e) {
     console.log(e.message);
