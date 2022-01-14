@@ -9,7 +9,6 @@ export const Button = styled.button`
   font-size: 16px;
   font-weight: 900;
   height: 40px;
-  margin-top: 40px;
   opacity: 0.8;
   outline: none;
   transition: 0.5s;
@@ -25,7 +24,7 @@ export const RegisterButton = styled.button`
   font-size: 16px;
   font-weight: 900;
   height: 40px;
-  margin-top: 40px;
+  margin-top: 30px;
   outline: none;
   transition: 0.5s;
   width: 250px;
