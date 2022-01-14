@@ -18,6 +18,7 @@ export default function AdminForm() {
     vldtEmail,
     rgRole,
     setRgRole,
+    setAddedUser,
   } = useContext(AppContext);
   const [isRoleValid, setIsRoleValid] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -27,7 +28,14 @@ export default function AdminForm() {
     setIsRoleValid(true);
   };
 
+  const checkInputs = () => {
+    vldtPwd(rgPwd);
+    vldtName(rgName);
+    vldtEmail(rgEmail);
+  };
+
   useEffect(() => {
+    checkInputs();
     if (validName && isValidEmail && validPwd && isRoleValid) {
       return setIsDisabled(false);
     }
@@ -39,6 +47,7 @@ export default function AdminForm() {
     const user = JSON.parse(localStorage.getItem('user'));
     const payload = { rgName, rgEmail, rgPwd, rgRole };
     await registerUser(payload, user.token);
+    setAddedUser(true);
     setRgEmail('');
     setRgName('');
     setRgPwd('');

@@ -36,7 +36,6 @@ export default function Products() {
   return (
     <>
       <NavBar button1="Produtos" button2="Meus Pedidos" />
-      <h3>Produtos</h3>
       <ListProducts products={ products } />
     </>
   );

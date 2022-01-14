@@ -92,12 +92,12 @@ export default function OrderDetails() {
         </ContainerInformation>
         <ContainerOrdersItems>
           <OrderTable products={ items } />
+          <TotalPrice
+            data-testid="customer_order_details__element-order-total-price"
+          >
+            { order && formatValue(order.totalPrice) }
+          </TotalPrice>
         </ContainerOrdersItems>
-        <TotalPrice
-          data-testid="customer_order_details__element-order-total-price"
-        >
-          { order && formatValue(order.totalPrice) }
-        </TotalPrice>
       </ContainerOrderDetails>
     </>
   );

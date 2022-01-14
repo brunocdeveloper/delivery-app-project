@@ -1,31 +1,28 @@
 import styled from 'styled-components';
 
 export const ContainerOrderDetails = styled.div`
-  background-color: green;
   width: 1640px;
   margin: 200px auto;
 `;
 
 export const ContainerInformation = styled.div`
   height: 70px;
-  background-color: pink;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #EAF1EF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const ContainerOrdersItems = styled.div`
-/*   width: 1634px;
+  width: 1634px;
   height: 727px;
-  top: 80px;
-  left: 1px;
-  position: absolute;
-  left: 0.06%;
-  right: 0.06%;
-  bottom: 0.11%;
-
-  background: #FBFFFE; */
+  margin-left: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #FBFFFE;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const TitleDetail = styled.span`
@@ -115,11 +112,10 @@ export const SaleDate = styled.span`
 `;
 
 export const TotalPrice = styled.span`
- /*  position: absolute;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
   width: 300px;
-  left: 81%;
-  top: 84.91%;
-  bottom: 6.89%;
 
   background: #036B52;
   border-radius: 10px;
@@ -129,7 +125,8 @@ export const TotalPrice = styled.span`
   font-size: 64px;
   line-height: 75px;
 
+  align-self: flex-end;
   text-align: center;
-
-  color: #F2FFFC; */
+  justify-content: flex-end;
+  color: #F2FFFC;
 `;

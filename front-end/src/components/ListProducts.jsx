@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CardProduct from './CardProduct';
 import AppContext from '../context/AppContext';
+import '../styles/components/products/listProduct.css';
 
 export default function ListProducts({ products }) {
   const {
@@ -36,24 +37,30 @@ export default function ListProducts({ products }) {
   }
 
   return (
-    <section>
+    <main className="list-product-container">
       { products && productsRefactor.map((product, index) => (
         <div key={ index }>
           <CardProduct product={ product } />
         </div>
       )) }
-      <button
-        disabled={ enableButton() }
-        type="button"
-        data-testid="customer_products__button-cart"
-        onClick={ () => handleRedirect() }
-      >
-        Ver Carrinho: R$
-        <span data-testid="customer_products__checkout-bottom-value">
-          { subTotal && subTotal.toFixed(2).replace('.', ',') }
-        </span>
-      </button>
-    </section>
+      <section className="btn-box-cart">
+        <button
+          className="btn-cart"
+          disabled={ enableButton() }
+          type="button"
+          data-testid="customer_products__button-cart"
+          onClick={ () => handleRedirect() }
+        >
+          Ver Carrinho: R$
+          <span
+            className="span-btn-price"
+            data-testid="customer_products__checkout-bottom-value"
+          >
+            {subTotal && subTotal.toFixed(2).replace('.', ',')}
+          </span>
+        </button>
+      </section>
+    </main>
   );
 }
 
