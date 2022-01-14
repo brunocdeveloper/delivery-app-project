@@ -10,6 +10,7 @@ export default function Login() {
     handleChangeInputs,
     redirectTo,
     setRedirectTo,
+    redirectToOwnerPage,
   } = useContext(AppContext);
 
   const validateLogin = () => {
@@ -25,12 +26,7 @@ export default function Login() {
 
   const checkLocalStorage = () => {
     const userInfo = JSON.parse(localStorage.getItem('user'));
-    if (userInfo && userInfo.token) {
-      return setRedirectTo({
-        pathName: '/customer/products',
-        shouldRedirect: true,
-      });
-    }
+    if (userInfo) redirectToOwnerPage(userInfo.role);
   };
 
   useEffect(() => {
@@ -75,13 +71,14 @@ export default function Login() {
         >
           Login
         </GlobalButton>
-        <button
+        <GlobalButton
+          register
           type="button"
           data-testid="common_login__button-register"
           onClick={ () => setRedirectTo({ pathName: '/register', shouldRedirect: true }) }
         >
           Ainda não tenho conta
-        </button>
+        </GlobalButton>
         <span
           data-testid="common_login__element-invalid-email"
         >
