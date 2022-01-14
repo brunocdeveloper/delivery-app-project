@@ -49,7 +49,7 @@ export default function ListProducts({ products }) {
           disabled={ enableButton() }
           type="button"
           data-testid="customer_products__button-cart"
-          onClick={ () => handleRedirect('/customer/checkout') }
+          onClick={ () => handleRedirect() }
         >
           Ver Carrinho: R$
           <span
