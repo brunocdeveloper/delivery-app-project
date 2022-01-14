@@ -1,29 +1,42 @@
-.title-login {
-  display: flex;
-  justify-content: center;
+body {
+  background: #dfdddd;
+}
+
+.img-logo {
+  box-sizing: border-box;
+  height: 90px;
+  margin: auto;
+  width: 200px;
+}
+
+.logo {
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .login-form-container {
   background: #ecf0f3;
   border-radius: 5px;
-  box-shadow: 5px 5px 10px #cbced1 , -14px -14px 20px white;
+  box-shadow: 6px 6px 6px 2px gray;
   box-sizing: border-box;
-  height: 420px;
+  gap: 10%;
+  height: 400px;
   margin: auto;
   margin-top: 100px;
+  margin-bottom: 10px;
   padding: 40px;
   position: relative;
   width: 360px;
 }
 
-.login-form-container input {
+.input-login {
   background: #ecf0f3;
   border-radius: 5px;
-  box-shadow: 6px 6px 6px #cbced1 , -6px -6px 6px white;
-  font-size: 14px;
+  box-shadow: 6px 6px 6px 2px gray;
+  font-size: 18px;
   height: 30px;
-  margin: auto;
-  margin-top: 40px;
+  margin: 30px 0;
+  margin-top: 10px;
   padding: 10px;
   padding-left: 20px;
   width: 250px;
@@ -36,7 +49,7 @@
 }
 
 .btn-login {
-  background: rgba(3, 107, 82);
+  background:#036b52;
   border: none;
   border-radius: 5px;
   color: white;
@@ -44,7 +57,6 @@
   font-size: 16px;
   font-weight: 900;
   height: 40px;
-  margin-top: 40px;
   opacity: 0.8;
   outline: none;
   transition: 0.5s;
@@ -60,7 +72,7 @@
   font-size: 16px;
   font-weight: 900;
   height: 40px;
-  margin-top: 40px;
+  margin-top: 30px;
   outline: none;
   transition: 0.5s;
   width: 250px;

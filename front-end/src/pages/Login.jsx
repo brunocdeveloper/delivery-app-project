@@ -1,6 +1,7 @@
 import { React, useContext } from 'react';
 import AppContext from '../context/AppContext';
-import '../styles/login.css';
+import '../styles/pages/login.css';
+import Logo from '../images/logoZB.gif';
 
 export default function Login() {
   const {
@@ -23,12 +24,14 @@ export default function Login() {
 
   return (
     <section className="login-container">
-      <h1 className="title-login">TRYBEER</h1>
+      <div className="img-logo">
+        <img className="logo" src={ Logo } alt="logo zé Bitira" width="200px" />
+      </div>
       <form className="login-form-container">
-        <label htmlFor="email-login" className="label-email">
+        <label htmlFor="email-login">
           Login
           <input
-            className="input-email"
+            className="input-login"
             id="email-login"
             type="email"
             name="email"
@@ -36,10 +39,10 @@ export default function Login() {
             onChange={ (e) => handleChangeInputs(e) }
           />
         </label>
-        <label htmlFor="password-login" className="label-pwd">
+        <label htmlFor="password-login">
           Senha
           <input
-            className="input-pwd"
+            className="input-login"
             id="password-login"
             type="password"
             name="password"

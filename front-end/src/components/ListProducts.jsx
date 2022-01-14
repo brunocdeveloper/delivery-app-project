@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import CardProduct from './CardProduct';
 import AppContext from '../context/AppContext';
-import '../styles/listProduct.css';
+import '../styles/components/listProduct.css';
 
 export default function ListProducts({ products }) {
   const { subTotal, handleRedirect } = useContext(AppContext);
@@ -22,17 +22,23 @@ export default function ListProducts({ products }) {
           <CardProduct product={ product } />
         </div>
       )) }
-      <button
-        disabled={ enableButton() }
-        type="button"
-        data-testid="customer_products__button-cart"
-        onClick={ () => handleRedirect('/customer/checkout') }
-      >
-        Ver Carrinho: R$
-        <span data-testid="customer_products__checkout-bottom-value">
-          { subTotal && subTotal.toFixed(2).replace('.', ',') }
-        </span>
-      </button>
+      <section className="btn-box-cart">
+        <button
+          className="btn-cart"
+          disabled={ enableButton() }
+          type="button"
+          data-testid="customer_products__button-cart"
+          onClick={ () => handleRedirect('/customer/checkout') }
+        >
+          Ver Carrinho: R$
+          <span
+            className="span-btn-price"
+            data-testid="customer_products__checkout-bottom-value"
+          >
+            {subTotal && subTotal.toFixed(2).replace('.', ',')}
+          </span>
+        </button>
+      </section>
     </main>
   );
 }

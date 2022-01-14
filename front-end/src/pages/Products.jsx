@@ -27,7 +27,6 @@ export default function Products() {
   return (
     <>
       <NavBar section1={ section1 } section2={ section2 } />
-      <h3>Produtos</h3>
       <ListProducts products={ products } />
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
+import '../styles/components/cardProducts.css';
 
 export default function CardProduct(props) {
   const { product: { id, name, price, urlImage } } = props;
@@ -91,49 +92,52 @@ export default function CardProduct(props) {
   };
 
   return (
-    <main id={ id }>
-      <section>
+    <main id={ id } className="card-products-container">
+      <section className="card-product-box">
         <span
           data-testid={ `customer_products__element-card-price-${id}` }
         >
           { changePriceToComa(price) }
         </span>
         <img
+          clasName="img-card-product"
           width="60px"
           src={ urlImage }
           alt={ `${name}` }
           data-testid={ `customer_products__img-card-bg-image-${id}` }
         />
       </section>
-      <footer>
+      <footer className="card-footer">
         <span
           data-testid={ `customer_products__element-card-title-${id}` }
         >
           { name }
         </span>
-        <button
-          idCart={ id }
-          name="remove"
-          type="button"
-          data-testid={ `customer_products__button-card-rm-item-${id}` }
-          onClick={ ({ target }) => addOrRemoveQuantity({ target }) }
-        >
-          -
-        </button>
-        <input
-          name="input"
-          data-testid={ `customer_products__input-card-quantity-${id}` }
-          onChange={ (e) => addOrRemoveQuantity(e) }
-          value={ quantity }
-        />
-        <button
-          name="add"
-          type="button"
-          data-testid={ `customer_products__button-card-add-item-${id}` }
-          onClick={ ({ target }) => addOrRemoveQuantity({ target }) }
-        >
-          +
-        </button>
+        <section className="btn-card-item-container">
+          <button
+            idCart={ id }
+            name="remove"
+            type="button"
+            data-testid={ `customer_products__button-card-rm-item-${id}` }
+            onClick={ ({ target }) => addOrRemoveQuantity({ target }) }
+          >
+            -
+          </button>
+          <input
+            name="input"
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+            onChange={ (e) => addOrRemoveQuantity(e) }
+            value={ quantity }
+          />
+          <button
+            name="add"
+            type="button"
+            data-testid={ `customer_products__button-card-add-item-${id}` }
+            onClick={ ({ target }) => addOrRemoveQuantity({ target }) }
+          >
+            +
+          </button>
+        </section>
       </footer>
     </main>
   );
