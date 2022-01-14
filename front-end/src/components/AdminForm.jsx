@@ -28,7 +28,14 @@ export default function AdminForm() {
     setIsRoleValid(true);
   };
 
+  const checkInputs = () => {
+    vldtPwd(rgPwd);
+    vldtName(rgName);
+    vldtEmail(rgEmail);
+  };
+
   useEffect(() => {
+    checkInputs();
     if (validName && isValidEmail && validPwd && isRoleValid) {
       return setIsDisabled(false);
     }
