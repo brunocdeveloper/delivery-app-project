@@ -1,6 +1,6 @@
-.card-products-container  {
+.card-products-container {
   background: #f1eded;
-  border:solid 1px;
+  border: solid 1px;
   border-radius: 5px;
   display: flex;
   flex-flow: column wrap;
@@ -18,7 +18,7 @@
 
 .card-footer {
   align-items: center;
-  background:#d1d1d1;
+  background: #d1d1d1;
   display: flex;
   flex-direction: column;
   height: 80px;
@@ -45,7 +45,6 @@
   background: #036b52;
   color: white;
   font-size: 18px;
-  font-weight: bold;
   justify-content: center;
   width: 30px;
 }
