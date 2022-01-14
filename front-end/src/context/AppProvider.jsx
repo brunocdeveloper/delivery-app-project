@@ -120,6 +120,7 @@ function AppProvider({ children }) {
     setUsersList,
     addedUser,
     setAddedUser,
+    redirectToOwnerPage,
   };
 
   AppProvider.propTypes = {
