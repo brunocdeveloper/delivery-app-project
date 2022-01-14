@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
-import '../styles/components/cardProducts.css';
+import '../styles/components/products/cardProducts.css';
 
 export default function CardProduct(props) {
   const { product: { id, name, price, urlImage } } = props;

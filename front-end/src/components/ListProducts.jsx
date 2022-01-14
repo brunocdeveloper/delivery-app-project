@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CardProduct from './CardProduct';
 import AppContext from '../context/AppContext';
-import '../styles/components/listProduct.css';
+import '../styles/components/products/listProduct.css';
 
 export default function ListProducts({ products }) {
   const {
