@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import '../styles/pages/login.css';
+import Logo from '../images/logoZB.gif';
 import GlobalButton from '../styles/components/button';
 
 export default function Login() {
@@ -39,12 +41,15 @@ export default function Login() {
   if (redirectTo.shouldRedirect) return <Redirect to={ redirectTo.pathName } />;
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form>
+    <section className="login-container">
+      <div className="img-logo">
+        <img className="logo" src={ Logo } alt="logo zé Bitira" width="200px" />
+      </div>
+      <form className="login-form-container">
         <label htmlFor="email-login">
           Login
           <input
+            className="input-login"
             id="email-login"
             type="email"
             name="email"
@@ -55,6 +60,7 @@ export default function Login() {
         <label htmlFor="password-login">
           Senha
           <input
+            className="input-login"
             id="password-login"
             type="password"
             name="password"
@@ -85,6 +91,12 @@ export default function Login() {
           Elemento oculto (Mensagem de erro)
         </span>
       </form>
-    </div>
+      <span
+        className="span-error"
+        data-testid="common_login__element-invalid-email"
+      >
+        Elemento oculto (Mensagem de erro)
+      </span>
+    </section>
   );
 }
