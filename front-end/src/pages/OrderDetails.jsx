@@ -4,7 +4,16 @@ import NavBar from '../components/NavBar';
 import OrderTable from '../components/OrderTable';
 import getCustomerOrderDetailsByIdfrom from '../api/orderCustomer';
 import formatValue from '../helpers/formatValues';
-import updateStatusOrder from '../api/OrderStatus';
+import { ButtonDelivered, ContainerInformation,
+  ContainerOrderDetails,
+  ContainerOrdersItems,
+  OrderId,
+  OrderStatus,
+  SaleDate,
+  Seller,
+  SellerName,
+  TitleDetail,
+  TotalPrice } from '../styles/components/orderDetails/style';
 
 export default function OrderDetails() {
   const [order, setOrder] = useState(null);
@@ -44,42 +53,52 @@ export default function OrderDetails() {
   return (
     <>
       <NavBar button1="Produtos" button2="Meus Pedidos" />
-      <span>Detalhe do Pedido</span>
-      <span
-        data-testid={ `${dataidCommon}-order-id` }
-      >
-        { order && `Pedido ${order.id}` }
-      </span>
-      <span> P.Vendedora:</span>
-      <span
-        data-testid={ `${dataidCommon}-seller-name` }
-      >
-        { order && `${order.seller.name}` }
-      </span>
-      <span
-        data-testid={ `${dataidCommon}-order-date` }
-      >
-        { order && `${order.saleDate}` }
-      </span>
-      <span
-        data-testid={ `${dataidCommon}-delivery-status` }
-      >
-        { order && `${order.status}` }
-      </span>
-      <button
-        data-testid="customer_order_details__button-delivery-check"
-        type="button"
-        onClick={ () => updateStatus('Entregue') }
-        disabled={ order && enableBtnDelivered() }
-      >
-        Marcar como entregue
-      </button>
-      <OrderTable products={ items } />
-      <span
-        data-testid="customer_order_details__element-order-total-price"
-      >
-        { order && formatValue(order.totalPrice) }
-      </span>
+      <ContainerOrderDetails>
+        <TitleDetail>Detalhe do Pedido</TitleDetail>
+        <ContainerInformation>
+          <di>
+            <OrderId
+              data-testid={ `${dataidCommon}-order-id` }
+            >
+              { order && `Pedido ${order.id}` }
+            </OrderId>
+            <Seller> P.Vendedora:</Seller>
+            <SellerName
+              data-testid={ `${dataidCommon}-seller-name` }
+            >
+              { order && `${order.seller.name}` }
+            </SellerName>
+            <SaleDate
+              data-testid={ `${dataidCommon}-order-date` }
+            >
+              { order && `${order.saleDate}` }
+            </SaleDate>
+          </di>
+          <di>
+            <OrderStatus
+              data-testid={ `${dataidCommon}-delivery-status` }
+            >
+              { order && `${order.status}` }
+            </OrderStatus>
+            <ButtonDelivered
+              data-testid="customer_order_details__button-delivery-check"
+              type="button"
+              onClick={ () => updateStatus('Entregue') }
+              disabled={ order && enableBtnDelivered() }
+            >
+              Marcar como entregue
+            </ButtonDelivered>
+          </di>
+        </ContainerInformation>
+        <ContainerOrdersItems>
+          <OrderTable products={ items } />
+        </ContainerOrdersItems>
+        <TotalPrice
+          data-testid="customer_order_details__element-order-total-price"
+        >
+          { order && formatValue(order.totalPrice) }
+        </TotalPrice>
+      </ContainerOrderDetails>
     </>
   );
 }
