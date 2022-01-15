@@ -28,16 +28,16 @@
   width: 80%;
 }
 
-.td-user-id .td-user-name .td-user-email .td-user-role {
-  height: 100%;
-  margin: 10px 0;
-}
-
 .td-user-role {
   background-color: #421981;
   color: white;
   text-align: center;
   width: 180px;
+}
+
+.td-user-id .td-user-name .td-user-email .td-user-role {
+  height: 100%;
+  margin: 10px 0;
 }
 
 .td-user-id {

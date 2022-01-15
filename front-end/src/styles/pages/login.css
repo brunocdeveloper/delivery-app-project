@@ -84,7 +84,7 @@ body {
 } */
 
 .span-error {
+  color: gray;
   display: flex;
-  color: #808080;
   justify-content: center;
 }
