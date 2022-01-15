@@ -97,17 +97,17 @@ export default function CardProduct(props) {
         <span
           data-testid={ `customer_products__element-card-price-${id}` }
         >
+          R$
+          {' '}
           { changePriceToComa(price) }
         </span>
         <img
-          clasName="img-card-product"
-          width="60px"
           src={ urlImage }
           alt={ `${name}` }
           data-testid={ `customer_products__img-card-bg-image-${id}` }
         />
       </section>
-      <footer className="card-footer">
+      <footer className="card-footer-container">
         <span
           data-testid={ `customer_products__element-card-title-${id}` }
         >

@@ -7,7 +7,10 @@
 }
 
 .btn-box-cart {
-  text-align: right;
+  bottom: 0;
+  padding: 12px 20px;
+  position: fixed;
+  right: 0;
 }
 
 .btn-box-cart button {
@@ -19,4 +22,9 @@
   height: 40px;
   margin-top: 10px;
   width: 260px;
+}
+
+button:disabled {
+  background-color: rgba(3, 107, 82, 0.5);
+  color: white;
 }

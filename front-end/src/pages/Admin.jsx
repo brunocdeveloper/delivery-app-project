@@ -4,6 +4,7 @@ import NavBarAdmin from '../components/NavBarAdmin';
 import getUsers from '../api/getUsers';
 import AppContext from '../context/AppContext';
 import AdminTable from '../components/AdminTable';
+import '../styles/pages/Admin.css';
 
 export default function Admin() {
   const {
@@ -23,9 +24,9 @@ export default function Admin() {
   }, [addedUser]);
 
   return (
-    <section>
+    <section className="admin-page-container">
       <NavBarAdmin />
-      <h3>Cadastrar novo usuário</h3>
+      <h3 className="admin-title">Cadastrar novo usuário</h3>
       <AdminForm />
       <AdminTable />
     </section>
