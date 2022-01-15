@@ -28,12 +28,16 @@
   width: 80%;
 }
 
-.td-user-id
-.td-user-name
-.td-user-email
-.td-user-role {
+.td-user-id .td-user-name .td-user-email .td-user-role {
   height: 100%;
   margin: 10px 0;
+}
+
+.td-user-role {
+  background-color: #421981;
+  color: white;
+  text-align: center;
+  width: 180px;
 }
 
 .td-user-id {
@@ -54,15 +58,8 @@
   width: 350px;
 }
 
-.td-user-role {
-  background-color: #421981;
-  color: white;
-  text-align: center;
-  width: 180px;
-}
-
 .btn-remove-register {
-  background-color: #056CF9;
+  background-color: #056cf9;
   color: white;
   text-align: center;
   width: 100px;

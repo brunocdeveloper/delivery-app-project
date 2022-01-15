@@ -19,7 +19,7 @@
   font-size: 14px;
   font-weight: 700;
   padding: 8px;
-  border-color: grey;
+  border-color: #808080;
   border-radius: 4px;
   border-style: solid 1px;
 }
@@ -30,12 +30,12 @@
 }
 
 .admin-container span {
-  color: grey;
+  color: #808080;
 }
 
 .admin-form-container button {
   align-items: center;
-  background:#036b52;
+  background: #036b52;
   border: none;
   border-radius: 5px;
   color: white;

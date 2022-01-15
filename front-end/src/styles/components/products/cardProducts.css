@@ -4,8 +4,8 @@
   border-radius: 5px;
   box-shadow: 3px 3px 3px 1px gray;
   display: flex;
-  flex-wrap: wrap;
   flex-flow: column wrap;
+  flex-wrap: wrap;
   height: 300px;
   justify-content: space-between;
   margin-left: 15px;
@@ -34,7 +34,7 @@
 .card-footer-container {
   align-items: center;
   background: #d1d1d1;
-  bottom: 0px;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   height: 70px;
@@ -54,8 +54,8 @@
 }
 
 .btn-card-item-container {
-  display: flex;
   bottom: 10px;
+  display: flex;
   margin-top: 5px;
 }
 
