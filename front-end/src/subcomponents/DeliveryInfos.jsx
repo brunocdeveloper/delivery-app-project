@@ -4,6 +4,15 @@ import PropTypes from 'prop-types';
 import AppContext from '../context/AppContext';
 import getUsersByRole from '../api/users';
 import createSale from '../api/customer';
+import { ContainerDeliveryDetails, ContainerSectionDelivery,
+  FinishButton,
+  InputAdress,
+  InputNumber,
+  SelectSeller,
+  SpanAdress,
+  SpanNumber,
+  SpanSeller,
+  TitleDeliveryInfos } from '../styles/components/deliveryInfos.js/style';
 
 export default function DeliveryInfos({ totalPrice }) {
   const [selectedSeller, setSelectedSeller] = useState(null);
@@ -62,14 +71,14 @@ export default function DeliveryInfos({ totalPrice }) {
   }
 
   return (
-    <section>
-      <h1>Detalhes e Endereço de Entrega</h1>
-      <section>
+    <ContainerDeliveryDetails>
+      <TitleDeliveryInfos>Detalhes e Endereço de Entrega</TitleDeliveryInfos>
+      <ContainerSectionDelivery>
         <label
           htmlFor="delivery-seller"
         >
-          <span>P.Vendedora Responsável:</span>
-          <select
+          <SpanSeller>P.Vendedora Responsável:</SpanSeller>
+          <SelectSeller
             id="delivery-seller"
             onChange={ (e) => setSelectedSeller(e.target.value) }
             data-testid="customer_checkout__select-seller"
@@ -87,37 +96,33 @@ export default function DeliveryInfos({ totalPrice }) {
                 {seller.name}
               </option>
             ))}
-          </select>
+          </SelectSeller>
         </label>
-        <label
-          htmlFor="delivery-address"
-        >
-          <span>Endereço:</span>
-          <input
+        <div>
+          <SpanAdress>Endereço:</SpanAdress>
+          <InputAdress
             data-testid="customer_checkout__input-address"
             type="text"
             onChange={ (e) => setSelectedAddress(e.target.value) }
           />
-        </label>
-        <label
-          htmlFor="delivery-number"
-        >
-          <span>Número:</span>
-          <input
+        </div>
+        <div>
+          <SpanNumber>Número:</SpanNumber>
+          <InputNumber
             data-testid="customer_checkout__input-addressNumber"
             type="text"
             onChange={ (e) => setSelectedNumber(e.target.value) }
           />
-        </label>
-        <button
-          type="button"
-          data-testid="customer_checkout__button-submit-order"
-          onClick={ handleSubmit }
-        >
-          Finalizar Pedido
-        </button>
-      </section>
-    </section>
+        </div>
+      </ContainerSectionDelivery>
+      <FinishButton
+        type="button"
+        data-testid="customer_checkout__button-submit-order"
+        onClick={ handleSubmit }
+      >
+        Finalizar Pedido
+      </FinishButton>
+    </ContainerDeliveryDetails>
   );
 }
 
