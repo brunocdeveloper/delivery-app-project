@@ -1,6 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import registerUser from '../api/register';
 import AppContext from '../context/AppContext';
+import { ButtonRegister, FormRegister,
+  InputEmail,
+  InputName,
+  InputPassword,
+  LabelEmail,
+  LabelName,
+  LabelType,
+  PasswordLabel,
+  SectionAdm,
+  SelectType,
+  TitleAdmRegister } from '../styles/components/management/style';
 
 export default function AdminForm() {
   const {
@@ -77,11 +88,12 @@ export default function AdminForm() {
   };
 
   return (
-    <section>
-      <form>
-        <label htmlFor="name">
-          Nome
-          <input
+    <SectionAdm>
+      <TitleAdmRegister>Cadastrar novo usuário</TitleAdmRegister>
+      <FormRegister>
+        <LabelName htmlFor="name">
+          Nome:
+          <InputName
             type="text"
             name="name"
             id="name"
@@ -90,10 +102,10 @@ export default function AdminForm() {
             data-testid="admin_manage__input-name"
             onChange={ (e) => handleOnChangeInput(e) }
           />
-        </label>
-        <label htmlFor="email">
-          Email
-          <input
+        </LabelName>
+        <LabelEmail htmlFor="email">
+          Email:
+          <InputEmail
             type="text"
             name="email"
             id="email"
@@ -102,10 +114,10 @@ export default function AdminForm() {
             data-testid="admin_manage__input-email"
             onChange={ (e) => handleOnChangeInput(e) }
           />
-        </label>
-        <label htmlFor="password">
-          Senha
-          <input
+        </LabelEmail>
+        <PasswordLabel htmlFor="password">
+          Senha:
+          <InputPassword
             type="password"
             name="password"
             id="password"
@@ -114,10 +126,10 @@ export default function AdminForm() {
             data-testid="admin_manage__input-password"
             onChange={ (e) => handleOnChangeInput(e) }
           />
-        </label>
-        <label htmlFor="type">
-          Tipo
-          <select
+        </PasswordLabel>
+        <LabelType htmlFor="type">
+          Tipo:
+          <SelectType
             name="role"
             id="type"
             value={ rgRole }
@@ -128,22 +140,22 @@ export default function AdminForm() {
             <option value="seller">vendedor</option>
             <option value="customer">cliente</option>
             <option value="administrator">administrador</option>
-          </select>
-        </label>
-        <button
+          </SelectType>
+        </LabelType>
+        <ButtonRegister
           type="button"
           data-testid="admin_manage__button-register"
           disabled={ isDisabled }
           onClick={ (e) => handleSubmit(e) }
         >
           CADASTRAR
-        </button>
-      </form>
+        </ButtonRegister>
+      </FormRegister>
       <span
         data-testid="admin_manage__element-invalid-register"
       >
-        { isDisabled && 'Erro no sistema' }
+        { isDisabled && '' }
       </span>
-    </section>
+    </SectionAdm>
   );
 }

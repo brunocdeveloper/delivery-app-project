@@ -6,6 +6,15 @@ import SellerTable from '../components/SellerTable';
 import getCustomerOrderDetailsByIdfrom from '../api/orderCustomer';
 import formatValue from '../helpers/formatValues';
 import updateStatusOrder from '../api/OrderStatus';
+import { ButtonToPrepare, ContainerSellerInformation,
+  ContainerSellerOrderDetails,
+  ContainerSellerOrdersItems,
+  SellerOrderId,
+  SellerOrderStatus,
+  SellerSaleDate,
+  SellerTotalPrice,
+  TitleSellerDetail } from '../styles/components/sellerOrderDetails/style';
+import { ButtonDelivered } from '../styles/components/orderDetails/style';
 
 export default function SellerDetails() {
   const [order, setOrder] = useState(null);
@@ -76,44 +85,54 @@ export default function SellerDetails() {
   return (
     <>
       <NavBar button2="Pedidos" />
-      <span> Detalhe do Pedido</span>
-      <span
-        data-testid={ `${dataidCommon}-order-id` }
-      >
-        { order && `Pedido ${order.id}` }
-      </span>
-      <span
-        data-testid={ `${dataidCommon}-order-date` }
-      >
-        { order && `${order.saleDate}` }
-      </span>
-      <span
-        data-testid={ `${dataidCommon}-delivery-status` }
-      >
-        { order && `${order.status}` }
-      </span>
-      <button
-        data-testid="seller_order_details__button-preparing-check"
-        type="button"
-        onClick={ () => updateStatus('Preparando') }
-        disabled={ order && enableBtnPrepare() }
-      >
-        Preparar Pedido
-      </button>
-      <button
-        data-testid="seller_order_details__button-dispatch-check"
-        type="button"
-        onClick={ () => updateStatus('Em Trânsito') }
-        disabled={ order && enableBtnForDelivery() }
-      >
-        Saiu para entrega
-      </button>
-      <SellerTable products={ items } />
-      <span
-        data-testid="seller_order_details__element-order-total-price"
-      >
-        { order && formatValue(order.totalPrice) }
-      </span>
+      <ContainerSellerOrderDetails>
+        <TitleSellerDetail> Detalhe do Pedido</TitleSellerDetail>
+        <ContainerSellerInformation>
+          <div>
+            <SellerOrderId
+              data-testid={ `${dataidCommon}-order-id` }
+            >
+              { order && `Pedido ${order.id}` }
+            </SellerOrderId>
+            <SellerSaleDate
+              data-testid={ `${dataidCommon}-order-date` }
+            >
+              { order && `${order.saleDate}` }
+            </SellerSaleDate>
+          </div>
+          <div>
+            <SellerOrderStatus
+              data-testid={ `${dataidCommon}-delivery-status` }
+            >
+              { order && `${order.status}` }
+            </SellerOrderStatus>
+            <ButtonToPrepare
+              data-testid="seller_order_details__button-preparing-check"
+              type="button"
+              onClick={ () => updateStatus('Preparando') }
+              disabled={ order && enableBtnPrepare() }
+            >
+              Preparar Pedido
+            </ButtonToPrepare>
+            <ButtonDelivered
+              data-testid="seller_order_details__button-dispatch-check"
+              type="button"
+              onClick={ () => updateStatus('Em Trânsito') }
+              disabled={ order && enableBtnForDelivery() }
+            >
+              Saiu para entrega
+            </ButtonDelivered>
+          </div>
+        </ContainerSellerInformation>
+        <ContainerSellerOrdersItems>
+          <SellerTable products={ items } />
+          <SellerTotalPrice
+            data-testid="seller_order_details__element-order-total-price"
+          >
+            { order && formatValue(order.totalPrice) }
+          </SellerTotalPrice>
+        </ContainerSellerOrdersItems>
+      </ContainerSellerOrderDetails>
     </>
   );
 }

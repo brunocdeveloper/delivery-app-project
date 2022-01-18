@@ -25,7 +25,6 @@ export default function Admin() {
   return (
     <section>
       <NavBarAdmin />
-      <h3>Cadastrar novo usuário</h3>
       <AdminForm />
       <AdminTable />
     </section>

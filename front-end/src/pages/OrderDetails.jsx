@@ -57,7 +57,7 @@ export default function OrderDetails() {
       <ContainerOrderDetails>
         <TitleDetail>Detalhe do Pedido</TitleDetail>
         <ContainerInformation>
-          <di>
+          <div>
             <OrderId
               data-testid={ `${dataidCommon}-order-id` }
             >
@@ -74,8 +74,8 @@ export default function OrderDetails() {
             >
               { order && `${order.saleDate}` }
             </SaleDate>
-          </di>
-          <di>
+          </div>
+          <div>
             <OrderStatus
               data-testid={ `${dataidCommon}-delivery-status` }
             >
@@ -89,7 +89,7 @@ export default function OrderDetails() {
             >
               Marcar como entregue
             </ButtonDelivered>
-          </di>
+          </div>
         </ContainerInformation>
         <ContainerOrdersItems>
           <OrderTable products={ items } />

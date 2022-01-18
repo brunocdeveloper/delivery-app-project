@@ -2,6 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import registerUser from '../api/register';
+import { BtnRegister, ContainerSection,
+  EmailInput,
+  EmailRegister,
+  InputName,
+  NameRegister,
+  PasswordInput,
+  PasswordRegister,
+  TitleRegister } from '../styles/components/register/style';
 
 export default function Register() {
   const {
@@ -72,14 +80,14 @@ export default function Register() {
   if (redirectTo.shouldRedirect) return <Redirect to={ redirectTo.pathName } />;
 
   return (
-    <section className="registerContainer">
-      <h1 className="appalmirinha">Cadastro</h1>
+    <ContainerSection className="registerContainer">
+      <TitleRegister className="appalmirinha">Cadastro</TitleRegister>
       <form
         className="register-form"
       >
-        <label htmlFor="name" className="name">
-          <p className="placeE">Name:</p>
-          <input
+        <div>
+          <NameRegister className="placeE">Name:</NameRegister>
+          <InputName
             type="text"
             name="name"
             id="name"
@@ -89,10 +97,10 @@ export default function Register() {
             }
             data-testid="common_register__input-name"
           />
-        </label>
-        <label htmlFor="email" className="email">
-          <p className="placeE">Email:</p>
-          <input
+        </div>
+        <div>
+          <EmailRegister className="placeE">Email:</EmailRegister>
+          <EmailInput
             type="text"
             name="email"
             id="email"
@@ -102,10 +110,10 @@ export default function Register() {
             }
             data-testid="common_register__input-email"
           />
-        </label>
-        <label htmlFor="password" className="teste">
-          <p className="placeS">Senha:</p>
-          <input
+        </div>
+        <div>
+          <PasswordRegister className="placeS">Senha:</PasswordRegister>
+          <PasswordInput
             type="password"
             name="password"
             id="password"
@@ -115,17 +123,17 @@ export default function Register() {
             }
             data-testid="common_register__input-password"
           />
-        </label>
-        <button
-          type="submit"
-          data-testid="common_register__button-register"
-          disabled={ err }
-          onClick={ (e) => handleSubmit(e) }
-        >
-          Cadastrar
-        </button>
+        </div>
       </form>
+      <BtnRegister
+        type="submit"
+        data-testid="common_register__button-register"
+        disabled={ err }
+        onClick={ (e) => handleSubmit(e) }
+      >
+        Cadastrar
+      </BtnRegister>
       <span data-testid="common_register__element-invalid_register">{ err }</span>
-    </section>
+    </ContainerSection>
   );
 }

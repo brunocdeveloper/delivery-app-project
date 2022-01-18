@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import OrdersCard from '../subcomponents/OrdersCard';
 import getUserOrders from '../api/getOrders';
 import AppContext from '../context/AppContext';
+import { ContainerSellerOrders } from '../styles/components/sellerOrders/style';
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -34,12 +35,14 @@ export default function Orders() {
   return (
     <section>
       <NavBar button2="Pedidos" />
-      { orders && orders.map((pedido) => (
-        <OrdersCard
-          pedidos={ pedido }
-          key={ pedido.id }
-        />
-      )) }
+      <ContainerSellerOrders>
+        { orders && orders.map((pedido) => (
+          <OrdersCard
+            pedidos={ pedido }
+            key={ pedido.id }
+          />
+        )) }
+      </ContainerSellerOrders>
     </section>
   );
 }

@@ -1,6 +1,9 @@
 import React, { useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import { ButtonExit, ButtonUsers,
+  Header,
+  SpanCurrentUser } from '../styles/components/management/style';
 
 export default function NavBarAdmin() {
   const {
@@ -31,23 +34,27 @@ export default function NavBarAdmin() {
   }
 
   return (
-    <header>
-      <button
+    <Header>
+      <ButtonUsers
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
       >
         GERENCIAR USUÁRIOS
-      </button>
-      <span data-testid="customer_products__element-navbar-user-full-name">
-        { currentUser() }
-      </span>
-      <button
-        type="button"
-        data-testid="customer_products__element-navbar-link-logout"
-        onClick={ logout }
-      >
-        Sair
-      </button>
-    </header>
+      </ButtonUsers>
+      <div>
+        <SpanCurrentUser
+          data-testid="customer_products__element-navbar-user-full-name"
+        >
+          { currentUser() }
+        </SpanCurrentUser>
+        <ButtonExit
+          type="button"
+          data-testid="customer_products__element-navbar-link-logout"
+          onClick={ logout }
+        >
+          Sair
+        </ButtonExit>
+      </div>
+    </Header>
   );
 }
