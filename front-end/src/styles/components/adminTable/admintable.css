@@ -1,0 +1,66 @@
+.admin-table-title {
+  color: rgb(85, 77, 77);
+  font-size: 20px;
+  margin-left: 10%;
+}
+
+/* .table-admin-list-user-container {
+  background: #ecf0f3;
+  border-radius: 5px;
+  box-shadow: 6px 6px 6px 2px gray;
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: auto;
+  padding: 20px;
+  width: 80%;
+} */
+
+.table-admin-list-user-container {
+  background: #ecf0f3;
+  border-radius: 5px;
+  box-shadow: 6px 6px 6px 2px gray;
+  box-sizing: border-box;
+  height: 100%;
+  margin: auto;
+  padding-left: 60px;
+  width: 80%;
+}
+
+.td-user-role {
+  background-color: #421981;
+  color: white;
+  text-align: center;
+  width: 180px;
+}
+
+.td-user-id .td-user-name .td-user-email .td-user-role {
+  height: 100%;
+  margin: 10px 0;
+}
+
+.td-user-id {
+  background-color: #2fc18c;
+  text-align: center;
+  width: 48px;
+}
+
+.td-user-name {
+  background-color: #ecf0f3;
+  width: 280px;
+}
+
+.td-user-email {
+  background-color: #036b52;
+  color: white;
+  text-align: center;
+  width: 350px;
+}
+
+.btn-remove-register {
+  background-color: #056cf9;
+  color: white;
+  text-align: center;
+  width: 100px;
+}

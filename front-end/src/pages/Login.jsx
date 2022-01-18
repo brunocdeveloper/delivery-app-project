@@ -43,7 +43,7 @@ export default function Login() {
   return (
     <section className="login-container">
       <div className="img-logo">
-        <img className="logo" src={ Logo } alt="logo zé Bitira" width="200px" />
+        <img className="logo" src={ Logo } alt="logo zé Bitira" width="240px" />
       </div>
       <form className="login-form-container">
         <label htmlFor="email-login">
@@ -68,28 +68,26 @@ export default function Login() {
             onChange={ (e) => handleChangeInputs(e) }
           />
         </label>
-        <GlobalButton
-          login
-          type="button"
-          data-testid="common_login__button-login"
-          disabled={ !validateLogin() }
-          onClick={ () => handleLoginSubmit() }
-        >
-          Login
-        </GlobalButton>
-        <GlobalButton
-          register
-          type="button"
-          data-testid="common_login__button-register"
-          onClick={ () => setRedirectTo({ pathName: '/register', shouldRedirect: true }) }
-        >
-          Ainda não tenho conta
-        </GlobalButton>
-        <span
-          data-testid="common_login__element-invalid-email"
-        >
-          Elemento oculto (Mensagem de erro)
-        </span>
+        <section className="btn-container">
+          <GlobalButton
+            login
+            type="button"
+            data-testid="common_login__button-login"
+            disabled={ !validateLogin() }
+            onClick={ () => handleLoginSubmit() }
+          >
+            Login
+          </GlobalButton>
+          <GlobalButton
+            register
+            type="button"
+            data-testid="common_login__button-register"
+            onClick={ () => setRedirectTo({
+              pathName: '/register', shouldRedirect: true }) }
+          >
+            Ainda não tenho conta
+          </GlobalButton>
+        </section>
       </form>
     </section>
   );

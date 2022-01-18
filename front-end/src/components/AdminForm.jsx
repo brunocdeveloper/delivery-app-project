@@ -55,13 +55,19 @@ export default function AdminForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = JSON.parse(localStorage.getItem('user'));
-    const payload = { rgName, rgEmail, rgPwd, rgRole };
-    await registerUser(payload, user.token);
-    setAddedUser(true);
-    setRgEmail('');
-    setRgName('');
-    setRgPwd('');
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const payload = { rgName, rgEmail, rgPwd, rgRole };
+      await registerUser(payload, user.token);
+      setAddedUser(true);
+      setRgErrorMsg(true);
+      setRgEmail('');
+      setRgName('');
+      setRgPwd('');
+    } catch (error) {
+      console.log(error);
+      setRgErrorMsg(false);
+    }
   };
 
   const handleOnChangeInput = (e) => {

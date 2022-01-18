@@ -4,6 +4,7 @@ import NavBarAdmin from '../components/NavBarAdmin';
 import getUsers from '../api/getUsers';
 import AppContext from '../context/AppContext';
 import AdminTable from '../components/AdminTable';
+import '../styles/pages/Admin.css';
 
 export default function Admin() {
   const {
@@ -23,7 +24,7 @@ export default function Admin() {
   }, [addedUser]);
 
   return (
-    <section>
+    <section className="admin-page-container">
       <NavBarAdmin />
       <AdminForm />
       <AdminTable />

@@ -52,6 +52,7 @@ export default function ListProducts({ products }) {
           onClick={ () => handleRedirect() }
         >
           Ver Carrinho: R$
+          {' '}
           <span
             className="span-btn-price"
             data-testid="customer_products__checkout-bottom-value"

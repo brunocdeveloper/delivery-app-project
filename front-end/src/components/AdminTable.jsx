@@ -40,7 +40,7 @@ export default function AdminTable() {
             <AdmRemove>Excluir</AdmRemove>
           </TableTr>
         </thead>
-        <tbody>
+        <tbody className="body-register-users-information">
           { usersList.length > 0 && usersList.map((user, i) => (
             <TablemItemsTr key={ user.name }>
               <TdItem data-testid={ `${dataidCommon}-item-number-${i}` }>{i + 1}</TdItem>
