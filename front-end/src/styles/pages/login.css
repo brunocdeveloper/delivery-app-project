@@ -6,7 +6,7 @@ body {
   box-sizing: border-box;
   height: 90px;
   margin: auto;
-  width: 200px;
+  width: 230px;
 }
 
 .logo {
@@ -84,6 +84,7 @@ body {
 } */
 
 .span-error {
+  color: gray;
   display: flex;
   justify-content: center;
 }

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import deleteUserById from '../api/deleteUserById';
 import AppContext from '../context/AppContext';
+import '../styles/components/adminTable/admintable.css';
 
 export default function AdminTable() {
   const { usersList, setUsersList } = useContext(AppContext);
@@ -15,8 +16,8 @@ export default function AdminTable() {
 
   return (
     <>
-      <h3>Lista de usuários</h3>
-      <table>
+      <h3 className="admin-table-title">Lista de usuários</h3>
+      <table className="table-admin-list-user-container">
         <thead>
           <tr>
             <th>Item</th>
@@ -26,14 +27,35 @@ export default function AdminTable() {
             <th>Excluir</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="body-register-users-information">
           { usersList.length > 0 && usersList.map((user, i) => (
             <tr key={ user.name }>
-              <td data-testid={ `${dataidCommon}-item-number-${i}` }>{i + 1}</td>
-              <td data-testid={ `${dataidCommon}-name-${i}` }>{user.name}</td>
-              <td data-testid={ `${dataidCommon}-email-${i}` }>{user.email}</td>
-              <td data-testid={ `${dataidCommon}-role-${i}` }>{user.role}</td>
+              <td
+                className="td-user-id"
+                data-testid={ `${dataidCommon}-item-number-${i}` }
+              >
+                {i + 1}
+              </td>
+              <td
+                className="td-user-name"
+                data-testid={ `${dataidCommon}-name-${i}` }
+              >
+                {user.name}
+              </td>
+              <td
+                className="td-user-email"
+                data-testid={ `${dataidCommon}-email-${i}` }
+              >
+                {user.email}
+              </td>
+              <td
+                className="td-user-role"
+                data-testid={ `${dataidCommon}-role-${i}` }
+              >
+                {user.role}
+              </td>
               <button
+                className="btn-remove-register"
                 name={ user.id }
                 data-testid={ `${dataidCommon}-remove-${i}` }
                 type="button"

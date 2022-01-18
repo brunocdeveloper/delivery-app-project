@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import registerUser from '../api/register';
 import AppContext from '../context/AppContext';
+import '../styles/components/adminForm/adminForm.css';
 
 export default function AdminForm() {
   const {
@@ -22,6 +23,7 @@ export default function AdminForm() {
   } = useContext(AppContext);
   const [isRoleValid, setIsRoleValid] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [rgErrorMsg, setRgErrorMsg] = useState(false);
 
   const vldtRole = (role) => {
     if (!role) return setIsRoleValid(false);
@@ -44,13 +46,19 @@ export default function AdminForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = JSON.parse(localStorage.getItem('user'));
-    const payload = { rgName, rgEmail, rgPwd, rgRole };
-    await registerUser(payload, user.token);
-    setAddedUser(true);
-    setRgEmail('');
-    setRgName('');
-    setRgPwd('');
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const payload = { rgName, rgEmail, rgPwd, rgRole };
+      await registerUser(payload, user.token);
+      setAddedUser(true);
+      setRgErrorMsg(true);
+      setRgEmail('');
+      setRgName('');
+      setRgPwd('');
+    } catch (error) {
+      console.log(error);
+      setRgErrorMsg(false);
+    }
   };
 
   const handleOnChangeInput = (e) => {
@@ -77,8 +85,8 @@ export default function AdminForm() {
   };
 
   return (
-    <section>
-      <form>
+    <main className="admin-container">
+      <form className="admin-form-container">
         <label htmlFor="name">
           Nome
           <input
@@ -131,6 +139,7 @@ export default function AdminForm() {
           </select>
         </label>
         <button
+          className="btn-register"
           type="button"
           data-testid="admin_manage__button-register"
           disabled={ isDisabled }
@@ -139,11 +148,14 @@ export default function AdminForm() {
           CADASTRAR
         </button>
       </form>
-      <span
-        data-testid="admin_manage__element-invalid-register"
-      >
-        { isDisabled && 'Erro no sistema' }
-      </span>
-    </section>
+      { rgErrorMsg && (
+        <span
+          className="span-admin-error"
+          data-testid="admin_manage__element-invalid-register"
+        >
+          Usuário Já Cadastrado!
+        </span>
+      )}
+    </main>
   );
 }
