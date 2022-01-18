@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ContainerOrderDetails = styled.div`
   width: 1640px;
-  margin: 200px auto;
+  margin: 80px auto;
 `;
 
 export const ContainerInformation = styled.div`

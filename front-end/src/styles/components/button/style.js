@@ -12,7 +12,7 @@ export const Button = styled.button`
   opacity: 0.8;
   outline: none;
   transition: 0.5s;
-  width: 250px;
+  width: 280px;
 `;
 
 export const RegisterButton = styled.button`
@@ -27,7 +27,7 @@ export const RegisterButton = styled.button`
   margin-top: 30px;
   outline: none;
   transition: 0.5s;
-  width: 250px;
+  width: 280px;
 `;
 
 export const DisabledButton = styled.button`

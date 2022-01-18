@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { CardOrder,
+  DateAndPrice,
+  OrderDate,
+  OrderId,
+  OrderPrice,
+  OrderStatus,
+  TitleId,
+  TitleStatus } from '../styles/components/customerOrders/style';
 
 export default function CustomerCardOrder({ order }) {
   const { id, status, saleDate, totalPrice } = order;
@@ -8,36 +16,36 @@ export default function CustomerCardOrder({ order }) {
   const changePriceToComa = (value) => value.toString().replace(/\./, ',');
 
   return (
-    <main>
-      <Link to={ `/customer/orders/${id}` }>
-        <section>
-          <h3
-            data-testid={ `customer_orders__element-order-id-${id}` }
-          >
+    <Link to={ `/customer/orders/${id}` }>
+      <CardOrder>
+        <OrderId
+          data-testid={ `customer_orders__element-order-id-${id}` }
+        >
+          <TitleId>
             { `Pedido ${id}` }
-          </h3>
-          <section>
-            <h3
-              data-testid={ `customer_orders__element-delivery-status-${id}` }
-            >
-              {status}
-            </h3>
-          </section>
-          <section>
-            <span
-              data-testid={ `customer_orders__element-order-date-${id}` }
-            >
-              {saleDate}
-            </span>
-            <span
-              data-testid={ `customer_orders__element-card-price-${id}` }
-            >
-              {`R$${changePriceToComa(totalPrice)}` }
-            </span>
-          </section>
-        </section>
-      </Link>
-    </main>
+          </TitleId>
+        </OrderId>
+        <OrderStatus>
+          <TitleStatus
+            data-testid={ `customer_orders__element-delivery-status-${id}` }
+          >
+            {status}
+          </TitleStatus>
+        </OrderStatus>
+        <DateAndPrice>
+          <OrderDate
+            data-testid={ `customer_orders__element-order-date-${id}` }
+          >
+            {saleDate}
+          </OrderDate>
+          <OrderPrice
+            data-testid={ `customer_orders__element-card-price-${id}` }
+          >
+            {`R$${changePriceToComa(totalPrice)}` }
+          </OrderPrice>
+        </DateAndPrice>
+      </CardOrder>
+    </Link>
   );
 }
 

@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import OrderTable from '../components/OrderTable';
 import getCustomerOrderDetailsByIdfrom from '../api/orderCustomer';
 import formatValue from '../helpers/formatValues';
+import updateStatusOrder from '../api/OrderStatus';
 import { ButtonDelivered, ContainerInformation,
   ContainerOrderDetails,
   ContainerOrdersItems,

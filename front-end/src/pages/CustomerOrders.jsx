@@ -4,6 +4,7 @@ import AppContext from '../context/AppContext';
 import NavBar from '../components/NavBar';
 import CustomerCardOrder from '../components/CustomerCardOrder';
 import getUserOrders from '../api/getOrders';
+import { ContainerWithOrders } from '../styles/components/customerOrders/style';
 
 export default function CustomerOrders() {
   const {
@@ -35,10 +36,12 @@ export default function CustomerOrders() {
   }
 
   return (
-    <section>
+    <div>
       <NavBar button1="Produtos" button2="Meus Pedidos" />
-      { orders && orders
-        .map((order, index) => <CustomerCardOrder key={ index } order={ order } />) }
-    </section>
+      <ContainerWithOrders>
+        { orders && orders
+          .map((order, index) => <CustomerCardOrder key={ index } order={ order } />) }
+      </ContainerWithOrders>
+    </div>
   );
 }
